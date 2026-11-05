@@ -10,6 +10,34 @@
     let paused = reduced.matches;
     let motion;
     let submitting = false;
+    const neighborhood = $('.hero-world');
+    const shopOrder = ['records', 'cafe', 'workshop'];
+    let shopIndex = 1;
+    let sceneTimer;
+    let sceneInView = true;
+    let manualScene = false;
+    function focusShop(shop, manual = false) {
+      const index = shopOrder.indexOf(shop);
+      if (index < 0) return;
+      shopIndex = index;
+      neighborhood.dataset.shop = shop;
+      $$('[data-shop-focus]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shopFocus === shop)));
+      if (manual) { manualScene = true; clearInterval(sceneTimer); }
+    }
+    function cycleNeighborhood() {
+      clearInterval(sceneTimer);
+      if (paused || manualScene || !sceneInView || document.hidden) return;
+      sceneTimer = setInterval(() => focusShop(shopOrder[(shopIndex + 1) % shopOrder.length]), 4800);
+    }
+    $$('[data-shop-focus]').forEach(button => button.addEventListener('click', () => focusShop(button.dataset.shopFocus, true)));
+    $$('.district-shop').forEach(shop => shop.addEventListener('click', () => focusShop(shop.dataset.shop, true)));
+    const sceneObserver = new IntersectionObserver(entries => {
+      sceneInView = entries[0].isIntersecting;
+      neighborhood.classList.toggle('scene-offscreen', !sceneInView);
+      cycleNeighborhood();
+    }, { threshold: .15 });
+    sceneObserver.observe(neighborhood);
+    document.addEventListener('visibilitychange', cycleNeighborhood);
     const success = $('#waitlist-success');
     const submit = $('.submit-button');
     function selectRole(role) {
@@ -52,6 +80,7 @@
         $('.motion-label', button).textContent = reduced.matches ? 'Reduced motion' : paused ? 'Play motion' : button.closest('.street-footer') ? 'Pause' : 'Pause motion';
         const icon = $('.motion-icon', button); if (icon) icon.textContent = reduced.matches ? '−' : paused ? '▷' : 'Ⅱ';
       });
+      cycleNeighborhood();
       if (paused || !window.gsap) return;
       motion = gsap.context(() => {
         if (entrance) {

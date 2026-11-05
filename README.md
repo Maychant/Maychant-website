@@ -24,7 +24,7 @@ Use the installed Sites plugin's build and publication helpers for release. Loca
 
 ## Experience
 
-The hero illustrates three fictional neighborhood businesses with a waving owner, rotating record, coffee steam, moving plants and an Open sign. All artwork is SVG; no generated photos or video are shipped. CSS handles continuous SVG motion and GSAP handles entrances. Pause and system reduced-motion settings provide a static view. Light and dark themes follow the system preference.
+The hero illustrates three fictional neighborhood businesses as a dimensional scene, with angled façades, roof planes and stepped pavement. A waving owner, rotating record, coffee steam, moving plants, an Open sign, drifting sky details and a moving route bring it to life. Shop controls change the emphasis; automatic focus cycles stop after manual selection, while offscreen or when motion is paused. All artwork is SVG; no generated photos or video are shipped. CSS handles continuous SVG motion and GSAP handles entrances. Pause and system reduced-motion settings provide a static view. The supplied white, navy, cobalt and cyan palette stays fixed across system theme settings, as requested.
 
 Buyer and seller links select the corresponding waitlist interest. Keyboard-operable audience tabs explain both sides. The form saves name, email, interest, optional location and consent. It shows success only after a successful server response and preserves input on failure. Names and addresses are never stored in browser storage or placed in a form GET URL. No email is sent automatically.
 
@@ -34,6 +34,6 @@ This is a prelaunch waitlist, not a live business marketplace. There are no list
 
 ## Verification
 
-Current independent review: `research/neighborhood-review.md`. Backend tests and persistence evidence: `research/waitlist-backend-report.md`. Root design judgment: `research/self-critique.md`. Earlier photographic/vector dashboard reviews describe superseded versions and remain historical evidence only.
+Current palette and scene review: `research/color-scene-review.md`. Full waitlist and layout review: `research/neighborhood-review.md`. Backend tests and persistence evidence: `research/waitlist-backend-report.md`. Root design judgment: `research/self-critique.md`. Earlier photographic/vector dashboard reviews describe superseded versions and remain historical evidence only.
 
 Original reference research, including all eleven requested GitHub repositories, remains in `research/repository-influences.md`. Current storefronts and all other art are bespoke; no competitor assets or customer claims are used.

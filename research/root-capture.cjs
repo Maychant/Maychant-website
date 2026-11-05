@@ -1,0 +1,22 @@
+const { chromium } = require('/private/tmp/maychant-visual-review/node_modules/playwright');
+const path = require('path');
+(async () => {
+ const browser = await chromium.launch({ headless: true, channel: 'chrome' });
+ const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+ page.setDefaultTimeout(8000);
+ page.on('pageerror', e => console.log('PAGEERROR',e.message));
+ await page.goto('http://127.0.0.1:4173', { waitUntil: 'domcontentloaded', timeout:10000 });
+ console.log('loaded');
+ await page.waitForTimeout(1500);
+ await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; scrollTo(0,1700); });
+ console.log('scrolled');
+ await page.waitForTimeout(1200);
+ await page.screenshot({path:path.join(__dirname,'qa/root-audiences.png'),timeout:10000});
+ console.log('captured');
+ await page.setViewportSize({width:390,height:844});
+ await page.evaluate(() => scrollTo(0,0));
+ await page.waitForTimeout(500);
+ await page.screenshot({path:path.join(__dirname,'qa/root-phone.png'),timeout:10000});
+ console.log('phone');
+ await browser.close();
+})().catch(e=>{console.error(e.message);process.exit(1)});

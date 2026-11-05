@@ -1,0 +1,53 @@
+{
+  "design": [
+    [
+      "hero",
+      "Use case: ui-mockup. Create a polished high fidelity desktop homepage HERO ONLY for MAYCHANT, business succession startup. 1536x1024 landscape web design. White background, navy #001021 and #0b1b3d ink, vivid #1652f0 buttons, teal #034748 and cyan #11b5e4 supporting accents. Cabinet Grotesk-like bold geometric typography. Minimal nav 'maychant.' left with elegant interlocking m icon; 'For owners' 'For operators' 'How it works' center; 'Find your next step' blue button right. Large centered 2-line headline 'Good businesses. / Great next chapters.' first line navy second cobalt. 94px desktop display type, generous letter spacing tight. Center subtitle 'A clearer path from the business you built to the person who carries it forward.' Two CTAs 'Find your next step' blue and 'See how it works' text with play circle. Below text a cinematic original stage: three tall editorial photo panels of a warm neighborhood cafe exterior left, artisan workshop center, indie record shop right, staggered in scale with soft rounded 24px corners, slight perspective and smaller side panels. Navy and cyan clean sweeping thin arch behind photos like a connection line. Central photo largest 390x270. Small understated caption 'Built with care. Ready for what comes next.' underneath. Quiet premium, human warmth, striking typography; no testimonials, no fake stats, no dashboards. Full hero fits screen with nav, headline, CTAs, image stage. Realistic, buildable website design."
+    ],
+    [
+      "pathways",
+      "Use case: ui-mockup. High fidelity desktop SECTION of MAYCHANT succession website. Landscape1536x1024. White and very light gray#f3f5f8; navy#0b1b3d; cobalt#1652f0; teal#034748. Cabinet Grotesk typography. Large left aligned headline 'Different starting points. / A shared next chapter.' small explanatory paragraph at right. Below an editorial three-panel horizontal accordion, asymmetric: expanded left 55percent width, narrow center and right about22percent each. Large left photograph of small cafe owner with real candid warm light, dark navy lower overlay, white heading 'I built a business.' and description 'Make what you know easier to pass on.' with thin white arrow circle. Center navy panel tall with refined portrait photo crop, heading 'I want to run one.' Bottom right pale cyan panel with paper handover checklist illustration heading 'I help owners move forward.' Subtle numbers01,02,03 as oversized background typography allowed just visual. Editorial quality, no generic card grid, no fake success statistics. 24pxcorner panels, enough space 80px margin. Show accessibility of expanded panel content and serene spacing."
+    ],
+    [
+      "journey",
+      "Use case: ui-mockup. Create one cinematic desktop SECTION of MAYCHANT business succession site, 1536x1024. Deep navy#001021 background, white and cyan#11b5e4 typography, teal detail. Left large headline 'A handover starts / long before / the keys change hands.' supporting short text. Right dominant premium slightly tilted white document resembling a physical field guide, title 'The next chapter plan', thin cobalt rule, checkbox sections 'The business today', 'The knowledge to keep', 'The people who matter', 'The next conversation'. Behind document a large realistic photographic slice of hands passing small brass shop keys at wooden cafe counter, not stock handshake. Elegant cyan continuous curve travels behind photo and document, like passing knowledge. Bottom horizontal three step navigator '01 Get a clearer picture' '02 Capture what matters' '03 Start the right conversation'. Lots negative space and excellent contrast. This will become a scroll-driven animated scene; render a beautiful clear middle state. No nested dashboard card spam or fake claims. Strong broad Cabinet Grotesk headline."
+    ],
+    [
+      "closing",
+      "Use case: ui-mockup. Create high fidelity final website SECTION for MAYCHANT,1536x1024 landscape. Upper55percent white light background. Left large navy headline 'A few things / worth knowing.' Right elegant open FAQ rows, thin gray horizontal rules, plus/minus icons: 'Is Maychant a business marketplace?' expanded answer 'We are starting with preparation: helping owners and future operators understand their next step.'; 'Do I need to be ready to sell?'; 'What happens to my information?'. Lower45percent cobalt#1652f0 fullwidth brand statement giant white bold Cabinet Grotesk 'The next chapter / starts with a conversation.' white rounded CTA 'Find your next step' navytext rightarrow. Footer navy#001021 slim with maychant.wordmark and links. Spacious editorial typography, no statistics no badges, no images needed, polish Coinbase meets Airbnb but original."
+    ]
+  ],
+  "assets": [
+    [
+      "cafe",
+      "Photorealistic editorial photograph, independent neighborhood corner cafe exterior on a leafy Portland-style street, deep teal painted window frames and canvas awning, warm glowing interior, plants and simple outdoor chairs, one person opening the door, lived-in human character, 35mm photography, golden afternoon, high end travel editorial, landscape 3:2. No logos or readable lettering. Full bleed photograph only, not website, no text overlays."
+    ],
+    [
+      "craft",
+      "Photorealistic candid editorial photograph, mature artisan man in dark navy apron carefully working on wooden furniture at a sunlit independent woodworking studio. Wide enough to show workbench, beautiful wood shavings, windows and leafy plants, warm light and teal background details, image feels deeply human and calm, high-end cinematic commercial photography, landscape3:2. No text, no logos, no website mockup."
+    ],
+    [
+      "records",
+      "Photorealistic editorial photograph of a beautiful independent record shop interior, warm amber light, rows of vinyl records in wooden crates, deep teal paint, hanging leafy plants, large front windows, one young adult customer browsing unobtrusively. Cinematic high end photography, landscape3:2. No readable logos, no text overlays, not website UI."
+    ],
+    [
+      "owner",
+      "Photorealistic candid editorial portrait of a woman cafe owner in her late50s with natural gray streaks in dark hair, warm smile, navy denim apron, leaning on wooden counter in her thriving neighborhood coffee shop. Beautiful natural side window light, plants and coffee equipment in soft background, authentic documentary character, teal and warm wood colors, landscape4:3. No text or logos or website."
+    ],
+    [
+      "keys",
+      "Photorealistic cinematic closeup of an older business owner's hand passing a small brass shop key on a simple ring to a younger person's open hand across a worn wooden cafe counter. Background espresso machine, dark teal wall, soft warm afternoon window light. Hands anatomically correct, discreet and human, high end advertising photography, landscape3:2. No text no logos no website UI."
+    ]
+  ],
+  "paths": {
+    "design/hero": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-c3f10163-61ee-4631-bd16-3e61d0e1dd92.png",
+    "design/pathways": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-b5e46697-20af-4a82-84e8-65948dde91fa.png",
+    "design/journey": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-f39831ef-42b7-4409-84d7-32076b4cf0eb.png",
+    "design/closing": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-904c38de-64a9-4f01-b184-d6f9a392891d.png",
+    "dist/assets/cafe": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-5ba6f9a9-b5ee-4510-ac1d-4d73a94428e7.png",
+    "dist/assets/craft": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-76092edf-2cf3-4c8e-b1ea-38314173d145.png",
+    "dist/assets/records": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-ec024d4c-f110-4fd8-9af8-33c3faa414fc.png",
+    "dist/assets/owner": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-3d2917e5-d668-46e5-a48b-7d82949b4cbf.png",
+    "dist/assets/keys": "/Users/krish_dhawan_home/.codex/generated_images/01a1a446-4fdf-73a3-9071-25d0e608a9b1/exec-22c069df-613f-4ec1-a55d-227c4e877d6b.png"
+  }
+}

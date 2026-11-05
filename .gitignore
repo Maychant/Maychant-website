@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+*.tar.gz
+*.tar
+research/qa/
+research/reference-captures/
+research/film-review/
+research/functional-artifacts/
+tmp/
+.openai/*.local.*

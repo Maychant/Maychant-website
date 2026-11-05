@@ -8,11 +8,9 @@
   <meta property="og:title" content="Maychant — Good businesses. Great next chapters.">
   <meta property="og:description" content="The people, knowledge, and possibilities behind a better business handover. Find your next step.">
   <meta property="og:type" content="website"><meta property="og:url" content="https://maychant-next-chapter.krish15dhawan.chatgpt.site">
-  <meta property="og:image" content="https://maychant-next-chapter.krish15dhawan.chatgpt.site/assets/cafe.webp">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" href="assets/cabinet-800.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/craft.webp" as="image">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="vector.css">
   <script defer src="assets/gsap.min.js"></script><script defer src="assets/ScrollTrigger.min.js"></script><script defer src="app.js"></script>
 </head>
 <body>
@@ -22,8 +20,12 @@
   <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="brand" viewBox="0 0 44 34"><path d="M3 31V15a12 12 0 0 1 24 0v16" fill="none" stroke="currentColor" stroke-width="6"/><path d="M20 31V15a10.5 10.5 0 0 1 21 0v16" fill="none" stroke="#11b5e4" stroke-width="6"/></symbol>
   <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7V5Z" fill="currentColor"/></symbol>
   <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+
+  <symbol id="store" viewBox="0 0 32 32"><path d="M5 14v14h22V14M3 13l4-9h18l4 9M3 13a4 4 0 0 0 7 2 4 4 0 0 0 6 0 4 4 0 0 0 6 0 4 4 0 0 0 7-2M13 28V18h7v10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="plan" viewBox="0 0 32 32"><rect x="7" y="5" width="21" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 24V4a2 2 0 0 1 2-2h17M12 12h11M12 18h11M12 24h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="person" viewBox="0 0 32 32"><circle cx="16" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 29v-3a11 11 0 0 1 22 0v3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="network" viewBox="0 0 32 32"><path d="m9 9 7 7m7-7-7 7m-7 7 7-7m7 7-7-7" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="25" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="25" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="25" cy="25" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16" cy="16" r="3" fill="currentColor"/></symbol>
 </defs></svg>
 <header class="site-header">
   <a class="brand" href="#" aria-label="Maychant home"><svg><use href="#brand"/></svg><span>maychant<span class="brand-dot">.</span></span></a>
@@ -37,21 +39,99 @@
     <div class="hero-copy">
       <h1 id="hero-title"><span class="hero-line">Good businesses.</span><span class="hero-line blue">Great next chapters.</span></h1>
       <p class="hero-description">A clearer path from the business you built<br class="desktop-break"> to the person who carries it forward.</p>
-      <div class="hero-actions"><button class="button" data-start>Find your next step <svg><use href="#arrow"/></svg></button><button class="text-button" id="watch-story"><span class="play-circle"><svg><use href="#play"/></svg></span>Watch the story <span class="film-length">18 sec</span></button></div>
+      <div class="hero-actions"><button class="button" data-start>Find your next step <svg><use href="#arrow"/></svg></button><a class="text-button explore-link" href="#handover-preview">See how it comes together <svg aria-hidden="true"><use href="#arrow"/></svg></a></div>
       <p class="hero-note">A free preparation check. No account needed.</p>
     </div>
-    <div class="hero-stage" aria-label="Illustrative scenes of independent local businesses">
-      <svg class="connection-arc" viewBox="0 0 1500 440" fill="none" aria-hidden="true"><defs><linearGradient id="arc-gradient"><stop stop-color="#034748"/><stop offset=".55" stop-color="#11b5e4"/><stop offset="1" stop-color="#1652f0"/></linearGradient></defs><path class="arc-track" d="M-80 390C300-95 1160-95 1580 390" stroke="url(#arc-gradient)" stroke-width="2"/><path class="arc-track arc-secondary" d="M-100 450C360-65 1160-50 1610 450" stroke="#11b5e4" stroke-opacity=".25" stroke-width="1.5"/><path class="arc-spark" d="M-80 390C300-95 1160-95 1580 390" stroke="#1652f0" stroke-width="5" stroke-linecap="round" stroke-dasharray="60 2000"/></svg>
-      <div class="hero-photo photo-left"><img src="assets/cafe.webp" srcset="assets/cafe-small.webp 720w, assets/cafe.webp 1440w" sizes="(max-width: 700px) 38vw, 30vw" alt="A welcoming neighborhood cafe with teal windows" width="1440" height="960"><div class="photo-label"><span>A place to belong.</span><svg><use href="#arrow"/></svg></div></div>
-      <div class="hero-photo photo-center"><img src="assets/craft.webp" srcset="assets/craft-small.webp 720w, assets/craft.webp 1440w" sizes="(max-width: 700px) 75vw, 44vw" alt="An artisan at work in a sunlit furniture workshop" width="1440" height="960" fetchpriority="high"><div class="photo-label"><span>A lifetime of know-how.</span><svg><use href="#arrow"/></svg></div></div>
-      <div class="hero-photo photo-right"><img src="assets/records.webp" srcset="assets/records-small.webp 720w, assets/records.webp 1440w" sizes="(max-width: 700px) 38vw, 30vw" alt="A customer browsing an independent record shop" width="1440" height="960"><div class="photo-label"><span>A future worth sharing.</span><svg><use href="#arrow"/></svg></div></div>
+    <div class="vector-stage" id="handover-preview" data-phase="0">
+      <div class="vector-stage-heading"><span class="stage-wordmark"><svg aria-hidden="true"><use href="#brand"/></svg> A clearer way forward</span><span class="example-label">Illustrative workflow</span></div>
+      <div class="vector-viewport">
+        <svg class="handover-canvas" viewBox="0 0 1280 500" role="img" aria-labelledby="vector-title vector-description">
+          <title id="vector-title">From your business to your next chapter</title>
+          <desc id="vector-description">An animated example connects a business snapshot, a preparation checklist, and a practical next-step plan. The illustrations show preparation, not live listings or completed transactions.</desc>
+          <defs>
+            <filter id="vector-shadow" x="-25%" y="-20%" width="150%" height="165%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#0b1b3d" flood-opacity=".08"/></filter>
+            <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1652f0" stop-opacity=".16"/><stop offset="1" stop-color="#1652f0" stop-opacity="0"/></linearGradient>
+            <pattern id="stage-dots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#d7e0ed"/></pattern>
+          </defs>
+          <rect width="1280" height="500" fill="url(#stage-dots)" opacity=".5"/>
+          <ellipse cx="638" cy="247" rx="204" ry="193" fill="#e8efff"/>
+          <ellipse class="halo-ring" cx="638" cy="247" rx="185" ry="176" fill="none" stroke="#c9d9ff" stroke-width="1" stroke-dasharray="3 9"/>
+
+          <g class="connection-lines" fill="none" stroke-linecap="round">
+            <path id="left-route" d="M404 218H456Q476 218 476 238V309Q476 329 496 329H516" stroke="#cad8e8" stroke-width="2"/>
+            <path id="right-route" d="M764 183H795Q815 183 815 203V268Q815 288 835 288H866" stroke="#cad8e8" stroke-width="2"/>
+            <path d="M234 425V449Q234 465 250 465H1025Q1041 465 1041 449V425" stroke="#dce4ef" stroke-width="1.5" stroke-dasharray="3 6"/>
+            <path class="active-route route-left" d="M404 218H456Q476 218 476 238V309Q476 329 496 329H516" stroke="#1652f0" stroke-width="2.5"/>
+            <path class="active-route route-right" d="M764 183H795Q815 183 815 203V268Q815 288 835 288H866" stroke="#0caadc" stroke-width="2.5"/>
+          </g>
+          <g class="route-ports" fill="white" stroke="#b8c9df" stroke-width="2"><circle cx="404" cy="218" r="6"/><circle cx="516" cy="329" r="6"/><circle cx="764" cy="183" r="6"/><circle cx="866" cy="288" r="6"/></g>
+          <circle class="flow-dot flow-dot-left" cx="404" cy="218" r="5" fill="#1652f0"/>
+          <circle class="flow-dot flow-dot-right" cx="764" cy="183" r="5" fill="#0caadc"/>
+
+          <g class="scene-card business-card" data-scene-card="0">
+            <rect x="54" y="74" width="350" height="351" rx="22" fill="white" stroke="#dfe6ef" filter="url(#vector-shadow)"/>
+            <rect class="card-focus" x="54" y="74" width="350" height="351" rx="22" fill="none" stroke="#1652f0" stroke-width="2" opacity="0"/>
+            <rect x="78" y="98" width="48" height="48" rx="14" fill="#e9f5f4"/>
+            <use href="#store" x="89" y="109" width="26" height="26" color="#034748"/>
+            <text class="svg-heading" x="140" y="118">Your business</text>
+            <text class="svg-muted" x="140" y="140">A story worth carrying forward.</text>
+            <path d="M78 166H380" stroke="#e8edf3"/>
+            <text class="svg-label" x="78" y="194">THE BUSINESS SNAPSHOT</text>
+            <g class="snapshot-chart">
+              <path d="M82 220H376M82 250H376M82 280H376" stroke="#edf1f7" stroke-dasharray="3 5"/>
+              <path class="chart-area" d="M84 282L119 268 153 272 191 244 225 253 262 224 297 233 335 212 374 195V294H84Z" fill="url(#chart-fill)"/>
+              <path class="business-line" d="M84 282L119 268 153 272 191 244 225 253 262 224 297 233 335 212 374 195" fill="none" stroke="#1652f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="chart-tip" cx="374" cy="195" r="6" fill="#1652f0" stroke="white" stroke-width="3"/>
+            </g>
+            <g class="snapshot-bars"><rect x="78" y="317" width="92" height="6" rx="3" fill="#1652f0"/><rect x="180" y="317" width="92" height="6" rx="3" fill="#11b5e4"/><rect x="282" y="317" width="92" height="6" rx="3" fill="#034748"/></g>
+            <text class="svg-small" x="78" y="346">Records</text><text class="svg-small" x="180" y="346">Know-how</text><text class="svg-small" x="282" y="346">People</text>
+            <rect x="78" y="369" width="302" height="34" rx="8" fill="#f3f6fa"/><circle cx="95" cy="386" r="4" fill="#0caadc"/><text class="svg-small" x="108" y="391">Start with what you already know.</text>
+          </g>
+
+          <g class="floating-note">
+            <rect x="310" y="28" width="189" height="68" rx="14" fill="white" stroke="#dfe6ef" filter="url(#vector-shadow)"/>
+            <circle cx="336" cy="62" r="14" fill="#e6f5f3"/><use href="#check" x="327" y="53" width="18" height="18" color="#034748"/>
+            <text class="svg-note" x="359" y="57">The little details.</text><text class="svg-muted" x="359" y="77">The bigger picture.</text>
+          </g>
+
+          <g class="scene-card preparation-card" data-scene-card="1">
+            <rect x="516" y="98" width="248" height="305" rx="24" fill="#1652f0" filter="url(#vector-shadow)"/>
+            <rect x="538" y="120" width="44" height="44" rx="13" fill="white"/><use href="#brand" x="546" y="128" width="28" height="26" color="#034748"/>
+            <text class="svg-brand" x="596" y="150" fill="white">maychant.</text>
+            <text class="svg-center-title" x="538" y="203">Make the next</text><text class="svg-center-title" x="538" y="233">step clearer.</text>
+            <g class="prep-row prep-row-0"><circle cx="547" cy="279" r="9" fill="white" fill-opacity=".2"/><path class="prep-check" d="m543 279 3 3 5-6" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text class="svg-prep-text" x="568" y="284">What matters most</text></g>
+            <g class="prep-row prep-row-1"><circle cx="547" cy="317" r="9" fill="white" fill-opacity=".2"/><path class="prep-check" d="m543 317 3 3 5-6" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text class="svg-prep-text" x="568" y="322">What needs attention</text></g>
+            <g class="prep-row prep-row-2"><circle cx="547" cy="355" r="9" fill="white" fill-opacity=".2"/><path class="prep-check" d="m543 355 3 3 5-6" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text class="svg-prep-text" x="568" y="360">Who to involve next</text></g>
+          </g>
+
+          <g class="scene-card next-card" data-scene-card="2">
+            <rect x="866" y="74" width="350" height="351" rx="22" fill="white" stroke="#dfe6ef" filter="url(#vector-shadow)"/>
+            <rect class="card-focus" x="866" y="74" width="350" height="351" rx="22" fill="none" stroke="#0caadc" stroke-width="2" opacity="0"/>
+            <rect x="890" y="98" width="48" height="48" rx="14" fill="#e9efff"/><use href="#plan" x="902" y="110" width="24" height="24" color="#1652f0"/>
+            <text class="svg-heading" x="952" y="118">Your next chapter</text><text class="svg-muted" x="952" y="140">A practical starting plan.</text>
+            <path d="M890 166H1192" stroke="#e8edf3"/>
+            <g class="next-step next-step-0"><circle cx="906" cy="206" r="15" fill="#eef2ff"/><text class="svg-step-no" x="906" y="211" text-anchor="middle">1</text><text class="svg-step-title" x="934" y="201">Organize the essentials.</text><text class="svg-muted" x="934" y="222">Bring the right records together.</text></g>
+            <g class="next-step next-step-1"><circle cx="906" cy="271" r="15" fill="#e5f6fa"/><text class="svg-step-no" x="906" y="276" text-anchor="middle">2</text><text class="svg-step-title" x="934" y="266">Keep the know-how.</text><text class="svg-muted" x="934" y="287">Map the work and relationships.</text></g>
+            <g class="next-step next-step-2"><circle cx="906" cy="336" r="15" fill="#e7f3f1"/><text class="svg-step-no" x="906" y="341" text-anchor="middle">3</text><text class="svg-step-title" x="934" y="331">Start a conversation.</text><text class="svg-muted" x="934" y="352">Make one useful decision next.</text></g>
+            <rect x="890" y="376" width="302" height="28" rx="7" fill="#f3f6fa"/><text class="svg-small" x="904" y="395">Made for your next step.</text><use href="#arrow" x="1162" y="381" width="18" height="18" color="#1652f0"/>
+          </g>
+          <g class="conversation-chip"><rect x="946" y="16" width="216" height="43" rx="21.5" fill="#034748"/><circle cx="969" cy="38" r="5" fill="#67e6d0"/><text x="984" y="43" class="svg-chip-text">A conversation worth having.</text></g>
+          <g class="chapter-mark"><circle cx="640" cy="465" r="15" fill="white" stroke="#d5dfed"/><use href="#brand" x="630" y="457" width="20" height="16" color="#034748"/></g>
+        </svg>
+      </div>
+      <div class="vector-stage-controls" role="group" aria-label="Explore the handover illustration">
+        <button class="scene-step is-active" data-scene="0" aria-pressed="true"><span class="scene-index">01</span><span>See the business</span><i></i></button>
+        <button class="scene-step" data-scene="1" aria-pressed="false"><span class="scene-index">02</span><span>Find the priorities</span><i></i></button>
+        <button class="scene-step" data-scene="2" aria-pressed="false"><span class="scene-index">03</span><span>Plan the next step</span><i></i></button>
+      </div>
     </div>
+
     <div class="hero-bottom"><span>Built with care. Ready for what comes next.</span><button class="motion-toggle" aria-pressed="false"><span class="pause-icon" aria-hidden="true"></span><span class="motion-label">Pause motion</span></button></div>
   </section>
 
   <section class="manifesto section-wrap" aria-labelledby="manifesto-title">
     <p class="eyebrow">The next chapter of local business</p>
-    <h2 id="manifesto-title" class="manifesto-text">Behind every business <span class="inline-image"><img src="assets/owner-small.webp" alt="" loading="lazy" width="720" height="540"></span> is something worth carrying forward.</h2>
+    <h2 id="manifesto-title" class="manifesto-text">Behind every business <span class="inline-vector" aria-hidden="true"><svg viewBox="0 0 80 48"><rect width="80" height="48" rx="24" fill="#e5f4f3"/><use href="#store" x="23" y="7" width="34" height="34" color="#034748"/></svg></span> is something worth carrying forward.</h2>
     <div class="manifesto-bottom"><span class="fine-rule"></span><p>The regulars. The relationships. The way things get done.<br> We're building a better starting point for passing it all on.</p></div>
   </section>
 
@@ -59,12 +139,33 @@
     <div class="section-heading"><h2 id="audience-title">Different starting points.<br> <span>A shared next chapter.</span></h2><p>Wherever you are in the story,<br> there's a useful place to begin.</p></div>
     <div class="audience-panels">
       <article class="audience-panel owner-panel is-active" data-audience="owner">
-        <img class="audience-image" src="assets/owner.webp" alt="Illustration of a cafe owner in her shop" width="1440" height="1080" loading="lazy">
+        <svg class="audience-vector owner-vector" viewBox="0 0 360 250" role="img" aria-label="A vector storefront, representing the business you built">
+  <circle cx="178" cy="132" r="107" fill="#0b5a5b"/><circle class="shop-orbit" cx="178" cy="132" r="121" stroke="#65cfca" stroke-opacity=".3" stroke-dasharray="3 8" fill="none"/>
+  <path d="M63 211H298" stroke="#64c8c3" stroke-width="1.5"/>
+  <rect x="86" y="88" width="190" height="123" rx="4" fill="#e4f4ef"/><rect x="97" y="39" width="168" height="44" rx="6" fill="#f8fcfc"/>
+  <text x="181" y="66" text-anchor="middle" fill="#034748" font-size="15" font-weight="700">The business you built.</text>
+  <path d="m86 83-13 33h216l-13-33Z" fill="#b4e6df"/>
+  <path d="m108 83-7 33h27l3-33m22 0-1 33h28V83m23 0 2 33h27l-5-33m23 0 7 33h32l-13-33" fill="#1481ba"/>
+  <path d="M73 116a14 14 0 0 0 28 0 14 14 0 0 0 27 0 14 14 0 0 0 26 0 14 14 0 0 0 27 0 14 14 0 0 0 26 0 14 14 0 0 0 27 0 14 14 0 0 0 27 0 14 14 0 0 0 28 0" fill="#b4e6df"/>
+  <rect x="102" y="139" width="85" height="51" rx="3" fill="#c5e7ed" stroke="#79b4bd"/><path d="M144 139v51m-42-25h85" stroke="#79b4bd"/>
+  <rect x="208" y="137" width="49" height="74" rx="3" fill="#034748"/><rect x="216" y="145" width="33" height="38" rx="2" fill="#86d0d4"/><circle cx="246" cy="194" r="2" fill="#d7f6ef"/>
+  <g class="shop-spark"><path d="M302 60v14m-7-7h14M56 143v10m-5-5h10" stroke="#77e1d5" stroke-width="2" stroke-linecap="round"/></g>
+  <g class="shop-note"><rect x="233" y="192" width="108" height="36" rx="10" fill="white"/><circle cx="250" cy="210" r="8" fill="#e5f4f1"/><use href="#check" x="244" y="204" width="12" height="12" color="#034748"/><text x="266" y="215" fill="#034748" font-size="11" font-weight="700">Built with care.</text></g>
+</svg>
         <button class="audience-toggle" aria-expanded="true" aria-controls="owner-details"><span>For owners</span><span class="expand-icon" aria-hidden="true">−</span></button>
         <div class="audience-content"><h3>I built<br> a business.</h3><div id="owner-details" class="audience-details"><p>Make what you know<br> easier to pass on.</p><button class="circle-link" data-start="owner" aria-label="Explore next steps for business owners"><svg><use href="#arrow"/></svg></button></div></div>
       </article>
       <article class="audience-panel operator-panel" data-audience="operator">
-        <img class="audience-image" src="assets/craft.webp" alt="Illustration of hands-on work in a furniture business" width="1440" height="960" loading="lazy">
+        <svg class="audience-vector operator-vector" viewBox="0 0 360 250" role="img" aria-label="A future operator profile with experience, purpose and a plan">
+  <circle cx="180" cy="128" r="105" fill="#dde8ff"/><circle class="profile-orbit" cx="180" cy="128" r="119" fill="none" stroke="#b1c6ff" stroke-dasharray="3 8"/>
+  <path d="M94 77 180 128l80-41M180 128l-82 75m82-75 89 75" stroke="#a6bdf2" stroke-width="2"/>
+  <rect x="108" y="39" width="147" height="179" rx="17" fill="white" stroke="#c3d3f2"/>
+  <circle cx="181" cy="96" r="36" fill="#eef3ff"/><circle cx="181" cy="88" r="12" fill="#1652f0"/><path d="M158 119v-3a23 23 0 0 1 46 0v3" fill="#1652f0"/>
+  <text x="181" y="153" text-anchor="middle" fill="#0b1b3d" font-size="16" font-weight="700">The next operator.</text><path d="M143 174h77m-61 10h45" stroke="#cfdaed" stroke-width="4" stroke-linecap="round"/>
+  <g class="skill-chip skill-chip-one"><rect x="22" y="56" width="113" height="35" rx="10" fill="#1652f0"/><text x="79" y="78" text-anchor="middle" fill="white" font-size="13" font-weight="700">Experience</text></g>
+  <g class="skill-chip skill-chip-two"><rect x="230" y="176" width="111" height="35" rx="10" fill="#034748"/><text x="286" y="198" text-anchor="middle" fill="white" font-size="12" font-weight="700">Shared purpose</text></g>
+  <g class="skill-chip skill-chip-three"><rect x="36" y="191" width="114" height="35" rx="10" fill="white" stroke="#c3d3f2"/><text x="93" y="213" text-anchor="middle" fill="#1652f0" font-size="13" font-weight="700">A thoughtful plan</text></g>
+</svg>
         <button class="audience-toggle" aria-expanded="false" aria-controls="operator-details"><span>For future operators</span><span class="expand-icon" aria-hidden="true">+</span></button>
         <div class="audience-content"><h3>I want to<br> run one.</h3><div id="operator-details" class="audience-details" hidden><p>Turn your ambition into<br> a thoughtful starting plan.</p><button class="circle-link" data-start="operator" aria-label="Explore next steps for future operators"><svg><use href="#arrow"/></svg></button></div></div>
       </article>
@@ -74,7 +175,7 @@
         <div class="audience-content"><h3>I help owners<br> move forward.</h3><div id="adviser-details" class="audience-details" hidden><p>Bring more clarity to<br> the first conversation.</p><button class="circle-link" data-start="adviser" aria-label="Explore the preparation checklist for advisers"><svg><use href="#arrow"/></svg></button></div></div>
       </article>
     </div>
-    <p class="image-note">Illustrative imagery. These are not business listings.</p>
+    <p class="image-note">Illustrations show the process. No live listings or buyer introductions.</p>
   </section>
 
   <section class="journey" id="how-it-works" aria-labelledby="journey-title">
@@ -89,7 +190,7 @@
       </div>
       <div class="journey-visual">
         <svg class="journey-line" viewBox="0 0 700 600" fill="none" aria-hidden="true"><path d="M-40 440C130 650 450 500 470 280S600-50 780 85" stroke="#11b5e4" stroke-width="3"/></svg>
-        <img class="keys-photo" src="assets/keys.webp" alt="Illustration of a shop key being passed to a new operator" width="1440" height="960" loading="lazy">
+        <div class="knowledge-map" aria-label="Illustrative map of everyday business knowledge"><div class="knowledge-header"><svg aria-hidden="true"><use href="#store"/></svg><span>Inside the business</span></div><div class="knowledge-node" data-knowledge="0"><span class="node-icon"><svg aria-hidden="true"><use href="#plan"/></svg></span><div><strong>The essentials</strong><small>Records. Responsibilities. Routine.</small></div><span class="node-dot"></span></div><div class="knowledge-node" data-knowledge="1"><span class="node-icon"><svg aria-hidden="true"><use href="#network"/></svg></span><div><strong>The connections</strong><small>People. Customers. Suppliers.</small></div><span class="node-dot"></span></div><div class="knowledge-node" data-knowledge="2"><span class="node-icon"><svg aria-hidden="true"><use href="#person"/></svg></span><div><strong>The next conversation</strong><small>A question. A person. A first step.</small></div><span class="node-dot"></span></div><div class="knowledge-footer"><span>Bring the whole picture together.</span><svg aria-hidden="true"><use href="#arrow"/></svg></div></div>
         <div class="plan-sheet"><div class="sheet-top"><span class="mini-brand">maychant.</span><span>Example plan</span></div><h4>The next<br> chapter plan<span>.</span></h4><div class="plan-blue-rule"></div><div class="sheet-rows">
           <div class="sheet-row" data-row="0"><span class="sheet-box"><svg><use href="#check"/></svg></span><div><strong>The business today</strong><small>What's clear. What's still a question.</small></div></div>
           <div class="sheet-row" data-row="1"><span class="sheet-box"><svg><use href="#check"/></svg></span><div><strong>The knowledge to keep</strong><small>The work, the people, the relationships.</small></div></div>
@@ -115,9 +216,8 @@
 <footer class="footer"><div class="footer-top section-wrap"><a class="brand" href="#" aria-label="Maychant home"><svg><use href="#brand"/></svg><span>maychant.</span></a><p>For the businesses worth carrying forward.</p><nav aria-label="Footer navigation"><a href="#your-chapter">Who it's for</a><a href="#how-it-works">How it works</a><button data-contact>Say hello <span aria-hidden="true">↗</span></button></nav></div><div class="footer-bottom section-wrap"><span>© 2026 Maychant. A new chapter in the making.</span><div><button data-privacy>Privacy</button><button class="motion-toggle" aria-pressed="false"><span class="motion-label">Pause motion</span></button></div></div></footer>
 
 <dialog id="assessment-dialog" class="assessment-dialog" aria-labelledby="assessment-title"><div class="dialog-top"><span class="mini-brand">maychant.</span><button class="icon-button" data-close aria-label="Close preparation check"><svg><use href="#close"/></svg></button></div><div id="assessment-content"></div></dialog>
-<dialog id="film-dialog" class="film-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">A next chapter worth preparing for.</h2><button class="icon-button" data-close aria-label="Close film"><svg><use href="#close"/></svg></button></div><video id="brand-film" controls playsinline preload="none" poster="assets/maychant-story-poster.jpg" aria-label="Maychant's 18-second silent brand film"><source src="assets/maychant-story.mp4" type="video/mp4"><track kind="captions" src="assets/maychant-story.vtt" srclang="en" label="English">Your browser cannot play this film.</video><div class="film-caption"><span>A silent brand film. Illustrative imagery.</span><span>Built with care. Carried forward.</span></div><details class="film-transcript"><summary>Read the film's text</summary><p>Built with care. More than a business. A next chapter worth preparing for. Maychant.</p></details></dialog>
 <dialog id="contact-dialog" class="contact-dialog" aria-labelledby="contact-title"><div class="dialog-top"><span class="mini-brand">maychant.</span><button class="icon-button" data-close aria-label="Close contact"><svg><use href="#close"/></svg></button></div><div class="dialog-body"><p class="eyebrow">Help shape what comes next</p><h2 id="contact-title">Let's talk<br> about your chapter.</h2><p>Tell Krish what you're working on and what would make a handover easier.</p><label for="contact-role">I'm here as a</label><select id="contact-role"><option value="business owner">Business owner</option><option value="future operator">Future operator</option><option value="adviser">Adviser</option><option value="curious supporter">Curious supporter</option></select><label for="contact-note">What's on your mind? <span>(optional)</span></label><textarea id="contact-note" rows="3" maxlength="1500" placeholder="The part I'm trying to figure out is…"></textarea><a id="email-draft" class="button" href="mailto:krishdw@umich.edu">Open email draft <svg><use href="#arrow"/></svg></a><button id="copy-message" class="text-button">Copy message instead</button><p class="contact-note">Opens your email app addressed to krishdw@umich.edu. Review and send it when you're ready. Your preparation answers are not included.</p><p id="contact-status" role="status"></p></div></dialog>
-<dialog id="privacy-dialog" class="contact-dialog" aria-labelledby="privacy-title"><div class="dialog-top"><span class="mini-brand">maychant.</span><button class="icon-button" data-close aria-label="Close privacy information"><svg><use href="#close"/></svg></button></div><div class="dialog-body"><h2 id="privacy-title">Your answers.<br> Your next step.</h2><p>The preparation check runs in your browser. Answers are kept only in this page's memory, not in a database or local storage. Refreshing or closing the page clears them.</p><p>Downloading your plan saves a file on your device. Opening an email draft shares only the role and message you choose in the contact form, through your own email provider.</p><p>This site does not include advertising or analytics trackers. Its hosting provider may process routine access logs and sign-in information to serve the site. All fonts, images, scripts, and film assets are served from this site.</p><p>Questions? <a href="mailto:krishdw@umich.edu">krishdw@umich.edu</a></p></div></dialog>
+<dialog id="privacy-dialog" class="contact-dialog" aria-labelledby="privacy-title"><div class="dialog-top"><span class="mini-brand">maychant.</span><button class="icon-button" data-close aria-label="Close privacy information"><svg><use href="#close"/></svg></button></div><div class="dialog-body"><h2 id="privacy-title">Your answers.<br> Your next step.</h2><p>The preparation check runs in your browser. Answers are kept only in this page's memory, not in a database or local storage. Refreshing or closing the page clears them.</p><p>Downloading your plan saves a file on your device. Opening an email draft shares only the role and message you choose in the contact form, through your own email provider.</p><p>This site does not include advertising or analytics trackers. Its hosting provider may process routine access logs and sign-in information to serve the site. All fonts, graphics, scripts, and vector assets are served from this site.</p><p>Questions? <a href="mailto:krishdw@umich.edu">krishdw@umich.edu</a></p></div></dialog>
 <div class="toast" role="status" aria-live="polite"></div>
-<noscript><div class="noscript-note">Enable JavaScript to use the preparation check and film. You can still read the page or <a href="mailto:krishdw@umich.edu">contact Krish by email</a>.</div></noscript>
+<noscript><div class="noscript-note">Enable JavaScript to use the preparation check and animated illustrations. You can still read the page or <a href="mailto:krishdw@umich.edu">contact Krish by email</a>.</div></noscript>
 </body></html>

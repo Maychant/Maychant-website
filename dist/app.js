@@ -15,7 +15,7 @@
   $$('dialog').forEach(dialog => {
     $('[data-close]', dialog)?.addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', event => { const r = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom)) dialog.close(); });
-    dialog.addEventListener('close', () => { if (!$('dialog[open]')) document.body.style.overflow = ''; if (dialog.id === 'film-dialog') $('#brand-film').pause(); });
+    dialog.addEventListener('close', () => { if (!$('dialog[open]')) document.body.style.overflow = ''; });
   });
 
   const menuButton = $('.menu-toggle');
@@ -54,10 +54,72 @@
     $('#chapter-description').textContent = chapters[index].description;
     $$('.chapter-button').forEach((button, i) => { button.classList.toggle('is-active', i === index); button.setAttribute('aria-pressed', String(i === index)); });
     $$('.sheet-row').forEach((row, i) => row.classList.toggle('complete', i <= index));
+    $$('.knowledge-node').forEach((row, i) => row.classList.toggle('is-active', i === index));
     if (animate && !motionPaused && window.gsap) gsap.fromTo(['#chapter-title', '#chapter-description'], { opacity: .35, y: 10 }, { opacity: 1, y: 0, stagger: .06, duration: .45, ease: 'power2.out', overwrite: true });
   }
   $$('.chapter-button').forEach(button => button.addEventListener('click', () => { chapterOverrideUntil = performance.now() + 2200; setChapter(Number(button.dataset.chapter), true); }));
   setChapter(0);
+
+
+  let heroPhase = 0;
+  let heroSequence;
+  let heroCamera;
+  const heroViews = ['35 50 390 400', '465 50 350 400', '845 50 390 400'];
+  function setHeroPhase(index, animateCamera = true) {
+    heroPhase = index;
+    $('.vector-stage').dataset.phase = String(index);
+    $$('.scene-step').forEach((button, i) => {
+      button.classList.toggle('is-active', i === index);
+      button.setAttribute('aria-pressed', String(i === index));
+    });
+    const view = matchMedia('(max-width: 700px)').matches ? heroViews[index] : '0 0 1280 500';
+    if (heroCamera) heroCamera.kill();
+    if (animateCamera && !motionPaused && window.gsap) heroCamera = gsap.to('.handover-canvas', { attr: { viewBox: view }, duration: 1.15, ease: 'power3.inOut' });
+    else $('.handover-canvas').setAttribute('viewBox', view);
+  }
+  function animateVectorStory() {
+    const leftPath = $('#left-route');
+    const rightPath = $('#right-route');
+    const leftFlow = { progress: 0 };
+    const rightFlow = { progress: 0 };
+    function moveDot(path, selector, progress) {
+      const point = path.getPointAtLength(path.getTotalLength() * progress);
+      const dot = $(selector);
+      dot.setAttribute('cx', point.x);
+      dot.setAttribute('cy', point.y);
+    }
+    const chart = $('.business-line');
+    const length = chart.getTotalLength();
+    heroSequence = gsap.timeline({ repeat: -1, repeatDelay: .65, defaults: { ease: 'power2.inOut' } });
+    heroSequence.call(() => setHeroPhase(0), [], 0)
+      .fromTo(chart, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: 2.2, ease: 'power2.out' }, 0)
+      .fromTo('.chart-area', { opacity: .25 }, { opacity: 1, duration: 2 }, .2)
+      .fromTo('.chart-tip', { scale: .65, transformOrigin: 'center', opacity: .4 }, { scale: 1, opacity: 1, duration: .8 }, 1.7)
+      .fromTo('.floating-note', { y: 8 }, { y: 0, duration: 1.1 }, .6)
+      .fromTo(leftFlow, { progress: 0 }, { progress: 1, duration: 2.7, onUpdate: () => moveDot(leftPath, '.flow-dot-left', leftFlow.progress), ease: 'none' }, 2.2)
+      .fromTo('.scene-step[data-scene="0"] i', { scaleX: 0 }, { scaleX: 1, duration: 5.4, ease: 'none' }, 0)
+      .call(() => setHeroPhase(1), [], 5.4)
+      .to('.preparation-card', { y: -8, scale: 1.025, duration: .7 }, 5.4)
+      .fromTo('.prep-check', { opacity: .15, scale: .5, transformOrigin: 'center' }, { opacity: 1, scale: 1, duration: .5, stagger: .7 }, 5.8)
+      .fromTo(rightFlow, { progress: 0 }, { progress: 1, duration: 2.6, onUpdate: () => moveDot(rightPath, '.flow-dot-right', rightFlow.progress), ease: 'none' }, 8)
+      .fromTo('.scene-step[data-scene="1"] i', { scaleX: 0 }, { scaleX: 1, duration: 5.4, ease: 'none' }, 5.4)
+      .call(() => setHeroPhase(2), [], 10.8)
+      .to('.preparation-card', { y: 0, scale: 1, duration: .7 }, 10.8)
+      .to('.next-card', { y: -5, duration: .75 }, 10.8)
+      .fromTo('.next-step', { opacity: .6, y: 5 }, { opacity: 1, y: 0, stagger: .5, duration: .65 }, 11)
+      .fromTo('.conversation-chip', { opacity: 0, y: 9 }, { opacity: 1, y: 0, duration: .7 }, 13.2)
+      .fromTo('.scene-step[data-scene="2"] i', { scaleX: 0 }, { scaleX: 1, duration: 5.4, ease: 'none' }, 10.8);
+    gsap.to('.halo-ring', { rotation: 12, transformOrigin: 'center', duration: 18, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.shop-note', { y: -5, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.skill-chip', { y: -4, duration: 3, stagger: .5, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  }
+  $$('.scene-step').forEach(button => button.addEventListener('click', () => {
+    const index = Number(button.dataset.scene);
+    if (heroSequence) heroSequence.seek([3.2, 8.1, 14.8][index], true).pause();
+    setHeroPhase(index);
+    $$('.scene-step i').forEach((line, i) => { line.style.transform = i === index ? 'scaleX(1)' : 'scaleX(0)'; });
+  }));
+  setHeroPhase(0, false);
 
   // Keep the readable document order and a static fallback if animation is unavailable.
   const manifesto = $('.manifesto-text');
@@ -69,7 +131,10 @@
     }
   });
   function setupAnimation(entrance = false) {
+    if (heroCamera) { heroCamera.kill(); heroCamera = null; }
     if (animationContext) { animationContext.revert(); animationContext = null; }
+    heroSequence = null;
+    setHeroPhase(heroPhase, false);
     document.documentElement.classList.toggle('is-motion-paused', motionPaused);
     $$('.motion-toggle').forEach(button => { button.setAttribute('aria-pressed', String(motionPaused)); $('.motion-label', button).textContent = motionPaused ? 'Enable motion' : 'Pause motion'; });
     if (motionPaused || !window.gsap || !window.ScrollTrigger) return;
@@ -79,30 +144,26 @@
         const opening = gsap.timeline({ defaults: { ease: 'power3.out' } });
         opening.from('.hero-line', { y: 28, opacity: 0, duration: .85, stagger: .11 })
           .from(['.hero-description', '.hero-actions', '.hero-note'], { y: 15, opacity: 0, duration: .65, stagger: .08 }, '-=.65')
-          .from('.hero-photo', { opacity: 0, scale: .91, duration: 1.1, stagger: .12 }, '-=.7');
+          .from('.vector-stage', { opacity: 0, y: 20, duration: 1, ease: 'power3.out' }, '-=.6');
       }
-      gsap.to('.photo-left', { y: -10, rotationZ: -2.4, duration: 5.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-      gsap.to('.photo-center', { y: -8, duration: 5.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-      gsap.to('.photo-right', { y: 8, rotationZ: 2.4, duration: 5.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      animateVectorStory();
       gsap.to('.reading-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: .2 } });
       gsap.fromTo('.manifesto-word', { opacity: .25 }, { opacity: 1, stagger: .15, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top 75%', end: 'bottom 65%', scrub: .5 } });
-      gsap.fromTo('.hero-stage', { scale: 1 }, { scale: .94, opacity: .65, ease: 'none', scrollTrigger: { trigger: '.hero-stage', start: 'top 30%', end: 'bottom top', scrub: .6 } });
       ['.section-heading', '.faq-intro', '.final-cta h2'].forEach(selector => gsap.from(selector, { y: 26, opacity: 0, duration: .8, scrollTrigger: { trigger: selector, start: 'top 90%', once: true } }));
       gsap.from('.audience-panels', { y: 30, opacity: 0, duration: .9, scrollTrigger: { trigger: '.audience-panels', start: 'top 90%', once: true } });
       if (matchMedia('(min-width: 701px)').matches) {
         gsap.fromTo('.plan-sheet', { rotation: 10, y: 35 }, { rotation: 2, y: -16, ease: 'none', scrollTrigger: { trigger: '.journey-scroll', start: 'top 65%', end: 'bottom 90%', scrub: .8 } });
-        gsap.fromTo('.keys-photo', { scale: .88, rotation: -9 }, { scale: 1.03, rotation: -3, ease: 'none', scrollTrigger: { trigger: '.journey-scroll', start: 'top 65%', end: 'bottom 90%', scrub: .8 } });
+        gsap.fromTo('.knowledge-map', { y: 22, rotation: -7 }, { y: -12, rotation: -2, ease: 'none', scrollTrigger: { trigger: '.journey-scroll', start: 'top 65%', end: 'bottom 90%', scrub: .8 } });
         ScrollTrigger.create({ trigger: '.journey-scroll', start: 'top 25%', end: 'bottom 95%', onUpdate: self => { if (performance.now() > chapterOverrideUntil) setChapter(Math.min(2, Math.floor(self.progress * 3)), true); } });
       }
     });
   }
-  $$('.motion-toggle').forEach(button => button.addEventListener('click', () => { motionPaused = !motionPaused; setupAnimation(); if (motionPaused) $('#brand-film').pause(); }));
+  $$('.motion-toggle').forEach(button => button.addEventListener('click', () => { motionPaused = !motionPaused; setupAnimation(); }));
   reducedMotion.addEventListener('change', event => { motionPaused = event.matches; setupAnimation(); });
   const widthMedia = matchMedia('(min-width: 701px)');
   widthMedia.addEventListener('change', () => { closeMenu(); setupAnimation(); });
   setupAnimation(true);
 
-  $('#watch-story').addEventListener('click', () => { openDialog($('#film-dialog')); const video = $('#brand-film'); video.currentTime = 0; video.play().catch(() => {}); });
   $$('[data-privacy]').forEach(button => button.addEventListener('click', () => openDialog($('#privacy-dialog'))));
 
   const roles = { owner: { label: 'Business owner', title: 'I built a business.', description: 'Make what you know easier to pass on.' }, operator: { label: 'Future operator', title: 'I want to run one.', description: 'Prepare for the work behind ownership.' }, adviser: { label: 'Adviser', title: 'I help owners move forward.', description: 'Bring clarity to a handover conversation.' } };

@@ -1,32 +1,19 @@
-# Maychant — self-critique and release decisions
+# Maychant — vector revision self-critique
 
-## Design review
+## Design judgment
 
-I inspected the actual desktop hero, complete static desktop/mobile pages, mobile hero, expanded audience panels, scroll-story middle state, mobile story, film playback states, and final paused-mode mobile form. These are rendered website screenshots in `research/qa/`, not the generated design references.
+The user rejected the generated photography and film. The current page replaces both with authored vector graphics: a business snapshot, a central preparation card and a next-step plan. A line chart draws, signals travel along connecting paths, priorities appear in sequence and the active card moves subtly forward. Manual scene buttons let visitors inspect each stage. This is an SVG/GSAP sequence, not a video player or a generated movie.
 
-**What works:** the two-line opening has a clear focal point and one primary action. Original warm imagery gives the navy/blue/cyan palette a human subject. The photographic arc, horizontal audience expansion, physical handover document, open FAQ rows, and broad cobalt ending provide varied compositions. The actual site closely follows the four generated section references while simplifying their extra navigation and decoration. Mobile recomposes the audience panels and makes the story manually navigable.
+The strongest improvement is clarity. The artwork now illustrates what the preparation tool does and shares the site's navy, cobalt, teal and cyan palette. A single scene is framed on mobile rather than compressing three cards into unreadable miniatures. Supporting storefront, operator and knowledge-map graphics keep the rest of the page visually consistent. The original type scale, open spacing and physical plan sheet preserve the brand's character.
 
-**What needed correction:** the first manual-motion implementation froze new CSS entrances at opacity zero. An independent reviewer caught the resulting invisible modal. Manual pause now disables those entrances and immediately exposes their readable state; targeted live retesting covered all four dialogs, audience details and FAQ across desktop,390px,360px and reduced motion. Bright photo crops weakened small role labels, so a top scrim was added. Hidden desktop line breaks joined words on mobile; both static HTML and dynamic chapter strings now preserve spaces. Utility controls were enlarged for mobile.
+The independent review caught a decorative note clipped by the mobile camera and an operator badge overlapping another label and, on mobile, the section heading. The note is now hidden in the narrow composition; the badge is repositioned and the audience artwork is smaller. Storefront lettering was also reduced to fit its sign. These corrections address observed screenshots rather than hypothetical polish.
 
-**Motion judgment:** the hero's subtle depth and moving connection line make the opening feel alive without delaying the primary action. The scroll story changes three meaningful preparation topics and the example document together. It has explicit buttons and a static alternative. Motion is not used to manufacture approvals, live matches, or business traction. The playable 18-second film is a real MP4; it is not an animated poster with a fake play control.
+The remaining design tradeoff is that vector art conveys the process more strongly than the lived character of a local business. Future authentic owner stories could provide that human evidence when available. The current illustrative labels avoid pretending the diagrams represent customers, verified buyers or completed transactions.
 
-The film reviewer also found that native mobile controls could cover the original lower-third titles. The final media revision moves all title pixels above y=428 in the720px frame, leaving the bottom292px free. The revised poster and representative frames were inspected and the full file decoded successfully. Playback timing and the site's player code are unchanged.
+## Verification and limits
 
-## Product and content judgment
+The current independent review is `research/vector-review.md`, with time-separated rendered observations at 1440 × 900 and 390 × 844. It checks actual scene changes, chart/check/path animation, mobile camera behavior, manual selection, pause, reduced motion, audience expansion and the journey's changing knowledge highlight. A representative owner preparation flow completed at both widths while paused. No horizontal overflow, JavaScript errors, raster/video elements or external resource requests were observed.
 
-The first useful product is preparation. The page does not claim a live marketplace, matching network, professional acceptance, valuation or acquisition results. Generated people and shops are marked illustrative. The assessment produces a real local text file and handles uncertainty without inventing a readiness percentage. Contact opens a draft for the visitor to review/send; no success message implies receipt.
+The original 24-scenario functional review remains historical evidence for unchanged preparation/export/contact behavior. It was not repeated in full for this visual revision. Browser verification used isolated Chromium after the connected browser tool failed; it does not establish physical-device Safari/Firefox compatibility or accessibility certification.
 
-The site remains an early product, not proof of demand. The next product test should observe whether owners and advisers understand the offer, finish the check, and find the generated next steps useful. Real case studies and authentic owner photography would strengthen credibility when available and authorized; fictional testimonials would not.
-
-## Evidence
-
-- Independent visual/motion review: `research/visual-motion-review.md`, including the defect, fixes and targeted retest.
-- Independent functional review: `research/functional-review.md`: 24 meaningful scenarios passed, real downloads inspected, no observed answer submission or third-party resource requests.
-- Rendered viewports:1440×900,1280×800,390×844,360×800. No horizontal overflow in reviewed states.
-- Film playback advanced through distinct scenes and reached18seconds; close/pause behavior verified.
-- All local asset references and in-page anchors resolved; no duplicate static IDs; JavaScript syntax check passed.
-- Eleven requested repository references are accounted for in `research/repository-influences.md`.
-
-## Practical limits
-
-QA used isolated Chromium after the connected-browser tool failed. It does not establish physical iOS/Safari/Firefox compatibility or accessibility certification. The page contains no backend service, live listings, payment flow, user accounts or subscription database. The published preview preserves owner-private access.
+The product remains a browser-local preparation tool without listings, accounts, valuations, buyer matching, payments or an email database. Answers remain in memory and exports are generated locally. Contact opens a draft for the visitor to review and send. The published preview preserves owner-private access.

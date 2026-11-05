@@ -8,3 +8,4 @@ research/film-review/
 research/functional-artifacts/
 tmp/
 .openai/*.local.*
+research/qa-vector/

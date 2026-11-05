@@ -12,10 +12,10 @@ Open http://127.0.0.1:4173. The deployable site is the `dist` directory; no buil
 
 ## Included
 
-- Responsive photographic hero with original imagery, GSAP entrance and floating motion, a connecting arc, and a motion pause control.
+- Authored SVG hero: a business snapshot, preparation card and next-step plan connected by moving signals. GSAP draws the chart, changes focus and reveals the priorities, with direct scene selection and a motion pause control.
 - Three accessible expanding audience panels for owners, future operators, and advisers.
 - A three-chapter scroll story with a sample handover document, plus manual chapter controls and reduced-motion behavior.
-- Original 18-second silent brand film with native video controls, captions, poster, and transcript.
+- Responsive vector illustrations for owners and operators, plus a knowledge map and handover document. Mobile frames one hero card at a time. No raster imagery or video is shipped.
 - Three-stage preparation check. Role-aware questions, prioritized next steps, Back/review/reset behavior, and real plain-text export/copy.
 - FAQ, mobile navigation, privacy explanation, and a contact flow that opens a draft addressed to the owner's supplied email, krishdw@umich.edu.
 
@@ -27,10 +27,10 @@ The Site was created with owner-private access. Publication does not make it pub
 
 ## Design provenance
 
-The four generated section comps and image analysis are in `design/`. Original image-generation prompts and asset mappings are in `design/prompts.json`. `research/repository-influences.md` documents all eleven unique requested repositories. `research/reference-sites.md` distinguishes observed reference-site behavior from design inference. No competitor images, logos, testimonials, source code, or statistics were copied.
+The current vector direction replaces the original generated photography and brand film at the user's request. `research/vector-reference-notes.md` records the observed Coinbase clip and the translation into an original SVG workflow. Historical section comps and prompts remain in `design/`, outside the deployed assets. `research/repository-influences.md` documents all eleven unique requested repositories. No competitor images, logos, testimonials, source code, or statistics were copied.
 
-Implementation is custom HTML, CSS, and JavaScript. Curated repositories inform composition and research; shadcn and Magic UI inform accessible dialog/disclosure and reveal/progress behavior. They are not installed React dependencies. GSAP and ScrollTrigger are served locally. The original brand photos are illustrations, not customers or available businesses.
+Implementation is custom HTML, CSS, SVG, and JavaScript. Curated repositories inform composition and research; shadcn and Magic UI inform accessible dialog/disclosure and reveal/progress behavior. They are not installed React dependencies. GSAP, ScrollTrigger and fonts are served locally. The graphics show an illustrative preparation workflow, not real businesses, customer activity or live matches.
 
 ## Verification
 
-See `research/visual-motion-review.md`, `research/functional-review.md`, and `research/self-critique.md` for the independent reviews, limitations, and fixes. These distinguish measured checks from subjective design judgment.
+See `research/vector-review.md` for the current independent motion, responsive-layout and functional checks, and `research/self-critique.md` for release judgment. `research/visual-motion-review.md` and `research/functional-review.md` describe the original version; the vector review covers the changed UI and a representative preparation flow. These distinguish measured checks from subjective design judgment.

@@ -1,0 +1,10 @@
+import { readFile, writeFile } from 'node:fs/promises';
+const root = new URL('../', import.meta.url);
+const markup = await readFile(new URL('design/source-v3/landing.html', root), 'utf8');
+const scene = await readFile(new URL('design/neighborhood-scene.svg', root), 'utf8');
+const marker = '<!-- NEIGHBORHOOD_SCENE -->';
+if (markup.split(marker).length !== 2) throw new Error('Expected one neighborhood illustration marker.');
+const source = `const landingContent = ${JSON.stringify(markup.replace(marker, scene))};\nexport default landingContent;\n`;
+const destination = new URL('app/landing-content.ts', root);
+if (await readFile(destination, 'utf8') !== source) await writeFile(destination, source);
+console.log('Maychant landing content is composed.');

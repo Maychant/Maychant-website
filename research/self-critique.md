@@ -1,19 +1,21 @@
-# Maychant — vector revision self-critique
+# Maychant neighborhood redesign: self-critique
 
-## Design judgment
+The previous page explained a preparation workflow through dashboard cards. The user wanted the feel of a shopkeeper's business and a buyer/seller waitlist. This revision changes the content, composition and primary action together.
 
-The user rejected the generated photography and film. The current page replaces both with authored vector graphics: a business snapshot, a central preparation card and a next-step plan. A line chart draws, signals travel along connecting paths, priorities appear in sequence and the active card moves subtly forward. Manual scene buttons let visitors inspect each stage. This is an SVG/GSAP sequence, not a video player or a generated movie.
+The opening now pairs a direct ownership idea with a miniature street. Different rooflines, a record window, café seating, a repair-shop window and an owner at the door give the business a physical setting. Motion comes from these objects: the record turns, coffee steam rises, a sign swings and the owner waves. There are no charts, workflow tiles, generated images or video.
 
-The strongest improvement is clarity. The artwork now illustrates what the preparation tool does and shares the site's navy, cobalt, teal and cyan palette. A single scene is framed on mobile rather than compressing three cards into unreadable miniatures. Supporting storefront, operator and knowledge-map graphics keep the rest of the page visually consistent. The original type scale, open spacing and physical plan sheet preserve the brand's character.
+The hero's two actions explicitly distinguish buying from selling. Both select the right form option. The rest of the page adds the people behind a handover, two audience perspectives, one durable waitlist and clear prelaunch answers. The page does not imply current listings, completed sales, verified buyers or existing customers. The storefront names are part of an illustration, not offered businesses.
 
-The independent review caught a decorative note clipped by the mobile camera and an operator badge overlapping another label and, on mobile, the section heading. The note is now hidden in the narrow composition; the badge is repositioned and the audience artwork is smaller. Storefront lettering was also reduced to fit its sign. These corrections address observed screenshots rather than hypothetical polish.
+## Corrections from actual review
 
-The remaining design tradeoff is that vector art conveys the process more strongly than the lived character of a local business. Future authentic owner stories could provide that human evidence when available. The current illustrative labels avoid pretending the diagrams represent customers, verified buyers or completed transactions.
+- GSAP's origin handling initially moved SVG objects outside their intended positions. Native CSS transform-box animations now keep the record in its window and the wave attached to the person.
+- A deferred interaction script raced React hydration. A post-hydration loader now initializes the page; a fresh independent capture showed no hydration warning.
+- Hidden desktop line breaks joined words on phone. Literal whitespace now preserves their text.
+- Dark-mode pavement and sky lines needed more contrast. Targeted colors preserve those details.
+- Form limits now match the API. Field errors are associated with inputs. The submit control enables only after its handler initializes, and the native form method is POST so contact data cannot fall into a GET URL if scripting is unavailable.
 
-## Verification and limits
+## Assessment
 
-The current independent review is `research/vector-review.md`, with time-separated rendered observations at 1440 × 900 and 390 × 844. It checks actual scene changes, chart/check/path animation, mobile camera behavior, manual selection, pause, reduced motion, audience expansion and the journey's changing knowledge highlight. A representative owner preparation flow completed at both widths while paused. No horizontal overflow, JavaScript errors, raster/video elements or external resource requests were observed.
+The page now has a coherent local-business subject and a working purpose. It is less corporate and more approachable than the prior dashboard-style composition. The illustration remains a stylized interpretation; it cannot substitute for real owner stories or evidence of demand. Future authentic stories should come from research and permission, not invented testimonials.
 
-The original 24-scenario functional review remains historical evidence for unchanged preparation/export/contact behavior. It was not repeated in full for this visual revision. Browser verification used isolated Chromium after the connected browser tool failed; it does not establish physical-device Safari/Firefox compatibility or accessibility certification.
-
-The product remains a browser-local preparation tool without listings, accounts, valuations, buyer matching, payments or an email database. Answers remain in memory and exports are generated locally. Contact opens a draft for the visitor to review and send. The published preview preserves owner-private access.
+Verification covers desktop, phone, dark mode, pause/reduced motion and the complete local signup flow, plus dedicated server validation and persistence checks. It uses isolated Chromium because the connected browser API failed. Physical iOS Safari/Firefox compatibility and production delivery of future emails are not established. No automated email service is configured; the stored waitlist supports future follow-up.

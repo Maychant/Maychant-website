@@ -1,36 +1,39 @@
 # Maychant
 
-A bespoke business-succession homepage, designed around the supplied Maychant palette and the idea of a business's next chapter.
+A buyer and seller waitlist for small-business ownership, with an authored animated neighborhood illustration. This revision replaces the former succession-preparation landing page.
 
-## Run locally
+## Run and build
 
 ```sh
-python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
+npm run dev -- --port 5174
 ```
 
-Open http://127.0.0.1:4173. The deployable site is the `dist` directory; no build or runtime dependency installation is needed.
+The current application uses the Sites Vinext starter, React and a Cloudflare Worker with D1. The Site identity remains in `.openai/hosting.json`; the audience remains owner-private.
 
-## Included
+- Page markup: `app/landing-content.ts` (generated from the readable `design/source-v3/landing.html` and `design/neighborhood-scene.svg`).
+- Styling: `app/globals.css`.
+- Waitlist form, tabs, pause controls and privacy dialog: `public/app.js`.
+- Post-hydration local script loading: `app/site-scripts.tsx`.
+- Write-only API: `app/api/waitlist/route.ts` and `lib/waitlist.ts`.
+- Schema and immutable migration: `db/schema.ts` and `drizzle/`.
+- Deployed output: generated `dist/`, not an authored source directory.
 
-- Authored SVG hero: a business snapshot, preparation card and next-step plan connected by moving signals. GSAP draws the chart, changes focus and reveals the priorities, with direct scene selection and a motion pause control.
-- Three accessible expanding audience panels for owners, future operators, and advisers.
-- A three-chapter scroll story with a sample handover document, plus manual chapter controls and reduced-motion behavior.
-- Responsive vector illustrations for owners and operators, plus a knowledge map and handover document. Mobile frames one hero card at a time. No raster imagery or video is shipped.
-- Three-stage preparation check. Role-aware questions, prioritized next steps, Back/review/reset behavior, and real plain-text export/copy.
-- FAQ, mobile navigation, privacy explanation, and a contact flow that opens a draft addressed to the owner's supplied email, krishdw@umich.edu.
+After editing the readable markup or illustration, run `node scripts/compose-landing.mjs` to update the page module.
 
-## Deliberate scope
+Use the installed Sites plugin's build and publication helpers for release. Local D1 migration setup is described in `research/waitlist-backend-report.md`. Do not replay an applied migration. Local test records are separate from hosted storage.
 
-This is an early-stage landing site with a working browser-local preparation tool. It does not have live business listings, accounts, buyer matching, professional reviews, valuations, payments, a mailing-list database, or AI processing. Preparation answers are held in memory and never submitted. Email is reviewed and sent by the visitor's mail application; the site does not claim a message was received.
+## Experience
 
-The Site was created with owner-private access. Publication does not make it publicly accessible without a separate audience change.
+The hero illustrates three fictional neighborhood businesses with a waving owner, rotating record, coffee steam, moving plants and an Open sign. All artwork is SVG; no generated photos or video are shipped. CSS handles continuous SVG motion and GSAP handles entrances. Pause and system reduced-motion settings provide a static view. Light and dark themes follow the system preference.
 
-## Design provenance
+Buyer and seller links select the corresponding waitlist interest. Keyboard-operable audience tabs explain both sides. The form saves name, email, interest, optional location and consent. It shows success only after a successful server response and preserves input on failure. Names and addresses are never stored in browser storage or placed in a form GET URL. No email is sent automatically.
 
-The current vector direction replaces the original generated photography and brand film at the user's request. `research/vector-reference-notes.md` records the observed Coinbase clip and the translation into an original SVG workflow. Historical section comps and prompts remain in `design/`, outside the deployed assets. `research/repository-influences.md` documents all eleven unique requested repositories. No competitor images, logos, testimonials, source code, or statistics were copied.
+## Product scope
 
-Implementation is custom HTML, CSS, SVG, and JavaScript. Curated repositories inform composition and research; shadcn and Magic UI inform accessible dialog/disclosure and reveal/progress behavior. They are not installed React dependencies. GSAP, ScrollTrigger and fonts are served locally. The graphics show an illustrative preparation workflow, not real businesses, customer activity or live matches.
+This is a prelaunch waitlist, not a live business marketplace. There are no listings, valuations, buyer matches, transaction guarantees, payments or user accounts. There is no public endpoint for reading signups. Duplicate emails receive the same response without exposing or overwriting the original entry. Owner follow-up and removal requests can be handled through the supplied contact address.
 
 ## Verification
 
-See `research/vector-review.md` for the current independent motion, responsive-layout and functional checks, and `research/self-critique.md` for release judgment. `research/visual-motion-review.md` and `research/functional-review.md` describe the original version; the vector review covers the changed UI and a representative preparation flow. These distinguish measured checks from subjective design judgment.
+Current independent review: `research/neighborhood-review.md`. Backend tests and persistence evidence: `research/waitlist-backend-report.md`. Root design judgment: `research/self-critique.md`. Earlier photographic/vector dashboard reviews describe superseded versions and remain historical evidence only.
+
+Original reference research, including all eleven requested GitHub repositories, remains in `research/repository-influences.md`. Current storefronts and all other art are bespoke; no competitor assets or customer claims are used.

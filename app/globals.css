@@ -200,3 +200,10 @@
   .nav-cta:hover, .chapter-cta:hover, .closing-cta:hover, .nav-cta:active, .chapter-cta:active, .closing-cta:active,
   .nav-cta:hover > svg, .chapter-cta:hover > svg, .closing-cta:hover > svg { transform: none; }
 }
+
+/* Section headlines now lead directly, without decorative eyebrow labels. */
+.hero h1:first-child,
+.belief h2:first-child,
+.people-top h2:first-child,
+.chapter-heading h2:first-child,
+.closing-invite h2:first-child { margin-top: 0; }

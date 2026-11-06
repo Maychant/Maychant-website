@@ -88,6 +88,11 @@
   --mc-glass-filter: blur(28px) saturate(165%);
   --mc-glass-fallback: #f4f7fc;
   --mc-glass-dark: linear-gradient(120deg, rgb(255 255 255 / 12%), rgb(17 181 228 / 5%));
+  --mc-nav-glass-fill: rgb(255 255 255 / 34%);
+  --mc-nav-glass-dark: rgb(255 255 255 / 9%);
+  --mc-nav-glass-filter: blur(20px) saturate(180%);
+  --mc-nav-glass-edge: rgb(255 255 255 / 40%);
+  --mc-nav-glass-shadow: 0 8px 32px rgb(16 30 66 / 10%);
 
   --mc-duration-fast: 180ms;
   --mc-duration-ui: 250ms;

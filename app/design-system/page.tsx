@@ -61,9 +61,9 @@ export default function DesignSystem() {
         <section className="ds-section" id="system-4">
           <SectionTitle n={4} title="Room to feel at home.">A four-pixel spacing foundation, generous section breaks, and glass used where layers actually meet.</SectionTitle>
           <div className="ds-spacing">{[4,8,12,16,24,32,48,64,96].map((n) => <div key={n}><span style={{ height: n }} /><code>{n}</code></div>)}</div>
-          <div className="ds-rule-grid"><div><h3>Space</h3><p>16–24px inside small groups. 32–48px between content groups. 64–120px between chapters of the page.</p></div><div><h3>Grid</h3><p>1380px maximum content width. Flexible gutters. One column on mobile; paired content expands into two columns where it fits.</p></div><div><h3>Shape</h3><p>10px fields. 24px panels and glass. 26px dialogs. Pill shapes are reserved for actions—not every surface.</p></div></div>
+          <div className="ds-rule-grid"><div><h3>Space</h3><p>16–24px inside small groups. 32–48px between content groups. 64–120px between chapters of the page.</p></div><div><h3>Grid</h3><p>1380px maximum content width. Flexible gutters. One column on mobile; paired content expands into two columns where it fits.</p></div><div><h3>Shape</h3><p>10px fields. 24px panels and glass. 26px dialogs. Pill shapes for actions and the floating navigation.</p></div></div>
           <GlassDemo />
-          <p className="ds-fineprint">Glass recipe: 28px backdrop blur, 165% saturation, a translucent fill, a fine inner edge, and a restrained navy shadow. Use an opaque fallback for reduced transparency or unsupported browsers.</p>
+          <p className="ds-fineprint">Surface glass: 28px blur and 165% saturation. Navigation glass: 20px blur, 180% saturation, and a translucent pill with subtle edge refraction. Keep the logo and links sharp above the glass. Use an opaque fallback for reduced transparency or unsupported browsers.</p>
         </section>
 
         <section className="ds-section" id="system-5">

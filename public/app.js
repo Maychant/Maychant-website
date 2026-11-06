@@ -171,6 +171,27 @@
       }
     });
     submit.disabled = false;
+    // Match the glass navigation's foreground to the section directly beneath it.
+    const header = $('.site-header');
+    const darkChapter = $('.chapter');
+    if (header && darkChapter) {
+      let framePending = false;
+      function syncHeaderSurface() {
+        framePending = false;
+        const nav = header.getBoundingClientRect();
+        const dark = darkChapter.getBoundingClientRect();
+        const midpoint = nav.top + nav.height / 2;
+        header.dataset.surface = dark.top <= midpoint && dark.bottom > midpoint ? 'dark' : 'light';
+      }
+      function queueHeaderSurface() {
+        if (!framePending) { framePending = true; requestAnimationFrame(syncHeaderSurface); }
+      }
+      window.addEventListener('scroll', queueHeaderSurface, { passive: true });
+      window.addEventListener('resize', queueHeaderSurface, { passive: true });
+      window.addEventListener('pageshow', queueHeaderSurface);
+      if ('ResizeObserver' in window) new ResizeObserver(queueHeaderSurface).observe($('#main'));
+      syncHeaderSurface();
+    }
     $('#add-another').addEventListener('click', () => {
       form.reset(); clearErrors(); success.hidden = true; form.hidden = false;
       updateWaitlistTitle();

@@ -81,9 +81,13 @@ Use the four-pixel spacing family: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96.
 
 Maximum marketing content width is 1380px; page gutters scale from 20px to 56px. Navigation has its own narrower floating container. Existing breakpoints are 380, 700, 900, and 1200px. Collapse based on content fit; do not hide essential copy to force a layout.
 
-Radii: input 10px; card/glass 24px; dialog 26px; action pill 999px. Mobile panels may tighten to 20–22px. Do not make every object a pill.
+Radii: input 10px; card/glass 24px; dialog 26px; actions and floating navigation 999px. Mobile panels may tighten to 20–22px. Do not make every object a pill.
 
-Glass combines a translucent fill, 28px blur, 165% saturation, a fine inner highlight, and a soft navy shadow. Use it on floating navigation or expanded surfaces with visible depth behind them. Always test against both light and dark content. Use the solid fallback when transparency is reduced or backdrop-filter is unavailable. Body copy belongs on a stable reading surface.
+General glass surfaces combine a translucent fill, 28px blur, 165% saturation, a fine inner highlight, and a soft navy shadow. Use them on expanded surfaces with visible depth behind them. Body copy belongs on a stable reading surface.
+
+The floating navigation has its own `--mc-nav-glass-*` recipe: a white 34% tint, 20px blur, 180% saturation, a rounded rim, and a soft shadow. Its separate `::before` surface carries the subtle SVG refraction; the logo, links, and focus rings remain outside that filter. Over the navy chapter, the tint falls to 9% and the foreground switches to the supplied reversed logo, white links, and a light CTA.
+
+Keep standard and WebKit backdrop declarations in separate `@supports` rules so production CSS optimization preserves the standard spelling. Verify `getComputedStyle(header, '::before').backdropFilter` in the deployed site, not just the source. Always check glass against light content, illustrations, and dark content. Use the solid fallback when transparency is reduced or backdrop-filter is unavailable.
 
 ## Components
 

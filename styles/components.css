@@ -157,3 +157,11 @@
   .mc-button, .mc-button > svg { transition: none; }
   .mc-button:hover:not(:disabled), .mc-button:active:not(:disabled), .mc-button:hover:not(:disabled) > svg { transform: none; }
 }
+
+/* The waitlist asks only for interest, a name, and one contact method. */
+.waitlist-dialog .simple-waitlist-fields { grid-template-columns: 1fr; gap: 18px; margin-top: 22px; }
+.waitlist-dialog .contact-hint { display: block; margin-top: 8px; font-size: 12px; font-weight: 400; line-height: 1.45; color: var(--mc-text-secondary); }
+.waitlist-dialog .waitlist-disclosure { display: block; max-width: 50ch; font-size: 12px; line-height: 1.5; }
+.waitlist-dialog .waitlist-disclosure button { margin-left: 3px; font-size: inherit; }
+.waitlist-dialog .dialog-intro h2:first-child { margin-top: 0; }
+.waitlist-dialog .form-area { margin-top: 24px; }

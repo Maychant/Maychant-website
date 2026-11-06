@@ -12,7 +12,7 @@ const noAccess = {
 };
 
 test('invalid fields fail before storage and identify relevant fields', async()=>{
-  const response=await handleWaitlist(request({name:'A',email:'invalid',role:'admin',consent:false,location:'x'.repeat(121)}),noAccess);
+  const response=await handleWaitlist(request({name:' ',email:'invalid',role:'admin',consent:false,location:'x'.repeat(121)}),noAccess);
   assert.equal(response.status,400);
   const result=await response.json();
   assert.equal(result.ok,false);
@@ -72,6 +72,7 @@ test('valid request is normalized and only then acknowledged',async()=>{
   assert.equal(response.status,200);
   assert.deepEqual((await response.json()),{ok:true,message:'You’re on the Maychant waitlist.'});
   assert.equal(entry.name,'Local Test');assert.equal(entry.email,'local-test@example.com');assert.equal(entry.role,'both');
+  assert.equal(entry.phone,null);
   assert.equal(entry.consentVersion,'maychant-waitlist-v1');
   assert.equal(entry.createdAt,entry.consentedAt);
   assert.equal(response.headers.get('Cache-Control'),'no-store');
@@ -127,14 +128,13 @@ test('all roles are accepted, optional location defaults empty, unicode becomes 
   assert.ok(entries.every(entry=>entry.name==='José Test'&&entry.location===''));
 });
 
-test('equivalent single-character names fail field validation before storage',async()=>{
-  for(const name of ['é','e\u0301']){
-    const response=await handleWaitlist(request({...valid,name}),noAccess);
-    assert.equal(response.status,400);
-    const result=await response.json();
-    assert.equal(result.ok,false);
-    assert.deepEqual(Object.keys(result.fields),['name']);
+test('one-character names are accepted and canonically equivalent names normalize identically',async()=>{
+  const entries=[];
+  const db={consumeRateLimit:async()=>1,save:async entry=>{entries.push(entry);}};
+  for(const name of ['A','é','e\u0301']){
+    assert.equal((await handleWaitlist(request({...valid,name}),db)).status,200);
   }
+  assert.deepEqual(entries.map(entry=>entry.name),['A','é','é']);
 });
 
 test('name and location maximum lengths apply after NFC normalization',async()=>{
@@ -144,4 +144,78 @@ test('name and location maximum lengths apply after NFC normalization',async()=>
   assert.equal(response.status,200);
   assert.equal(saved.name,'é'.repeat(100));
   assert.equal(saved.location,'é'.repeat(120));
+});
+
+const newSignup={name:'K',contact:'contact-test@example.com',role:'buyer',consent:true,website:''};
+
+test('new email contacts are normalized with v2 consent and no phone',async()=>{
+  let saved;
+  const db={consumeRateLimit:async()=>1,save:async entry=>{saved=entry;}};
+  assert.equal((await handleWaitlist(request({...newSignup,contact:' CONTACT-TEST@EXAMPLE.COM '}),db)).status,200);
+  assert.equal(saved.email,'contact-test@example.com');
+  assert.equal(saved.phone,null);
+  assert.equal(saved.location,'');
+  assert.equal(saved.consentVersion,'maychant-waitlist-v2');
+});
+
+test('formatted US contacts and international contacts normalize to E.164',async()=>{
+  const entries=[];
+  const db={consumeRateLimit:async()=>1,save:async entry=>{entries.push(entry);}};
+  const contacts=[['(202) 555-0123','+12025550123'],['+1 202.555.0123','+12025550123'],['+44 20 7946 0018','+442079460018']];
+  for(const [contact,expected] of contacts){
+    assert.equal((await handleWaitlist(request({...newSignup,contact}),db)).status,200);
+    assert.equal(entries.at(-1).phone,expected);
+    assert.equal(entries.at(-1).email,null);
+    assert.equal(entries.at(-1).consentVersion,'maychant-waitlist-v2');
+  }
+});
+
+test('new contact supports every role and the same rate-limit identity as legacy submissions',async()=>{
+  const entries=[],limits=[];
+  const db={consumeRateLimit:async value=>{limits.push(value);return 1;},save:async entry=>{entries.push(entry);}};
+  const context={clientIdentity:'192.0.2.1',now:1_800_000_001_000};
+  for(const role of ['buyer','seller','both']){
+    assert.equal((await handleWaitlist(request({...newSignup,role}),db,context)).status,200);
+  }
+  await handleWaitlist(request(valid),db,context);
+  assert.deepEqual(entries.slice(0,3).map(entry=>entry.role),['buyer','seller','both']);
+  assert.ok(limits.every(value=>value.key===limits[0].key));
+});
+
+test('invalid contacts fail before storage and cannot fall back to a legacy email',async()=>{
+  for(const contact of ['',null,123,'not-an-email','a@@example.com','12345','+1 111 111 1111',
+    '202-555-0123 ext 5','Call +1 202 555 0123','+1 202\u0000555 0123','x'.repeat(255)]){
+    const response=await handleWaitlist(request({...newSignup,contact,email:valid.email}),noAccess);
+    assert.equal(response.status,400);
+    assert.deepEqual(Object.keys((await response.json()).fields),['contact']);
+  }
+});
+
+test('missing contact in the new form reports the contact field',async()=>{
+  const response=await handleWaitlist(request({...newSignup,contact:undefined}),noAccess);
+  assert.equal(response.status,400);
+  assert.deepEqual(Object.keys((await response.json()).fields),['contact']);
+});
+
+test('new and cached payloads require true consent before storage',async()=>{
+  for(const base of [newSignup,valid]){
+    for(const consent of [false,undefined,'true']){
+      const response=await handleWaitlist(request({...base,consent}),noAccess);
+      assert.equal(response.status,400);
+      assert.deepEqual(Object.keys((await response.json()).fields),['consent']);
+    }
+  }
+});
+
+test('names are 1–100 Unicode characters, without controls or empty values',async()=>{
+  let saved;
+  const db={consumeRateLimit:async()=>1,save:async entry=>{saved=entry;}};
+  const name='𐐀'.repeat(100);
+  assert.equal((await handleWaitlist(request({...newSignup,name}),db)).status,200);
+  assert.equal(saved.name,name);
+  for(const name of ['', '   ', 'A'.repeat(101), '𐐀'.repeat(101),'K\u0000']){
+    const response=await handleWaitlist(request({...newSignup,name}),noAccess);
+    assert.equal(response.status,400);
+    assert.deepEqual(Object.keys((await response.json()).fields),['name']);
+  }
 });

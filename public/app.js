@@ -39,9 +39,9 @@
       const heading = $('#waitlist-title');
       if (!heading) return;
       const role = $('input[name="role"]:checked', form)?.value;
-      heading.textContent = role === 'buyer' ? 'Your next chapter starts here.'
-        : role === 'seller' ? 'A good business deserves good hands.'
-        : 'Be part of what comes next.';
+      heading.textContent = role === 'buyer' ? 'Join the buyer waitlist.'
+        : role === 'seller' ? 'Join the seller waitlist.'
+        : 'Join the waitlist.';
     }
     function selectRole(role) {
       if (!['buyer', 'seller', 'both'].includes(role)) return;
@@ -138,7 +138,7 @@
       form.setAttribute('aria-busy', 'true');
       $('.submit-label').textContent = 'Joining…';
       const values = new FormData(form);
-      const payload = { name: String(values.get('name') || '').trim(), email: String(values.get('email') || '').trim(), role: values.get('role'), location: String(values.get('location') || '').trim(), consent: values.get('consent') === 'on', website: String(values.get('website') || '') };
+      const payload = { name: String(values.get('name') || '').trim(), contact: String(values.get('contact') || '').trim(), role: values.get('role'), consent: true, website: String(values.get('website') || '') };
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 15000);
       try {

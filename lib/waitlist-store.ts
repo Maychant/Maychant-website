@@ -42,13 +42,13 @@ export function createPostgresWaitlistStore(query: WaitlistQuery): WaitlistStore
     async save(entry: WaitlistEntry) {
       const result = await query(
         `INSERT INTO waitlist_entries
-         (id, name, email, role, location, consent_version, consented_at, created_at)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-         ON CONFLICT (email) DO NOTHING`,
-        [entry.id, entry.name, entry.email, entry.role, entry.location,
+         (id, name, email, phone, role, location, consent_version, consented_at, created_at)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+         ON CONFLICT DO NOTHING`,
+        [entry.id, entry.name, entry.email, entry.phone, entry.role, entry.location,
           entry.consentVersion, entry.consentedAt, entry.createdAt],
       );
-      // Both a saved row and a unique-email conflict are successful. Do not read,
+      // Both a saved row and a unique-contact conflict are successful. Do not read,
       // return or replace the existing person's details on a duplicate request.
       if (result.command !== "INSERT" || (result.rowCount !== 0 && result.rowCount !== 1)) {
         throw new Error("waitlist-write-failed");

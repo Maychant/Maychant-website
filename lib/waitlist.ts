@@ -1,20 +1,22 @@
 import { z } from "zod";
+import { parsePhoneNumberFromString } from "libphonenumber-js/max";
+
+type WaitlistContact = { email: string; phone: null } | { email: null; phone: string };
 
 export type WaitlistEntry = {
   id: string;
   name: string;
-  email: string;
   role: "buyer" | "seller" | "both";
   location: string;
   consentVersion: string;
   consentedAt: number;
   createdAt: number;
-};
+} & WaitlistContact;
 
 export interface WaitlistStore {
   /** Atomically consumes one attempt, returning the new count for this window. */
   consumeRateLimit(input: { key: string; now: number; expiresAt: number; limit: number }): Promise<number>;
-  /** Resolves only after a successful insert or an existing unique-email conflict. */
+  /** Resolves only after a successful insert or an existing unique-contact conflict. */
   save(entry: WaitlistEntry): Promise<void>;
 }
 
@@ -28,23 +30,47 @@ export const WAITLIST_MAX_BYTES = 4096;
 export const WAITLIST_WINDOW_SECONDS = 600;
 export const WAITLIST_REQUEST_LIMIT = 12;
 export const WAITLIST_CONSENT_VERSION = "maychant-waitlist-v1";
+export const WAITLIST_CONTACT_CONSENT_VERSION = "maychant-waitlist-v2";
 
 const cleanText = (max: number) => z.string().trim()
   .transform(value => value.normalize("NFC"))
-  .pipe(z.string().max(max).refine(
+  .pipe(z.string().refine(value => [...value].length <= max, `Use ${max} characters or fewer.`).refine(
     value => !/[\u0000-\u001f\u007f]/u.test(value),
     "Please use ordinary text without control characters.",
   ));
 
-const signup = z.object({
-  name: cleanText(100).refine(value => value.length >= 2, "Enter your name (2–100 characters)."),
-  email: z.string().trim().max(254, "Enter an email address under 255 characters.")
-    .email("Enter a valid email address.").transform(value => value.toLowerCase()),
+const emailAddress = z.string().trim().max(254, "Enter a valid email address.")
+  .email("Enter a valid email address.").transform(value => value.toLowerCase());
+
+const contact = z.string({ required_error: "Enter an email or phone number.", invalid_type_error: "Enter an email or phone number." })
+  .trim().max(254, "Enter a valid email or phone number.")
+  .transform((value, context): WaitlistContact | typeof z.NEVER => {
+    const email = emailAddress.safeParse(value);
+    if (email.success) return { email: email.data, phone: null };
+    // Parse the entire input, never extract a number from arbitrary prose or
+    // silently discard an extension. Stored phone contacts use canonical E.164.
+    if (/^\+?[\d ().-]+$/u.test(value)) {
+      const phone = parsePhoneNumberFromString(value, { defaultCountry: "US", extract: false });
+      if (phone?.isValid() && !phone.ext) return { email: null, phone: phone.number };
+    }
+    context.addIssue({ code: z.ZodIssueCode.custom, message: "Enter a valid email or phone number." });
+    return z.NEVER;
+  });
+
+const signupFields = z.object({
+  name: cleanText(100).refine(value => value.length >= 1, "Enter your name."),
   role: z.enum(["buyer", "seller", "both"], { errorMap: () => ({ message: "Choose buyer, seller, or both." }) }),
   location: cleanText(120).optional().default(""),
   consent: z.literal(true, { errorMap: () => ({ message: "Please agree to receive updates about Maychant." }) }),
   website: z.string().max(200).optional().default(""),
 });
+
+const signup = signupFields.extend({ contact }).transform(({ contact, ...fields }) => ({
+  ...fields, ...contact, consentVersion: WAITLIST_CONTACT_CONSENT_VERSION,
+}));
+const legacySignup = signupFields.extend({ email: emailAddress }).transform(fields => ({
+  ...fields, phone: null, consentVersion: WAITLIST_CONSENT_VERSION,
+}));
 
 function json(body: object, status: number, extraHeaders: HeadersInit = {}) {
   return Response.json(body, {
@@ -114,7 +140,12 @@ export async function handleWaitlist(
       : "We couldn’t read this request. Please check the form and try again." },
     error instanceof RangeError ? 413 : 400);
   }
-  const parsed = signup.safeParse(body);
+  // Presence of contact selects v2 even when invalid: never silently fall back
+  // to an unrelated email field supplied alongside a malformed contact.
+  const isLegacySignup = !!body && typeof body === "object"
+    && Object.prototype.hasOwnProperty.call(body, "email")
+    && !Object.prototype.hasOwnProperty.call(body, "contact");
+  const parsed = (isLegacySignup ? legacySignup : signup).safeParse(body);
   if (!parsed.success) {
     const fields: Record<string, string> = {};
     for (const issue of parsed.error.issues) {
@@ -142,13 +173,14 @@ export async function handleWaitlist(
       return json({ ok: false, error: "You’ve made several requests. Please wait a little and try again." }, 429,
         { "Retry-After": String(Math.max(1, expires - seconds)) });
     }
-    const { name, email, role, location } = parsed.data;
+    const { name, email, phone, role, location, consentVersion } = parsed.data;
     await store.save({
-      id: crypto.randomUUID(), name, email, role,
-      location, consentVersion: WAITLIST_CONSENT_VERSION,
+      id: crypto.randomUUID(), name, role,
+      ...(phone === null ? { email: email!, phone: null } : { email: null, phone }),
+      location, consentVersion,
       consentedAt: seconds, createdAt: seconds,
     });
-    // A conflict confirms an existing saved email. Never reveal its details or overwrite it.
+    // A conflict confirms a saved contact. Never reveal details or overwrite it.
     return json({ ok: true, message: "You’re on the Maychant waitlist." }, 200);
   } catch {
     // Do not log contact data or expose storage errors to visitors.

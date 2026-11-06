@@ -2,21 +2,26 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createPostgresWaitlistStore, createNeonWaitlistStore } from '../lib/waitlist-store.ts';
 import { setupWaitlistDatabase, WAITLIST_SCHEMA_STATEMENTS, main } from '../scripts/setup-waitlist-db.mjs';
+import { migrateWaitlistContact, WAITLIST_CONTACT_MIGRATION_STATEMENTS, main as migrateMain } from '../scripts/migrate-waitlist-contact.mjs';
 
-const entry={id:'00000000-0000-4000-8000-000000000001',name:"O'Reilly <script>",email:'test@example.invalid',role:'both',location:'Ann Arbor',consentVersion:'maychant-waitlist-v1',consentedAt:1800000001,createdAt:1800000001};
+const entry={id:'00000000-0000-4000-8000-000000000001',name:"O'Reilly <script>",email:'test@example.invalid',phone:null,role:'both',location:'Ann Arbor',consentVersion:'maychant-waitlist-v1',consentedAt:1800000001,createdAt:1800000001};
 const inserted={command:'INSERT',rowCount:1,rows:[]};
 
 test('contacts remain parameters; a duplicate is acknowledged without reading or changing the contact',async()=>{
+  for(const contact of [{email:entry.email,phone:null},{email:null,phone:'+12025550123'}]){
+  const candidate={...entry,...contact};
   for(const rowCount of [1,0]){
     const calls=[];
     const store=createPostgresWaitlistStore(async(text,values)=>{calls.push({text,values});return {...inserted,rowCount};});
-    assert.equal(await store.save(entry),undefined);
+    assert.equal(await store.save(candidate),undefined);
     assert.equal(calls.length,1);
-    assert.match(calls[0].text,/ON CONFLICT \(email\) DO NOTHING/u);
+    assert.match(calls[0].text,/ON CONFLICT DO NOTHING/u);
     assert.doesNotMatch(calls[0].text,/SELECT|UPDATE|CREATE|ALTER/u);
     assert.ok(!calls[0].text.includes(entry.name));
     assert.ok(!calls[0].text.includes(entry.email));
-    assert.deepEqual(calls[0].values,Object.values(entry));
+    if(candidate.phone)assert.ok(!calls[0].text.includes(candidate.phone));
+    assert.deepEqual(calls[0].values,Object.values(candidate));
+  }
   }
 });
 
@@ -83,6 +88,43 @@ test('schema setup failure propagates and CLI never prints a credential or provi
     assert.equal(await main(),1);
     process.env.DATABASE_URL='invalid-private-credential';
     assert.equal(await main(),1);
+    assert.ok(!logs.join('\n').includes('invalid-private-credential'));
+  }finally{
+    console.error=oldError;
+    if(previous===undefined)delete process.env.DATABASE_URL;else process.env.DATABASE_URL=previous;
+  }
+});
+
+test('contact migration keeps DDL in one transaction and retains legacy data and indexes',async()=>{
+  let transactions=0;
+  const sql={query:text=>({text}),transaction:async statements=>{
+    transactions++;
+    assert.deepEqual(statements.map(item=>item.text),WAITLIST_CONTACT_MIGRATION_STATEMENTS);
+  }};
+  await migrateWaitlistContact(sql);
+  await migrateWaitlistContact(sql);
+  assert.equal(transactions,2);
+  const ddl=WAITLIST_CONTACT_MIGRATION_STATEMENTS.join('\n');
+  assert.equal(WAITLIST_CONTACT_MIGRATION_STATEMENTS[0],WAITLIST_SCHEMA_STATEMENTS[0]);
+  assert.match(ddl,/ADD COLUMN IF NOT EXISTS phone text/u);
+  assert.match(ddl,/ALTER COLUMN email DROP NOT NULL/u);
+  assert.match(ddl,/CHECK \(\(email IS NOT NULL\) <> \(phone IS NOT NULL\)\)/u);
+  assert.match(ddl,/char_length\(name\) BETWEEN 1 AND 100/u);
+  assert.match(ddl,/CREATE UNIQUE INDEX IF NOT EXISTS waitlist_phone_unique/u);
+  assert.doesNotMatch(ddl,/DELETE|TRUNCATE|DROP TABLE|DROP COLUMN|DROP INDEX|UPDATE waitlist_entries/u);
+});
+
+test('contact migration errors propagate and its CLI cannot reveal provider details',async()=>{
+  await assert.rejects(migrateWaitlistContact({query:text=>text,transaction:async()=>{throw new Error('failed');}}),/failed/u);
+  const previous=process.env.DATABASE_URL;
+  const logs=[];
+  const oldError=console.error;
+  try{
+    console.error=(...parts)=>logs.push(parts.join(' '));
+    delete process.env.DATABASE_URL;
+    assert.equal(await migrateMain(),1);
+    process.env.DATABASE_URL='invalid-private-credential';
+    assert.equal(await migrateMain(),1);
     assert.ok(!logs.join('\n').includes('invalid-private-credential'));
   }finally{
     console.error=oldError;

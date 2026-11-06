@@ -118,7 +118,7 @@ Existing marketing CTAs retain `data-waitlist-open` and optional `data-role="buy
 
 ### Forms and feedback
 
-Keep real visible labels. Placeholder text is only a hint. Connect hints/errors via `aria-describedby`, set `aria-invalid`, and focus the first invalid field. Put radio errors on the visible selection surface, not just its visually hidden input. Use explicit consent; never pre-check it.
+Keep real visible labels. Placeholder text is only a hint. Connect hints/errors via `aria-describedby`, set `aria-invalid`, and focus the first invalid field. Put radio errors on the visible selection surface, not just its visually hidden input. The waitlist asks for name, buyer/seller/both, and one email or phone number. Joining is the affirmative action for the adjacent waitlist-update disclosure; do not add a pre-checked checkbox. Keep broader marketing permissions separate from this request.
 
 Success requires confirmed server success. Keep entered values after a request failure. Use a clear pending label; never clear a form before the save succeeds.
 

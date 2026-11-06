@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import "../public/brand/tokens.css";
 import "./globals.css";
+import "../styles/components.css";
 
 export const metadata: Metadata = {
   title: "Maychant — Next chapters for good businesses",

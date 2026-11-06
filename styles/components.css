@@ -1,0 +1,103 @@
+/* Shared component contract: native HTML and React use the same mc-* classes. */
+.mc-logo { width: 180px; height: auto; display: block; }
+.site-header .brand .brand-lockup { width: 180px; height: auto; display: block; }
+.site-footer .brand .brand-lockup { width: 200px; height: auto; display: block; }
+.paper-brand-lockup { width: 110px; height: auto; display: block; }
+.dialog-topbar .dialog-mark { width: 32px; height: 28px; }
+.mc-button {
+  --button-bg: var(--mc-action);
+  --button-text: var(--mc-white);
+  --button-hover: var(--mc-action-hover);
+  --button-border: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mc-space-5);
+  min-height: var(--mc-control-height);
+  padding: 0 var(--mc-space-6);
+  border: 1px solid var(--button-border);
+  border-radius: var(--mc-radius-pill);
+  background: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: var(--mc-shadow-action);
+  font: var(--mc-weight-bold) var(--mc-text-base)/1.2 var(--mc-font);
+  letter-spacing: -.015em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--mc-duration-ui), border-color var(--mc-duration-ui), transform var(--mc-duration-ui) var(--mc-ease), box-shadow var(--mc-duration-ui);
+}
+.mc-button--secondary { --button-bg: rgb(255 255 255 / 72%); --button-text: var(--mc-navy); --button-hover: var(--mc-glass-fallback); --button-border: var(--mc-border-control); box-shadow: inset 0 1px 0 white; }
+.mc-button--ink { --button-bg: var(--mc-navy); --button-hover: #18345c; box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%); }
+.mc-button--small { min-height: var(--mc-control-min); font-size: var(--mc-text-sm); padding-inline: var(--mc-space-5); gap: var(--mc-space-3); }
+.mc-button--link { --button-bg: transparent; --button-text: var(--mc-navy); --button-hover: transparent; padding-inline: 0; border: 0; border-radius: 0; box-shadow: none; text-decoration: underline; text-underline-offset: 7px; }
+.mc-button > svg { width: 20px; height: 20px; flex: 0 0 auto; transition: transform var(--mc-duration-ui) var(--mc-ease); }
+.mc-button:hover:not(:disabled) { background: var(--button-hover); transform: translateY(-2px); }
+.mc-button:hover:not(:disabled) > svg { transform: translateX(3px); }
+.mc-button:active:not(:disabled) { transform: translateY(1px); box-shadow: none; }
+.mc-button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.mc-button[aria-busy="true"] { cursor: progress; }
+.mc-button:focus-visible, .mc-input:focus-visible, .mc-control:focus-visible { outline: 3px solid var(--mc-focus); outline-offset: 4px; }
+.mc-on-dark { --mc-focus: var(--mc-cyan); color: var(--mc-text-on-dark); }
+.mc-label { display: grid; gap: var(--mc-space-2); font-size: var(--mc-text-sm); font-weight: var(--mc-weight-bold); }
+.mc-input {
+  display: block; width: 100%; min-height: 48px; padding: var(--mc-space-3); border: 1px solid var(--mc-border-control);
+  border-radius: var(--mc-radius-input); background: var(--mc-white); color: var(--mc-text); font: var(--mc-weight-medium) var(--mc-text-base)/1.4 var(--mc-font);
+  transition: border-color var(--mc-duration-fast), box-shadow var(--mc-duration-fast);
+}
+.mc-input::placeholder { color: var(--mc-text-secondary); font-weight: var(--mc-weight-regular); }
+.mc-input[aria-invalid="true"] { border-color: var(--mc-error); box-shadow: 0 0 0 1px var(--mc-error); }
+.mc-help { font-size: var(--mc-text-sm); line-height: var(--mc-leading-body); color: var(--mc-text-secondary); font-weight: var(--mc-weight-medium); }
+.mc-help--error { color: var(--mc-error); }
+.mc-choice { display: inline-flex; align-items: center; gap: var(--mc-space-2); min-height: var(--mc-control-min); cursor: pointer; font-size: var(--mc-text-sm); }
+.mc-choice input { accent-color: var(--mc-action); width: 18px; height: 18px; margin: 0; }
+.mc-notice { display: flex; align-items: flex-start; gap: var(--mc-space-3); padding: var(--mc-space-4); border-radius: var(--mc-radius-input); background: var(--mc-blue-wash); color: var(--mc-navy); font-size: var(--mc-text-sm); line-height: 1.5; }
+.mc-notice > svg { flex: 0 0 20px; width: 20px; height: 20px; margin-top: 1px; }
+.mc-notice--success { background: var(--mc-success-wash); color: var(--mc-success); }
+.mc-notice--error { background: var(--mc-error-wash); color: var(--mc-error); }
+.mc-glass { background: var(--mc-glass-fill); border: 1px solid var(--mc-glass-border); border-radius: var(--mc-radius-card); backdrop-filter: var(--mc-glass-filter); -webkit-backdrop-filter: var(--mc-glass-filter); box-shadow: var(--mc-glass-edge), var(--mc-shadow-soft); }
+.mc-surface { background: var(--mc-surface); border-radius: var(--mc-radius-card); }
+.mc-disclosure { border-bottom: 1px solid var(--mc-border); }
+.mc-disclosure summary { display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding-block: var(--mc-space-4); gap: var(--mc-space-4); font-size: var(--mc-text-body); cursor: pointer; list-style: none; }
+.mc-disclosure summary::-webkit-details-marker { display: none; }
+.mc-disclosure summary::after { content: '+'; font-size: 24px; font-weight: 400; }
+.mc-disclosure[open] summary::after { content: '−'; }
+.mc-disclosure > p { color: var(--mc-text-secondary); max-width: var(--mc-copy-max); padding-bottom: var(--mc-space-6); line-height: var(--mc-leading-body); font-size: var(--mc-text-base); }
+
+/* Existing landing components consume the same primitives; layout is retained. */
+.site-header { border-color: var(--mc-glass-border); border-radius: var(--mc-radius-card); background: var(--mc-glass-fill); backdrop-filter: var(--mc-glass-filter); -webkit-backdrop-filter: var(--mc-glass-filter); box-shadow: var(--mc-glass-edge), var(--mc-shadow-soft); z-index: var(--mc-z-header); }
+.skip-link:focus { z-index: var(--mc-z-skip); }
+.nav-cta.mc-button { min-height: var(--mc-control-min); font-size: var(--mc-text-sm); padding-inline: var(--mc-space-5); }
+.chapter-cta.mc-button { min-height: var(--mc-control-height); }
+.closing-cta.mc-button { min-height: 58px; }
+.waitlist-dialog .submit-button.mc-button { border-radius: var(--mc-radius-pill); }
+.waitlist-dialog { border-radius: var(--mc-radius-dialog); box-shadow: var(--mc-shadow-dialog), var(--mc-glass-edge); }
+.waitlist-dialog .form-row input, .waitlist-dialog .location-label input { border-radius: var(--mc-radius-input); border-color: var(--mc-border-control); }
+.waitlist-dialog .form-row input[aria-invalid="true"], .waitlist-dialog .location-label input[aria-invalid="true"] { border-color: var(--mc-error); box-shadow: 0 0 0 1px var(--mc-error); }
+.waitlist-dialog .role-choices input[aria-invalid="true"] + span { border-color: var(--mc-error); box-shadow: 0 0 0 1px var(--mc-error); }
+.field-error, .form-error { color: var(--mc-error); }
+.role-choices input:checked + span { background: var(--mc-action); border-color: var(--mc-action); }
+.consent input { accent-color: var(--mc-action); }
+.chapter :is(button, a, [tabindex]):focus-visible { outline-color: var(--mc-cyan); }
+.seller-card :is(button, a):focus-visible { outline-color: var(--mc-cyan); }
+@media (max-width: 700px) {
+  .site-header .brand .brand-lockup { width: 150px; }
+  .site-header { border-radius: 22px; }
+  .nav-cta.mc-button { font-size: 12px; padding-inline: 15px; gap: 10px; }
+  .chapter-cta.mc-button { min-height: 52px; padding-inline: 20px; gap: 17px; }
+  .waitlist-dialog { border-radius: 22px; }
+}
+@media (max-width: 380px) {
+  .site-header .brand .brand-lockup { width: 132px; }
+  .nav-cta.mc-button { font-size: 11px; padding-inline: 12px; gap: 8px; }
+  .chapter-cta.mc-button { padding-inline: 16px; gap: 12px; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mc-glass, .site-header { background: var(--mc-glass-fallback); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .mc-glass, .site-header { background: var(--mc-glass-fallback); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mc-button, .mc-button > svg { transition: none; }
+  .mc-button:hover:not(:disabled), .mc-button:active:not(:disabled), .mc-button:hover:not(:disabled) > svg { transform: none; }
+}

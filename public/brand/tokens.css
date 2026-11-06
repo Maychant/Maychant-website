@@ -1,0 +1,123 @@
+/* Maychant / foundation tokens / v1.0
+ * Canonical source. Imported by the site and available to download.
+ * Keep brand colors separate from their semantic application.
+ */
+:root {
+  --mc-blue: #1557ff;
+  --mc-blue-hover: #1247d8;
+  --mc-navy: #101e42;
+  --mc-night: #001021;
+  --mc-cyan: #11b5e4;
+  --mc-teal: #034748;
+  --mc-white: #ffffff;
+  --mc-cloud: #f3f5f8;
+  --mc-blue-wash: #eef4ff;
+  --mc-slate: #58657a;
+  --mc-mist: #dce3ed;
+  --mc-success: #087b58;
+  --mc-success-wash: #e7f5ee;
+  --mc-error: #b42318;
+  --mc-error-wash: #fff1f0;
+  --mc-warning: #885b12;
+  --mc-warning-wash: #fff6df;
+
+  --mc-bg: var(--mc-white);
+  --mc-surface: var(--mc-cloud);
+  --mc-surface-selected: var(--mc-blue-wash);
+  --mc-text: var(--mc-navy);
+  --mc-text-secondary: var(--mc-slate);
+  --mc-text-on-dark: var(--mc-white);
+  --mc-text-secondary-on-dark: #b9c8dc;
+  --mc-border: var(--mc-mist);
+  --mc-border-control: #7c8ca5;
+  --mc-action: var(--mc-blue);
+  --mc-action-hover: var(--mc-blue-hover);
+  --mc-focus: var(--mc-blue);
+
+  --mc-font: Cabinet, Arial, sans-serif;
+  --mc-font-code: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --mc-weight-regular: 400;
+  --mc-weight-medium: 500;
+  --mc-weight-bold: 700;
+  --mc-weight-display: 800;
+  --mc-text-xs: .75rem;
+  --mc-text-sm: .875rem;
+  --mc-text-base: 1rem;
+  --mc-text-body: 1.125rem;
+  --mc-text-lead: clamp(1.125rem, 1.5vw, 1.375rem);
+  --mc-text-title: clamp(1.75rem, 3vw, 2.75rem);
+  --mc-text-heading: clamp(2.25rem, 4.8vw, 4.5rem);
+  --mc-text-display: clamp(3rem, 6.4vw, 6rem);
+  --mc-leading-display: 1.02;
+  --mc-leading-heading: 1.08;
+  --mc-leading-body: 1.55;
+  --mc-tracking-display: -.05em;
+  --mc-tracking-heading: -.035em;
+  --mc-tracking-label: .1em;
+
+  --mc-space-1: .25rem;
+  --mc-space-2: .5rem;
+  --mc-space-3: .75rem;
+  --mc-space-4: 1rem;
+  --mc-space-5: 1.25rem;
+  --mc-space-6: 1.5rem;
+  --mc-space-8: 2rem;
+  --mc-space-10: 2.5rem;
+  --mc-space-12: 3rem;
+  --mc-space-16: 4rem;
+  --mc-space-20: 5rem;
+  --mc-space-24: 6rem;
+  --mc-section-space: clamp(4rem, 8vw, 7.5rem);
+  --mc-page-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --mc-page-max: 86.25rem;
+  --mc-copy-max: 60ch;
+
+  --mc-radius-input: .625rem;
+  --mc-radius-card: 1.5rem;
+  --mc-radius-dialog: 1.625rem;
+  --mc-radius-pill: 999px;
+  --mc-control-min: 2.75rem;
+  --mc-control-height: 3.375rem;
+  --mc-shadow-soft: 0 8px 28px -12px rgb(16 30 66 / 20%);
+  --mc-shadow-card: 0 22px 60px -30px rgb(16 30 66 / 25%);
+  --mc-shadow-dialog: 0 35px 130px rgb(0 16 33 / 25%);
+  --mc-shadow-action: inset 0 1px 0 rgb(255 255 255 / 19%), 0 5px 14px -8px rgb(21 87 255 / 44%);
+  --mc-glass-fill: linear-gradient(115deg, rgb(255 255 255 / 78%), rgb(242 248 255 / 52%) 48%, rgb(255 255 255 / 68%));
+  --mc-glass-border: rgb(168 190 219 / 42%);
+  --mc-glass-edge: inset 0 1px 0 rgb(255 255 255 / 96%), inset 0 -1px 0 rgb(255 255 255 / 50%);
+  --mc-glass-filter: blur(28px) saturate(165%);
+  --mc-glass-fallback: #f4f7fc;
+  --mc-glass-dark: linear-gradient(120deg, rgb(255 255 255 / 12%), rgb(17 181 228 / 5%));
+
+  --mc-duration-fast: 180ms;
+  --mc-duration-ui: 250ms;
+  --mc-duration-expand: 600ms;
+  --mc-duration-reveal: 800ms;
+  --mc-stagger: 120ms;
+  --mc-ease: cubic-bezier(.22, 1, .36, 1);
+  --mc-z-header: 30;
+  --mc-z-skip: 31;
+
+  /* Compatibility aliases keep existing artwork and landing styles in sync. */
+  --paper: var(--mc-bg);
+  --ink: var(--mc-text);
+  --teal: var(--mc-teal);
+  --blue: var(--mc-blue);
+  --cyan: var(--mc-cyan);
+  --muted: var(--mc-text-secondary);
+  --line: var(--mc-border);
+  --wash: var(--mc-surface);
+  --form: var(--mc-surface-selected);
+  --white: var(--mc-white);
+  --ease: var(--mc-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --mc-duration-fast: 0ms;
+    --mc-duration-ui: 0ms;
+    --mc-duration-expand: 0ms;
+    --mc-duration-reveal: 0ms;
+    --mc-stagger: 0ms;
+  }
+}

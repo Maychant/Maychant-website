@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" fill="none" role="img" aria-labelledby="seller-art-title seller-art-description">
+  <title id="seller-art-title">A story ready to be carried forward</title>
+  <desc id="seller-art-description">A folded blue and white document passes between two hands. Its flowing ink mark suggests the knowledge and care within a business.</desc>
+  <!-- Motion hooks: .seller-story, .seller-hand-giving, .seller-hand-receiving, .seller-ink. Keep movement within 3px / 2deg. -->
+  <rect width="520" height="420" fill="#0B1B3D"/>
+  <path d="M95 327C175 303 344 301 429 328C369 356 166 366 95 327Z" fill="#142C57"/>
+  <path d="M353 61C373 61 384 74 384 91M359 50C386 50 399 66 399 87" stroke="#4B75B7" stroke-width="2" stroke-linecap="round"/>
+  <g class="seller-hand-giving" data-motion="giving-hand">
+    <path d="M0 190L53 176L88 189L127 173L164 148C173 142 183 145 186 153C190 161 183 169 177 174L155 190L191 184C201 182 208 189 206 198C204 206 196 208 188 210L164 217L177 219C188 221 192 230 186 237C183 241 177 242 171 242L136 239L116 254C102 265 86 270 64 264L24 260L0 190Z" fill="#EDF4FF" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M155 190L136 202M164 217L146 220M113 213C111 227 120 234 134 237M89 207L77 219" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M0 173L50 168L75 268L0 287V173Z" fill="#11B5E4"/>
+    <path d="M49 168L63 166L88 263L75 268L49 168Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M22 204L35 253" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="66" cy="245" r="3.5" fill="#0B1B3D"/>
+  </g>
+  <g class="seller-story" data-motion="folded-story">
+    <path d="M130 139L306 95L409 202L231 251L130 139Z" fill="#D3E8FF" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M231 251L409 202L365 293L186 341L231 251Z" fill="#1652F0" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M186 341L168 326L211 239L231 251L186 341Z" fill="#11B5E4" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M130 139L306 95L284 75L109 119L130 139Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M109 119L284 75L389 181L211 228L109 119Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M211 228L389 181L375 210L198 257L211 228Z" fill="#C7ECF7" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M164 115L209 104M174 126L201 119" stroke="#0B1B3D" stroke-width="3" stroke-linecap="round"/>
+    <g class="seller-ink" data-motion="story-ink">
+      <path d="M191 174C196 151 221 137 229 145C237 153 222 171 207 170C193 170 192 180 201 184C220 193 245 143 259 149C275 155 247 174 265 176C278 178 290 167 300 161" stroke="#1652F0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M222 200L319 174" stroke="#11B5E4" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <path d="M243 278L342 251M237 290L312 269M231 302L274 290" stroke="#C9DFFF" stroke-width="3" stroke-linecap="round"/>
+    <path d="M346 310L369 304" stroke="#11B5E4" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g class="seller-hand-receiving" data-motion="receiving-hand">
+    <path d="M520 284L471 263L441 241L415 210C409 202 398 201 393 208C387 215 393 225 398 232L407 246L383 233C375 229 365 233 363 242C361 250 369 256 376 260L402 276L373 283L347 299C339 305 341 316 349 320C357 324 364 320 371 317L389 308L412 307C434 308 451 318 470 330L520 354V284Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M407 246C415 250 421 258 422 267M402 276L419 285M388 308L404 296M444 283C434 275 424 273 415 275" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M520 275L478 257L451 329L520 366V275Z" fill="#1652F0"/>
+    <path d="M477 257L490 262L463 336L451 329L477 257Z" fill="#C7ECF7" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M492 300L511 307" stroke="#8DAEFF" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="467" cy="316" r="3.5" fill="#0B1B3D"/>
+  </g>
+  <path d="M95 332L88 345M115 348L112 362" stroke="#11B5E4" stroke-width="3" stroke-linecap="round"/>
+</svg>

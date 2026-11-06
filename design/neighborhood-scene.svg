@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 640" fill="none" role="img" aria-label="A lively neighborhood of independent businesses" aria-describedby="neighborhood-desc">
-  <desc id="neighborhood-desc">A cobalt café steps forward between a navy record shop and a white repair workshop, each set at a different angle. An older owner waves from the café, with plants, café chairs and a bicycle along the stepped street.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" fill="none" role="group" aria-label="Explore a neighborhood of independent businesses" aria-describedby="neighborhood-desc">
+  <desc id="neighborhood-desc">Three independent businesses along a panoramic street. Choose a building to bring its windows, door and everyday details to life. An owner waves hello, with plants, outdoor chairs and a parked bicycle.</desc>
   <style>
  .street-line{stroke:#001021;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
  .street-fine{stroke:#001021;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -9,245 +9,264 @@
  .street-sign,.street-awning{transform-origin:center top}
  .street-door{transform-origin:left center}
  .street-wave{transform-origin:0 85%}
+
+ .district-reveal{transform-box:fill-box;transform-origin:center bottom}
+ .district-shop{cursor:pointer}
+ .street-window-glint{pointer-events:none}
 </style>
-  <ellipse cx="413" cy="524" rx="383" ry="99" fill="#F3F5F8" />
-  <path class="street-route" pathLength="100" d="M34 525C120 574 216 519 282 549S443 639 577 578 731 514 789 530" stroke="#1481BA" stroke-width="2.5" stroke-linecap="round" />
-  <g class="street-cloud" opacity=".9">
-    <path d="M82 139c-9-17 14-29 26-19 3-24 43-28 49-4 17-8 30 4 25 18z" fill="#F3F5F8" />
-    <path d="M96 145l64-3" stroke="#0B1B3D" stroke-width="1.5" stroke-linecap="round" />
+  <ellipse cx="600" cy="478" rx="568" ry="51" fill="#F3F5F8" />
+  <path class="street-route" pathLength="100" d="M28 483C154 538 267 466 392 497S647 548 798 499 1038 475 1170 501" stroke="#1481BA" stroke-width="2.5" stroke-linecap="round" />
+  <g class="street-cloud" aria-hidden="true">
+    <path d="M105 86c-9-17 14-29 26-19 3-24 43-28 49-4 17-8 30 4 25 18z" fill="#F3F5F8" />
+    <path d="M119 92l64-3" stroke="#0B1B3D" stroke-width="1.5" stroke-linecap="round" />
   </g>
-  <g class="street-cloud">
-    <path d="M635 91c-2-15 17-21 25-10 6-20 31-15 33 1 12-5 25 3 24 14z" fill="#F3F5F8" />
+  <g class="street-cloud" aria-hidden="true">
+    <path d="M978 66c-2-15 17-21 25-10 6-20 31-15 33 1 12-5 25 3 24 14z" fill="#F3F5F8" />
   </g>
-  <g class="street-bird" stroke="#001021" stroke-width="2" stroke-linecap="round">
-    <path d="M219 104q9-8 18 1 9-11 18-4" />
+  <g class="street-bird" aria-hidden="true" stroke="#001021" stroke-width="1.8" stroke-linecap="round">
+    <path d="M410 83q9-8 18 1 9-11 18-4M826 93q7-7 14 0 6-8 13-2" />
   </g>
-  <g class="street-bird" stroke="#001021" stroke-width="1.7" stroke-linecap="round">
-    <path d="M713 146q7-7 14 0 6-8 13-2" />
-  </g>
-  <g class="district-shop" data-shop="workshop" id="district-workshop">
-    <g class="district-perspective" transform="matrix(.78 -.13 0 .78 213 123)">
-      <path class="street-line" fill="#FFFFFF" d="M456 520l267-6 41-43-268-1z" />
-      <path class="street-line" fill="#1481BA" d="M456 520l267-6v14l-267 6z" />
-      <path class="street-line" fill="#0B1B3D" d="M723 514l41-43v14l-41 43z" />
-      <path class="street-line" fill="#F3F5F8" d="M513 242l-55-32v274l55 30z" />
-      <path class="street-line" fill="#11B5E4" d="M501 242l-54-31 103-62 53 33z" />
-      <path class="street-line" fill="#1481BA" d="M603 182l-53-33 120 56 54 35z" />
-      <path class="street-fine" fill="#FFFFFF" d="M470 289l27 15v63l-27-15zM470 388l27 15v63l-27-15z" />
-      <path class="street-fine" d="M483 297v62m-13-36 27 16m-14 57v62m-13-36 27 16" />
-      <g class="street-building" id="repair-workshop">
-        <path class="street-line" fill="#FFFFFF" d="M513 242l92-51 106 49-2 269-196 5z" />
-        <path class="street-line" fill="#11B5E4" d="M516 245l88-47 105 47-1 69-194 3z" />
-        <path class="street-line" fill="#001021" d="M501 242l102-60 121 58-8 13-113-54-94 57z" />
-        <path class="street-fine" d="M595 221l18-1m-37 13 16-1m21 0 17 1" />
-        <g class="street-sign" id="workshop-lettering">
-          <text class="street-label" x="613" y="279" text-anchor="middle" font-size="20" letter-spacing=".8">FIX &amp; MEND</text>
-          <text class="street-label" x="613" y="299" text-anchor="middle" font-size="9.5" letter-spacing="2">REPAIR WORKSHOP</text>
-        </g>
-        <g class="street-awning" id="workshop-canopy">
-          <path class="street-line" fill="#0B1B3D" d="M512 312l196-2 11 23-213 4z" />
-          <path class="street-fine" stroke="#FFFFFF" d="M541 314l-5 20m42-21-3 20m40-21 1 20m37-20 5 19m33-19 9 18" />
-          <path class="street-line" d="M507 337l211-4" />
-        </g>
-        <path class="street-line" fill="#FFFFFF" d="M528 349l104-2v137l-105 3z" />
-        <path class="street-line" d="M534 354l91-1v124l-92 2zM528 429l103-1" />
-        <g class="street-fine" fill="#001021">
-          <path d="M551 365l17 5-3 9-5-1-8 32-7-2 9-32-5-2z" />
-          <path fill="#0B1B3D" d="M591 363c-7 1-11 8-9 14l-12 27 6 3 13-28c6-1 11-5 11-12l-7 6-6-4z" />
-          <path fill="#11B5E4" d="M601 393l8-1 3 23-8 1z" />
-        </g>
-        <path class="street-fine" d="M543 458l67-5 4 8-70 5zm4 10 70-5 1 8-72 3" />
-        <g class="street-door" id="workshop-door">
-          <path class="street-line" fill="#0B1B3D" d="M648 345l46-1-1 157-45 2z" />
-          <path class="street-fine" fill="#FFFFFF" d="M658 356l26-1v53l-26 1z" />
-          <path class="street-fine" d="M671 357v50" />
-          <path stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" d="M684 428v12" />
-          <path stroke="#FFFFFF" stroke-width="1.5" d="M656 471h29" />
-        </g>
-        <path class="street-line" d="M644 507l54-1" />
-        <path class="street-fine" d="M524 497h15m-13 7h10M703 366l5-1m-5 53h5" />
-      </g>
-      <g class="street-plant" id="workshop-leafy-plant">
-        <path class="street-line" fill="#0B1B3D" d="M695 482l36-1-4 50-27 2z" />
-        <path class="street-line" d="M711 484l2-62m0 35-18-19m18 5 16-18m-17 47 20-17" />
-        <path fill="#0B1B3D" d="M711 450c-19-4-24-20-17-26 15 5 20 13 17 26m3-9c0-22 11-34 21-30 0 17-6 26-21 30m-2-5c-12-10-14-27-6-32 10 8 13 17 6 32m0 39c3-22 18-30 27-23-4 15-12 22-27 23" />
-        <path stroke="#FFFFFF" stroke-width="1.6" d="M702 491l22-1" />
-      </g>
-    </g>
-  </g>
-  <g class="district-shop" data-shop="records" id="district-records">
-    <g class="district-perspective" transform="matrix(.84 .15 0 .84 -6 6)">
-      <path class="street-line" fill="#FFFFFF" d="M26 555l250 10 58-53-249-8z" />
-      <path class="street-line" fill="#11B5E4" d="M26 555l250 10v15L26 569z" />
-      <path class="street-line" fill="#0B1B3D" d="M276 565l58-53v15l-58 53z" />
-      <path class="street-line" fill="#0B1B3D" d="M265 241l54-35v271l-54 38z" />
-      <path class="street-line" fill="#1481BA" d="M45 237l55-35 222-8-52 36z" />
-      <path class="street-fine" fill="#11B5E4" d="M280 278l23-16v53l-23 17zm0 90 23-16v54l-23 16z" />
-      <path class="street-fine" d="M292 271v52m-12 77 23-17" />
-      <path stroke="#FFFFFF" stroke-width="1.5" d="M279 446l26-18m-26 31 26-18" />
-      <g class="street-building" id="record-shop">
-        <path class="street-line" fill="#001021" d="M53 247l213-7-1 275-212 5z" />
-        <path class="street-line" fill="#0B1B3D" d="M45 237l225-7 2 17-225 8z" />
-        <path class="street-line" fill="#FFFFFF" d="M67 217l35-1 1 20-35 1z" />
-        <path class="street-fine" d="M63 215l43-1m-31 11 12-1" />
-        <g class="street-sign" id="record-lettering">
-          <text x="157" y="284" text-anchor="middle" fill="#FFFFFF" font-family="Georgia,serif" font-size="31" letter-spacing="2">SIDE A</text>
-          <text x="158" y="301" text-anchor="middle" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="9" letter-spacing="3">RECORDS &amp; GOOD FINDS</text>
-        </g>
-        <g class="street-awning" id="record-awning">
-          <path fill="#FFFFFF" d="M53 315l209-5 12 31-228 6z" />
-          <path fill="#11B5E4" d="M53 315l27-1-4 31-30 2zm54-1 27-1 1 30-29 1zm54-2 27-1 5 31-30 1zm53-1 27-1 10 31-29 1z" />
-          <path class="street-line" d="M53 315l209-5 12 31-228 6z" />
-          <path class="street-line" fill="#FFFFFF" d="M46 347l30-1q-3 12-15 12-14 1-15-11m30-1 30-1q-1 12-15 13-13 0-15-12m30-1 29-1q0 13-14 13-14 1-15-12m29-1 28-1q1 13-13 14-14 0-15-13m28-1 30-1q1 13-14 13-13 1-16-12m30-1 29-1q3 12-12 13-14 0-17-12m29-1 29-1q4 13-11 13-14 1-18-12m29-1 23-1q6 12-8 13-10 0-15-12" />
-        </g>
-        <g class="street-door" id="record-door">
-          <path class="street-fine" fill="#0B1B3D" stroke="#FFFFFF" d="M66 369l44-1-1 139-44 2z" />
-          <path fill="#FFFFFF" d="M75 378l26-1-1 62-26 1z" />
-          <path class="street-fine" d="M88 379v60" />
-          <path stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" d="M102 456v10" />
-        </g>
-        <path class="street-line" fill="#FFFFFF" d="M126 368l116-3-1 117-115 3z" />
-        <path class="street-fine" d="M132 375l103-3-1 103-102 3z" />
-        <g class="street-record">
-          <circle cx="184" cy="416" r="33" fill="#001021" />
-          <circle cx="184" cy="416" r="10" fill="#11B5E4" />
-          <circle cx="184" cy="416" r="2.4" fill="#001021" />
-          <path stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" d="M164 399a26 26 0 0 1 37 1m-40 25a26 26 0 0 0 34 14" />
-        </g>
-        <path class="street-fine" fill="#0B1B3D" d="M141 454l20-3 2 23-21 2z" />
-        <path class="street-fine" fill="#FFFFFF" d="M166 450l22 2-2 22-22-2z" />
-        <circle cx="176" cy="462" r="6" fill="#11B5E4" />
-        <path class="street-fine" fill="#11B5E4" d="M193 454l20-2 2 22-21 1z" />
-        <path class="street-fine" d="M199 460l9-1m-8 5 8-1" />
-        <path stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" d="M131 495l42-1m7 0 14-1" />
-      </g>
-      <g class="street-plant" id="record-shop-plant">
-        <path class="street-line" fill="#1652F0" d="M28 488l35-1-5 42-24 1z" />
-        <path class="street-line" d="M43 491l-2-43m2 29-17-20m17 13 16-21" />
-        <path fill="#0B1B3D" d="M41 460c-18-6-18-24-13-26 13 4 18 15 13 26m1 17c-18-1-24-14-20-19 12-1 21 5 20 19m2-9c0-18 13-26 20-21-1 14-7 20-20 21m-1-15c-1-18 7-29 14-27 4 12-2 23-14 27" />
-        <path class="street-fine" d="M31 496l29-1" />
-      </g>
-      <g class="street-note" id="record-a-board">
-        <path class="street-line" d="M227 489l-12 59m47-63 12 58" />
-        <path class="street-line" fill="#FFFFFF" d="M224 487l38-3 8 51-50 5z" />
-        <text class="street-label" x="244" y="508" font-size="11" text-anchor="middle" transform="rotate(-5 244 508)">NEW</text>
-        <text class="street-label" x="245" y="521" font-size="11" text-anchor="middle" transform="rotate(-5 245 521)">IN</text>
-        <path class="street-fine" d="M230 529l25-2" />
-      </g>
-      <g id="parked-bicycle" class="street-line">
-        <g class="street-wheel" id="bicycle-rear-wheel">
-          <circle cx="86" cy="544" r="25" fill="#FFFFFF" />
-          <circle cx="86" cy="544" r="19" stroke-width="1" />
-          <path stroke-width="1" d="M86 520v48m-24-24h48m-41-17 34 34m0-34-34 34" />
-        </g>
-        <g class="street-wheel" id="bicycle-front-wheel">
-          <circle cx="164" cy="540" r="25" fill="#FFFFFF" />
-          <circle cx="164" cy="540" r="19" stroke-width="1" />
-          <path stroke-width="1" d="M164 516v48m-24-24h48m-41-17 34 34m0-34-34 34" />
-        </g>
-        <path stroke="#1652F0" stroke-width="4" d="M86 544l27-38 21 36-48 2 61-34-13 32m13-34 17 32" />
-        <path d="M111 505l-5-11m-8 0 18-1m31 15-5-20 11-1q8 0 6 6" />
-        <circle cx="134" cy="542" r="4" fill="#001021" />
-        <path d="M134 542l8 7 7-1" />
-        <path fill="#11B5E4" d="M152 493l24-2-3 19-18 1z" />
-        <path stroke-width="1" d="M156 497l16-1m-15 6 14-1" />
-      </g>
-    </g>
-  </g>
-  <g class="district-shop" data-shop="cafe" id="district-cafe">
-    <g class="district-perspective" transform="matrix(1.02 0 0 1.02 42 34)">
-      <path class="street-line" fill="#FFFFFF" d="M231 550l302-1 43-37-302 1z" />
-      <path class="street-line" fill="#1481BA" d="M231 550l302-1v15l-302 1z" />
-      <path class="street-line" fill="#0B1B3D" d="M533 549l43-37v15l-43 37z" />
-      <path class="street-fine" d="M239 556l282-1" />
-      <path class="street-line" fill="#0B1B3D" d="M506 160l49-30v353l-48 33z" />
-      <path class="street-line" fill="#11B5E4" d="M263 123l47-29 226-6-49 28z" />
-      <path class="street-line" fill="#1481BA" d="M487 116l49-28 1 29 26 11-50 27-25-10z" />
-      <path class="street-fine" fill="#1481BA" d="M520 203l24-15v58l-24 16zm0 95 24-15v58l-24 16zm0 95 24-15v58l-24 16z" />
-      <path stroke="#FFFFFF" stroke-width="1.3" d="M531 196v58m-11-25 24-15m-13 77v58m-11-25 24-15m-13 77v58m-11-25 24-15" />
-      <g class="street-building" id="daylight-cafe">
-        <path class="street-line" fill="#1652F0" d="M255 165l251-5 1 356-253 3z" />
-        <path class="street-line" fill="#1652F0" d="M244 159l18-10 1-26 224-7 1 29 25 10-1 15-269 6z" />
-        <path stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" d="M272 137l204-7m-223 31 250-7" />
-        <path class="street-line" fill="#FFFFFF" d="M280 237v-30c0-31 49-32 49-2v31zM357 235v-31c0-32 49-32 49-1v31zM435 233v-31c0-31 47-31 47-1v31z" />
-        <g class="street-fine">
-          <path d="M304 184v51m-23-26 47-1M381 181v52m-22-26 46-1M458 180v51m-22-26 44-1" />
-          <path fill="#11B5E4" d="M282 223l20-2-1 13-19 1zm77-3 20-2v14l-20 1zm78-3 19-2v15l-19 1z" stroke="none" />
-        </g>
-        <g class="street-sign" id="cafe-lettering">
-          <path class="street-line" fill="#FFFFFF" d="M274 252l211-4 1 38-213 5z" />
-          <text class="street-label" x="380" y="277" text-anchor="middle" font-size="23" letter-spacing="2.2">DAYLIGHT</text>
-          <path stroke="#FFFFFF" stroke-width="1.5" d="M268 266h-7m231-4 8-1" />
-        </g>
-        <g class="street-awning" id="cafe-awning">
-          <path fill="#FFFFFF" d="M256 303l250-5 20 39-284 6z" />
-          <path fill="#0B1B3D" d="M256 303l30-1-8 40-36 1zm62-1 31-1-1 39-35 1zm62-2 31-1 6 40-35 1zm63-1 31-1 13 40-35 1z" />
-          <path class="street-line" d="M256 303l250-5 20 39-284 6z" />
-          <path class="street-line" fill="#FFFFFF" d="M242 343l36-1q-3 15-17 15-16 1-19-14m36-1 35-1q-2 15-16 15-16 1-19-14m35-1 35-1q0 16-15 16-16 1-20-15m35-1 34-1q1 15-14 16-16 1-20-15m34-1 35-1q2 15-13 16-16 0-22-15m35-1 35-1q4 15-11 16-16 0-24-15m35-1 35-1q5 14-9 15-15 1-26-14m35-1 39-1q6 15-10 16-16 1-29-15" />
-        </g>
-        <path class="street-line" fill="#FFFFFF" d="M273 369l119-2 1 118-121 3z" />
-        <path class="street-line" d="M279 375l107-2 1 105-109 3zM332 375v104M279 431l108-2" />
-        <path class="street-fine" d="M305 375v20" />
-        <path class="street-line" fill="#11B5E4" d="M294 407c0-16 22-16 22-1z" />
-        <path class="street-line" fill="#0B1B3D" d="M304 453h24l-3 15h-17zm24 2c13-1 10 12-1 9" />
-        <path class="street-fine" d="M300 472h31" />
-        <g class="street-steam" id="cafe-cup-steam" stroke="#0B1B3D" stroke-width="1.8" stroke-linecap="round">
-          <path d="M311 447c-6-6 6-10 1-16M320 446c-5-5 6-9 1-14" />
-        </g>
-        <g class="street-note" id="window-note">
-          <path class="street-fine" fill="#FFFFFF" d="M347 393l29 2-2 43-30-2z" />
-          <path fill="#11B5E4" d="M354 389l13 1-1 9-13-1z" />
-          <text class="street-label" x="360" y="412" text-anchor="middle" font-size="7.5" transform="rotate(4 360 412)">LOCAL</text>
-          <text class="street-label" x="359" y="422" text-anchor="middle" font-size="7.5" transform="rotate(4 359 422)">ROAST</text>
-          <path class="street-fine" d="M349 430l19 1" />
-        </g>
-        <path class="street-line" fill="#001021" d="M408 364l77-1 1 151-79 2z" />
-        <g class="street-sign" id="cafe-open-sign">
-          <path stroke="#FFFFFF" stroke-width="1.2" d="M419 365l24-13 25 12" />
-          <path class="street-fine" fill="#FFFFFF" d="M415 363l56-1 1 24-57 1z" />
-          <text class="street-label" x="443" y="379" text-anchor="middle" font-size="12" letter-spacing="1.4">OPEN</text>
-        </g>
-        <g class="street-door" id="cafe-open-door">
-          <path class="street-line" fill="#11B5E4" d="M487 364l24 13 1 149-25-12z" />
-          <path class="street-fine" fill="#FFFFFF" d="M492 377l13 7 1 64-14-8z" />
-          <path class="street-line" d="M493 466v10" />
-          <path class="street-fine" d="M492 490l14 8" />
-        </g>
-        <g class="street-person" id="cafe-owner">
-          <path class="street-line" fill="#E8DDA0" d="M431 432l2-12 14-1 1 15z" />
-          <path class="street-line" fill="#E8DDA0" d="M426 414c-1-18 27-20 28-2 1 10-7 19-16 17-7-1-11-8-12-15z" />
-          <path fill="#FFFFFF" d="M426 415c-5-8-2-19 8-21 11-4 22 3 23 14-5 2-12-2-15-7-2 9-9 12-16 14z" />
-          <path class="street-fine" d="M433 414h1m12-1h1m-6 1-2 3h2m-2 5q3 1 5-1" />
-          <path class="street-line" fill="#1652F0" d="M429 434q10-5 21 0l7 43-35 1z" />
-          <path class="street-line" fill="#E8DDA0" d="M424 437l-8 22 8 4 9-23z" />
-          <g class="street-wave" id="owner-waving-arm">
-            <path class="street-line" fill="#E8DDA0" d="M451 434l12-11 1-24 8-1 1 28-16 18z" />
-            <path class="street-line" fill="#E8DDA0" d="M464 399l-2-8q-1-4 3-4l2 6-1-12q0-4 3-3l2 13 1-11q1-3 4-1l-1 14 4-5q3-3 4 0l-7 13z" />
+  <g class="district-reveal" data-district="records">
+    <g class="district-shop" data-shop="records" id="district-records" role="button" tabindex="0" aria-label="Bring the first business to life" aria-pressed="false">
+      <g class="district-perspective" transform="matrix(.90 .08 0 .90 37 -30)" aria-hidden="true">
+        <path class="street-line" fill="#FFFFFF" d="M26 555l250 10 58-53-249-8z" />
+        <path class="street-line" fill="#11B5E4" d="M26 555l250 10v15L26 569z" />
+        <path class="street-line" fill="#0B1B3D" d="M276 565l58-53v15l-58 53z" />
+        <path class="street-line" fill="#0B1B3D" d="M265 241l54-35v271l-54 38z" />
+        <path class="street-line" fill="#1481BA" d="M45 237l55-35 222-8-52 36z" />
+        <path class="street-fine" fill="#11B5E4" d="M280 278l23-16v53l-23 17zm0 90 23-16v54l-23 16z" />
+        <path class="street-fine" d="M292 271v52m-12 77 23-17" />
+        <path stroke="#FFFFFF" stroke-width="1.5" d="M279 446l26-18m-26 31 26-18" />
+        <g class="street-building" id="record-shop">
+          <path class="street-line" fill="#001021" d="M53 247l213-7-1 275-212 5z" />
+          <path class="street-line" fill="#0B1B3D" d="M45 237l225-7 2 17-225 8z" />
+          <path class="street-line" fill="#FFFFFF" d="M67 217l35-1 1 20-35 1z" />
+          <path class="street-fine" d="M63 215l43-1m-31 11 12-1" />
+          <g class="street-sign" id="record-lettering">
+            <text x="157" y="284" text-anchor="middle" fill="#FFFFFF" font-family="Georgia,serif" font-size="25" letter-spacing="1">CORNER &amp; CO.</text>
+          <text x="158" y="301" text-anchor="middle" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="8" letter-spacing="1.3">BUILT A LITTLE EVERY DAY</text>
           </g>
-          <path fill="#FFFFFF" d="M430 439l3-7 3 1-2 8 11-1-1-8 3 1 2 8 3 31-26 1z" />
-          <path class="street-fine" d="M433 453l12-1-1 9-9 1z" />
-          <path class="street-line" fill="#0B1B3D" d="M426 478l12-1-2 28-12 1zm15-1 11-1 5 27-11 2z" />
-          <path stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" d="M423 506h13m10-1 13-1" />
+          <g class="street-awning" id="record-awning">
+            <path fill="#FFFFFF" d="M53 315l209-5 12 31-228 6z" />
+            <path fill="#11B5E4" d="M53 315l27-1-4 31-30 2zm54-1 27-1 1 30-29 1zm54-2 27-1 5 31-30 1zm53-1 27-1 10 31-29 1z" />
+            <path class="street-line" d="M53 315l209-5 12 31-228 6z" />
+            <path class="street-line" fill="#FFFFFF" d="M46 347l30-1q-3 12-15 12-14 1-15-11m30-1 30-1q-1 12-15 13-13 0-15-12m30-1 29-1q0 13-14 13-14 1-15-12m29-1 28-1q1 13-13 14-14 0-15-13m28-1 30-1q1 13-14 13-13 1-16-12m30-1 29-1q3 12-12 13-14 0-17-12m29-1 29-1q4 13-11 13-14 1-18-12m29-1 23-1q6 12-8 13-10 0-15-12" />
+          </g>
+          <g class="street-door" id="record-door">
+            <path class="street-fine" fill="#0B1B3D" stroke="#FFFFFF" d="M66 369l44-1-1 139-44 2z" />
+            <path fill="#FFFFFF" d="M75 378l26-1-1 62-26 1z" />
+            <path class="street-fine" d="M88 379v60" />
+            <path stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" d="M102 456v10" />
+          </g>
+          <path class="street-line" fill="#FFFFFF" d="M126 368l116-3-1 117-115 3z" />
+          <path class="street-fine" d="M132 375l103-3-1 103-102 3z" />
+          <g class="street-window-detail">
+            <path class="street-fine" fill="#F3F5F8" d="M140 382l83-2v59l-83 2z" />
+            <path class="street-fine" fill="#11B5E4" d="M140 382l17-1-6 41-11 2zm66-2 17 0v44l-11-3z" />
+            <path class="street-fine" d="M180 382v57m-40-27 83-2" />
+            <g class="street-plant">
+              <path class="street-line" fill="#0B1B3D" d="M174 432h15l-2 12h-11z" />
+              <path class="street-fine" d="M181 432v-17" />
+              <path fill="#0B1B3D" d="M181 426c-10 0-14-8-10-10 7 1 11 4 10 10m1-5c0-9 6-14 10-11-1 7-5 10-10 11" />
+            </g>
+            <path class="street-window-glint" d="M160 388l-7 12m13-12-8 15" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+          </g>
+          <path class="street-fine" fill="#0B1B3D" d="M141 454l20-3 2 23-21 2z" />
+          <path class="street-fine" fill="#FFFFFF" d="M166 450l22 2-2 22-22-2z" />
+          <circle cx="176" cy="462" r="6" fill="#11B5E4" />
+          <path class="street-fine" fill="#11B5E4" d="M193 454l20-2 2 22-21 1z" />
+          <path class="street-fine" d="M199 460l9-1m-8 5 8-1" />
+          <path stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" d="M131 495l42-1m7 0 14-1" />
         </g>
-        <path class="street-line" fill="#FFFFFF" d="M401 516l113-1 6 12-124 3z" />
-        <path class="street-fine" d="M399 522l112-2" />
+        <g class="street-plant" id="record-shop-plant">
+          <path class="street-line" fill="#1652F0" d="M28 488l35-1-5 42-24 1z" />
+          <path class="street-line" d="M43 491l-2-43m2 29-17-20m17 13 16-21" />
+          <path fill="#0B1B3D" d="M41 460c-18-6-18-24-13-26 13 4 18 15 13 26m1 17c-18-1-24-14-20-19 12-1 21 5 20 19m2-9c0-18 13-26 20-21-1 14-7 20-20 21m-1-15c-1-18 7-29 14-27 4 12-2 23-14 27" />
+          <path class="street-fine" d="M31 496l29-1" />
+        </g>
+        <g class="street-note" id="record-a-board">
+          <path class="street-line" d="M227 489l-12 59m47-63 12 58" />
+          <path class="street-line" fill="#FFFFFF" d="M224 487l38-3 8 51-50 5z" />
+          <text class="street-label" x="244" y="508" font-size="11" text-anchor="middle" transform="rotate(-5 244 508)">COME</text>
+          <text class="street-label" x="245" y="521" font-size="11" text-anchor="middle" transform="rotate(-5 245 521)">IN</text>
+          <path class="street-fine" d="M230 529l25-2" />
+        </g>
+        <g id="parked-bicycle" class="street-line">
+          <g class="street-wheel" id="bicycle-rear-wheel">
+            <circle cx="86" cy="544" r="25" fill="#FFFFFF" />
+            <circle cx="86" cy="544" r="19" stroke-width="1" />
+            <path stroke-width="1" d="M86 520v48m-24-24h48m-41-17 34 34m0-34-34 34" />
+          </g>
+          <g class="street-wheel" id="bicycle-front-wheel">
+            <circle cx="164" cy="540" r="25" fill="#FFFFFF" />
+            <circle cx="164" cy="540" r="19" stroke-width="1" />
+            <path stroke-width="1" d="M164 516v48m-24-24h48m-41-17 34 34m0-34-34 34" />
+          </g>
+          <path stroke="#1652F0" stroke-width="4" d="M86 544l27-38 21 36-48 2 61-34-13 32m13-34 17 32" />
+          <path d="M111 505l-5-11m-8 0 18-1m31 15-5-20 11-1q8 0 6 6" />
+          <circle cx="134" cy="542" r="4" fill="#001021" />
+          <path d="M134 542l8 7 7-1" />
+          <path fill="#11B5E4" d="M152 493l24-2-3 19-18 1z" />
+          <path stroke-width="1" d="M156 497l16-1m-15 6 14-1" />
+        </g>
       </g>
-      <g class="street-plant" id="cafe-herbs">
-        <path class="street-line" fill="#11B5E4" d="M521 492h34l-4 37-24 1z" />
-        <path class="street-fine" d="M538 493v-37m0 21-13-14m13 21 15-19" />
-        <path fill="#0B1B3D" d="M537 475c-15-2-20-15-15-18 10 0 16 7 15 18m2 8c1-17 12-25 17-20-1 12-5 19-17 20m-2-17c-9-10-8-22-2-24 9 6 11 16 2 24" />
-        <path class="street-fine" d="M524 500h28" />
+    </g>
+  </g>
+  <g class="district-reveal" data-district="cafe">
+    <g class="district-shop" data-shop="cafe" id="district-cafe" role="button" tabindex="0" aria-label="Bring the second business to life" aria-pressed="false">
+      <g class="district-perspective" transform="matrix(.85 0 0 .85 270 35)" aria-hidden="true">
+        <path class="street-line" fill="#FFFFFF" d="M231 550l302-1 43-37-302 1z" />
+        <path class="street-line" fill="#1481BA" d="M231 550l302-1v15l-302 1z" />
+        <path class="street-line" fill="#0B1B3D" d="M533 549l43-37v15l-43 37z" />
+        <path class="street-fine" d="M239 556l282-1" />
+        <path class="street-line" fill="#0B1B3D" d="M506 160l49-30v353l-48 33z" />
+        <path class="street-line" fill="#11B5E4" d="M263 123l47-29 226-6-49 28z" />
+        <path class="street-line" fill="#1481BA" d="M487 116l49-28 1 29 26 11-50 27-25-10z" />
+        <path class="street-fine" fill="#1481BA" d="M520 203l24-15v58l-24 16zm0 95 24-15v58l-24 16zm0 95 24-15v58l-24 16z" />
+        <path stroke="#FFFFFF" stroke-width="1.3" d="M531 196v58m-11-25 24-15m-13 77v58m-11-25 24-15m-13 77v58m-11-25 24-15" />
+        <g class="street-building" id="daylight-cafe">
+          <path class="street-line" fill="#1652F0" d="M255 165l251-5 1 356-253 3z" />
+          <path class="street-line" fill="#1652F0" d="M244 159l18-10 1-26 224-7 1 29 25 10-1 15-269 6z" />
+          <path stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" d="M272 137l204-7m-223 31 250-7" />
+          <path class="street-line" fill="#FFFFFF" d="M280 237v-30c0-31 49-32 49-2v31zM357 235v-31c0-32 49-32 49-1v31zM435 233v-31c0-31 47-31 47-1v31z" />
+          <g class="street-fine">
+            <path d="M304 184v51m-23-26 47-1M381 181v52m-22-26 46-1M458 180v51m-22-26 44-1" />
+            <path fill="#11B5E4" d="M282 223l20-2-1 13-19 1zm77-3 20-2v14l-20 1zm78-3 19-2v15l-19 1z" stroke="none" />
+          </g>
+          <g class="street-sign" id="cafe-lettering">
+            <path class="street-line" fill="#FFFFFF" d="M274 252l211-4 1 38-213 5z" />
+            <text class="street-label" x="380" y="277" text-anchor="middle" font-size="20" letter-spacing="1">GOOD COMPANY</text>
+            <path stroke="#FFFFFF" stroke-width="1.5" d="M268 266h-7m231-4 8-1" />
+          </g>
+          <g class="street-awning" id="cafe-awning">
+            <path fill="#FFFFFF" d="M256 303l250-5 20 39-284 6z" />
+            <path fill="#0B1B3D" d="M256 303l30-1-8 40-36 1zm62-1 31-1-1 39-35 1zm62-2 31-1 6 40-35 1zm63-1 31-1 13 40-35 1z" />
+            <path class="street-line" d="M256 303l250-5 20 39-284 6z" />
+            <path class="street-line" fill="#FFFFFF" d="M242 343l36-1q-3 15-17 15-16 1-19-14m36-1 35-1q-2 15-16 15-16 1-19-14m35-1 35-1q0 16-15 16-16 1-20-15m35-1 34-1q1 15-14 16-16 1-20-15m34-1 35-1q2 15-13 16-16 0-22-15m35-1 35-1q4 15-11 16-16 0-24-15m35-1 35-1q5 14-9 15-15 1-26-14m35-1 39-1q6 15-10 16-16 1-29-15" />
+          </g>
+          <path class="street-line" fill="#FFFFFF" d="M273 369l119-2 1 118-121 3z" />
+          <path class="street-line" d="M279 375l107-2 1 105-109 3zM332 375v104M279 431l108-2" />
+          <path class="street-fine" d="M305 375v20" />
+          <path class="street-line" fill="#11B5E4" d="M294 407c0-16 22-16 22-1z" />
+          <path class="street-line" fill="#0B1B3D" d="M304 453h24l-3 15h-17z" />
+          <path class="street-fine" d="M300 472h31" />
+          <g class="street-plant" id="window-sprig">
+            <path class="street-fine" d="M316 454v-23" />
+            <path fill="#0B1B3D" d="M316 444c-12-2-15-11-10-14 8 2 11 6 10 14m1 4c1-13 9-20 14-16-1 10-6 14-14 16" />
+          </g>
+          <g class="street-note" id="window-note">
+            <path class="street-fine" fill="#FFFFFF" d="M347 393l29 2-2 43-30-2z" />
+            <path fill="#11B5E4" d="M354 389l13 1-1 9-13-1z" />
+            <text class="street-label" x="360" y="412" text-anchor="middle" font-size="7.5" transform="rotate(4 360 412)">SAY</text>
+            <text class="street-label" x="359" y="422" text-anchor="middle" font-size="7.5" transform="rotate(4 359 422)">HELLO</text>
+            <path class="street-fine" d="M349 430l19 1" />
+          </g>
+          <path class="street-line" fill="#001021" d="M408 364l77-1 1 151-79 2z" />
+          <g class="street-sign" id="cafe-open-sign">
+            <path stroke="#FFFFFF" stroke-width="1.2" d="M419 365l24-13 25 12" />
+            <path class="street-fine" fill="#FFFFFF" d="M415 363l56-1 1 24-57 1z" />
+            <text class="street-label" x="443" y="379" text-anchor="middle" font-size="12" letter-spacing="1.4">OPEN</text>
+          </g>
+          <g class="street-door" id="cafe-open-door">
+            <path class="street-line" fill="#11B5E4" d="M487 364l24 13 1 149-25-12z" />
+            <path class="street-fine" fill="#FFFFFF" d="M492 377l13 7 1 64-14-8z" />
+            <path class="street-line" d="M493 466v10" />
+            <path class="street-fine" d="M492 490l14 8" />
+          </g>
+          <g class="street-person" id="cafe-owner">
+            <path class="street-line" fill="#E8DDA0" d="M431 432l2-12 14-1 1 15z" />
+            <path class="street-line" fill="#E8DDA0" d="M426 414c-1-18 27-20 28-2 1 10-7 19-16 17-7-1-11-8-12-15z" />
+            <path fill="#FFFFFF" d="M426 415c-5-8-2-19 8-21 11-4 22 3 23 14-5 2-12-2-15-7-2 9-9 12-16 14z" />
+            <path class="street-fine" d="M433 414h1m12-1h1m-6 1-2 3h2m-2 5q3 1 5-1" />
+            <path class="street-line" fill="#1652F0" d="M429 434q10-5 21 0l7 43-35 1z" />
+            <path class="street-line" fill="#E8DDA0" d="M424 437l-8 22 8 4 9-23z" />
+            <g class="street-wave" id="owner-waving-arm">
+              <path class="street-line" fill="#E8DDA0" d="M451 434l12-11 1-24 8-1 1 28-16 18z" />
+              <path class="street-line" fill="#E8DDA0" d="M464 399l-2-8q-1-4 3-4l2 6-1-12q0-4 3-3l2 13 1-11q1-3 4-1l-1 14 4-5q3-3 4 0l-7 13z" />
+            </g>
+            <path fill="#FFFFFF" d="M430 439l3-7 3 1-2 8 11-1-1-8 3 1 2 8 3 31-26 1z" />
+            <path class="street-fine" d="M433 453l12-1-1 9-9 1z" />
+            <path class="street-line" fill="#0B1B3D" d="M426 478l12-1-2 28-12 1zm15-1 11-1 5 27-11 2z" />
+            <path stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" d="M423 506h13m10-1 13-1" />
+          </g>
+          <path class="street-line" fill="#FFFFFF" d="M401 516l113-1 6 12-124 3z" />
+          <path class="street-fine" d="M399 522l112-2" />
+          <path class="street-window-glint" d="M339 382l9-9m-9 18 18-18" stroke="#11B5E4" stroke-width="2.5" stroke-linecap="round" />
+        </g>
+        <g class="street-plant" id="cafe-herbs">
+          <path class="street-line" fill="#11B5E4" d="M521 492h34l-4 37-24 1z" />
+          <path class="street-fine" d="M538 493v-37m0 21-13-14m13 21 15-19" />
+          <path fill="#0B1B3D" d="M537 475c-15-2-20-15-15-18 10 0 16 7 15 18m2 8c1-17 12-25 17-20-1 12-5 19-17 20m-2-17c-9-10-8-22-2-24 9 6 11 16 2 24" />
+          <path class="street-fine" d="M524 500h28" />
+        </g>
+        <g id="cafe-seating" class="street-line">
+          <path fill="#FFFFFF" d="M285 492q16-18 32-1l-2 23-30-1z" />
+          <path d="M291 494l-1 14m9-17v18m9-15v14m-25 9 34 1m-29 1-5 30m28-30 5 26" />
+          <path fill="#0B1B3D" d="M392 489q14-14 29-2l-1 26-28 2z" />
+          <path stroke="#FFFFFF" stroke-width="1.5" d="M398 492l18-1m-17 8 17-1" />
+          <path d="M390 518l33-2m-28 3-3 27m25-29 8 26" />
+          <path fill="#FFFFFF" d="M316 502c2-15 71-17 77-3 5 13-75 19-77 3z" />
+          <path d="M353 512l-2 39m-11 1 24-1" />
+          <path fill="#FFFFFF" d="M344 491l14-1-2 10-10 1z" />
+          <path stroke-width="1.4" d="M338 503l26-2" />
+        </g>
       </g>
-      <g id="cafe-seating" class="street-line">
-        <path fill="#FFFFFF" d="M285 492q16-18 32-1l-2 23-30-1z" />
-        <path d="M291 494l-1 14m9-17v18m9-15v14m-25 9 34 1m-29 1-5 30m28-30 5 26" />
-        <path fill="#0B1B3D" d="M392 489q14-14 29-2l-1 26-28 2z" />
-        <path stroke="#FFFFFF" stroke-width="1.5" d="M398 492l18-1m-17 8 17-1" />
-        <path d="M390 518l33-2m-28 3-3 27m25-29 8 26" />
-        <path fill="#FFFFFF" d="M316 502c2-15 71-17 77-3 5 13-75 19-77 3z" />
-        <path d="M353 512l-2 39m-11 1 24-1" />
-        <path fill="#FFFFFF" d="M344 491l14-1-2 10-10 1zm14 1q9-2 7 4-1 3-8 2" />
-        <path stroke-width="1.4" d="M338 503l26-2" />
+    </g>
+  </g>
+  <g class="district-reveal" data-district="workshop">
+    <g class="district-shop" data-shop="workshop" id="district-workshop" role="button" tabindex="0" aria-label="Bring the third business to life" aria-pressed="false">
+      <g class="district-perspective" transform="matrix(.93 -.08 0 .93 423 53)" aria-hidden="true">
+        <path class="street-line" fill="#FFFFFF" d="M456 520l267-6 41-43-268-1z" />
+        <path class="street-line" fill="#1481BA" d="M456 520l267-6v14l-267 6z" />
+        <path class="street-line" fill="#0B1B3D" d="M723 514l41-43v14l-41 43z" />
+        <path class="street-line" fill="#F3F5F8" d="M513 242l-55-32v274l55 30z" />
+        <path class="street-line" fill="#11B5E4" d="M501 242l-54-31 103-62 53 33z" />
+        <path class="street-line" fill="#1481BA" d="M603 182l-53-33 120 56 54 35z" />
+        <path class="street-fine" fill="#FFFFFF" d="M470 289l27 15v63l-27-15zM470 388l27 15v63l-27-15z" />
+        <path class="street-fine" d="M483 297v62m-13-36 27 16m-14 57v62m-13-36 27 16" />
+        <g class="street-building" id="repair-workshop">
+          <path class="street-line" fill="#FFFFFF" d="M513 242l92-51 106 49-2 269-196 5z" />
+          <path class="street-line" fill="#11B5E4" d="M516 245l88-47 105 47-1 69-194 3z" />
+          <path class="street-line" fill="#001021" d="M501 242l102-60 121 58-8 13-113-54-94 57z" />
+          <path class="street-fine" d="M595 221l18-1m-37 13 16-1m21 0 17 1" />
+          <g class="street-sign" id="workshop-lettering">
+            <text class="street-label" x="613" y="279" text-anchor="middle" font-size="20" letter-spacing=".8">NEXT DOOR</text>
+            <text class="street-label" x="613" y="299" text-anchor="middle" font-size="8" letter-spacing="1.05">PART OF THE NEIGHBORHOOD</text>
+          </g>
+          <g class="street-awning" id="workshop-canopy">
+            <path class="street-line" fill="#0B1B3D" d="M512 312l196-2 11 23-213 4z" />
+            <path class="street-fine" stroke="#FFFFFF" d="M541 314l-5 20m42-21-3 20m40-21 1 20m37-20 5 19m33-19 9 18" />
+            <path class="street-line" d="M507 337l211-4" />
+          </g>
+          <path class="street-line" fill="#FFFFFF" d="M528 349l104-2v137l-105 3z" />
+          <g class="street-door" id="workshop-door">
+            <path class="street-line" fill="#0B1B3D" d="M648 345l46-1-1 157-45 2z" />
+            <path class="street-fine" fill="#FFFFFF" d="M658 356l26-1v53l-26 1z" />
+            <path class="street-fine" d="M671 357v50" />
+            <path stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" d="M684 428v12" />
+            <path stroke="#FFFFFF" stroke-width="1.5" d="M656 471h29" />
+          </g>
+          <path class="street-line" d="M644 507l54-1" />
+          <path class="street-fine" d="M524 497h15m-13 7h10M703 366l5-1m-5 53h5" />
+          <g class="street-window-detail">
+            <path class="street-fine" d="M534 354l91-1v124l-92 2zM580 355v122M534 416l91-2" />
+            <path class="street-fine" fill="#F3F5F8" d="M535 355l18-1-6 51-12 3zm72-1 18-1v53l-11-4z" />
+            <path class="street-fine" d="M560 357v22" />
+            <path class="street-line" fill="#11B5E4" d="M550 389c1-14 20-14 20 0z" />
+            <g class="street-plant">
+              <path class="street-line" fill="#1652F0" d="M590 454h20l-3 18h-14z" />
+              <path class="street-fine" d="M600 454v-24m0 15-7-7" />
+              <path fill="#0B1B3D" d="M600 441c-11-2-15-12-10-15 8 3 12 8 10 15m1 7c1-14 10-20 15-16-2 10-6 14-15 16" />
+            </g>
+            <path class="street-window-glint" d="M586 369l9-10m-9 19 18-20" stroke="#11B5E4" stroke-width="2.5" stroke-linecap="round" />
+          </g>
+        </g>
+        <g class="street-plant" id="workshop-leafy-plant">
+          <path class="street-line" fill="#0B1B3D" d="M695 482l36-1-4 50-27 2z" />
+          <path class="street-line" d="M711 484l2-62m0 35-18-19m18 5 16-18m-17 47 20-17" />
+          <path fill="#0B1B3D" d="M711 450c-19-4-24-20-17-26 15 5 20 13 17 26m3-9c0-22 11-34 21-30 0 17-6 26-21 30m-2-5c-12-10-14-27-6-32 10 8 13 17 6 32m0 39c3-22 18-30 27-23-4 15-12 22-27 23" />
+          <path stroke="#FFFFFF" stroke-width="1.6" d="M702 491l22-1" />
+        </g>
       </g>
     </g>
   </g>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" fill="none" role="img" aria-labelledby="buyer-art-title buyer-art-description">
+  <title id="buyer-art-title">Room for a new beginning</title>
+  <desc id="buyer-art-description">Two hands unfold a generous paper plan. An open blue doorway appears on the page, inviting the next chapter.</desc>
+  <!-- Motion hooks: .buyer-paper-fan, .buyer-door, .buyer-hand-left, .buyer-hand-right. Keep movement within 3px / 2deg. -->
+  <rect width="520" height="420" fill="#EDF4FF"/>
+  <path d="M65 347C130 324 358 317 456 350C405 378 143 391 65 347Z" fill="#D7E5FC"/>
+  <path d="M393 54V36M413 65L426 53M422 87H440" stroke="#1652F0" stroke-width="3.5" stroke-linecap="round"/>
+  <g class="buyer-paper-fan" data-motion="paper-fan">
+    <path d="M112 129L280 58L382 292L213 361L112 129Z" fill="#1652F0" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M136 101L315 76L351 331L174 356L136 101Z" fill="#11B5E4" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M150 120L157 168M172 294L177 326" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round"/>
+    <g transform="rotate(-11 270 211)">
+      <path d="M185 77H332L365 110V329H185V77Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M332 77V110H365" fill="#C7ECF7"/>
+      <path d="M332 77V110H365" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M205 99H244" stroke="#0B1B3D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M205 111H228" stroke="#0B1B3D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M215 273V181C215 152 235 134 263 134C291 134 312 152 312 181V273" fill="#0B1B3D"/>
+      <path d="M229 272V181C229 160 243 147 263 147C283 147 298 160 298 181V272" fill="#C7ECF7"/>
+      <path d="M229 249L264 228L298 249V272H229V249Z" fill="#11B5E4"/>
+      <path d="M229 272L264 250L298 272" stroke="#FFF" stroke-width="2.5"/>
+      <g class="buyer-door" data-motion="open-door">
+        <path d="M265 148L320 165V286L265 272V148Z" fill="#1652F0" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M277 165L307 174V267L277 259V165Z" stroke="#90C2FF" stroke-width="2"/>
+        <path d="M306 224V233" stroke="#FFF" stroke-width="4" stroke-linecap="round"/>
+      </g>
+      <path d="M207 286H250M207 299H237" stroke="#0B1B3D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M289 312H344" stroke="#11B5E4" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+  <g class="buyer-hand-left" data-motion="supporting-hand">
+    <path d="M38 318C62 302 83 291 99 270L136 224C142 216 153 216 159 222C166 228 164 238 158 245L144 264L175 244C185 238 195 242 198 250C201 257 197 263 190 269L166 289L184 281C195 277 203 283 202 292C201 298 195 302 189 307L163 328C147 342 126 348 102 348L78 367L38 318Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M137 265L126 280C141 278 150 284 151 296M166 289L150 302M181 309L164 319M103 319C103 308 108 300 116 294" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M0 311L51 288L100 354L66 420H0V311Z" fill="#1652F0" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M43 295L89 357L77 378L29 301" fill="#11B5E4" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M20 366L43 400" stroke="#8DAEFF" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <g class="buyer-hand-right" data-motion="turning-hand">
+    <path d="M520 350L474 331L433 311C416 302 409 286 398 273L385 257C379 250 368 251 365 260C361 270 369 280 374 288L379 298L350 285C341 281 332 286 331 294C330 302 337 306 344 310L369 324L391 346C407 361 426 368 448 367L482 388L520 350Z" fill="#C7ECF7" stroke="#0B1B3D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M379 298C388 301 395 310 398 318M366 324L382 334M399 338L410 348M432 333C426 325 419 321 411 321" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M520 333L483 321L448 371L471 420H520V333Z" fill="#0B1B3D"/>
+    <path d="M482 322L494 329L460 379L448 371L482 322Z" fill="#FFF" stroke="#0B1B3D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M493 372L511 386" stroke="#11B5E4" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

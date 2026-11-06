@@ -10,34 +10,6 @@
     let paused = reduced.matches;
     let motion;
     let submitting = false;
-    const neighborhood = $('.hero-world');
-    const shopOrder = ['records', 'cafe', 'workshop'];
-    let shopIndex = 1;
-    let sceneTimer;
-    let sceneInView = true;
-    let manualScene = false;
-    function focusShop(shop, manual = false) {
-      const index = shopOrder.indexOf(shop);
-      if (index < 0) return;
-      shopIndex = index;
-      neighborhood.dataset.shop = shop;
-      $$('[data-shop-focus]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shopFocus === shop)));
-      if (manual) { manualScene = true; clearInterval(sceneTimer); }
-    }
-    function cycleNeighborhood() {
-      clearInterval(sceneTimer);
-      if (paused || manualScene || !sceneInView || document.hidden) return;
-      sceneTimer = setInterval(() => focusShop(shopOrder[(shopIndex + 1) % shopOrder.length]), 4800);
-    }
-    $$('[data-shop-focus]').forEach(button => button.addEventListener('click', () => focusShop(button.dataset.shopFocus, true)));
-    $$('.district-shop').forEach(shop => shop.addEventListener('click', () => focusShop(shop.dataset.shop, true)));
-    const sceneObserver = new IntersectionObserver(entries => {
-      sceneInView = entries[0].isIntersecting;
-      neighborhood.classList.toggle('scene-offscreen', !sceneInView);
-      cycleNeighborhood();
-    }, { threshold: .15 });
-    sceneObserver.observe(neighborhood);
-    document.addEventListener('visibilitychange', cycleNeighborhood);
     const success = $('#waitlist-success');
     const submit = $('.submit-button');
     function selectRole(role) {
@@ -46,56 +18,10 @@
       if (!success.hidden) { success.hidden = true; form.hidden = false; }
     }
     $$('[data-role]').forEach(link => link.addEventListener('click', () => selectRole(link.dataset.role)));
-    function selectAudience(role, focus = false) {
-      $$('[data-tab]').forEach(button => {
-        const active = button.dataset.tab === role;
-        button.setAttribute('aria-selected', String(active));
-        button.tabIndex = active ? 0 : -1;
-        $(`#${button.getAttribute('aria-controls')}`).hidden = !active;
-        if (active && focus) button.focus();
-      });
-    }
-    $$('[data-tab]').forEach(button => {
-      button.addEventListener('click', () => selectAudience(button.dataset.tab));
-      button.addEventListener('keydown', event => {
-        if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-          event.preventDefault();
-          const role = event.key === 'Home' ? 'buyer' : event.key === 'End' ? 'seller' : button.dataset.tab === 'buyer' ? 'seller' : 'buyer';
-          selectAudience(role, true);
-        }
-      });
-    });
-    $$('[data-audience]').forEach(link => link.addEventListener('click', () => selectAudience(link.dataset.audience)));
     const privacy = $('.privacy-dialog');
     $$('[data-privacy]').forEach(button => button.addEventListener('click', () => privacy.showModal()));
     $('[data-close]', privacy).addEventListener('click', () => privacy.close());
     privacy.addEventListener('click', event => { const r = privacy.getBoundingClientRect(); if (event.target === privacy && (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom)) privacy.close(); });
-    function animate(entrance = false) {
-      if (motion) { motion.revert(); motion = null; }
-      document.documentElement.classList.toggle('motion-paused', paused);
-      $$('.motion-toggle').forEach(button => {
-        button.setAttribute('aria-pressed', String(paused));
-        button.disabled = reduced.matches;
-        button.setAttribute('aria-label', reduced.matches ? 'Animation off: system reduced-motion preference' : paused ? 'Enable animation' : 'Pause animation');
-        $('.motion-label', button).textContent = reduced.matches ? 'Reduced motion' : paused ? 'Play motion' : button.closest('.street-footer') ? 'Pause' : 'Pause motion';
-        const icon = $('.motion-icon', button); if (icon) icon.textContent = reduced.matches ? '−' : paused ? '▷' : 'Ⅱ';
-      });
-      cycleNeighborhood();
-      if (paused || !window.gsap) return;
-      motion = gsap.context(() => {
-        if (entrance) {
-          gsap.from('.hero-copy > *', { opacity: 0, y: 15, duration: .8, stagger: .08, ease: 'power3.out' });
-          gsap.from('.street-building', { opacity: 0, y: 25, duration: 1, stagger: .12, ease: 'power3.out', delay: .2 });
-        }
-        if (window.ScrollTrigger) {
-          gsap.registerPlugin(ScrollTrigger);
-          ['.belief', '.people-top', '.waitlist-copy', '.questions h2'].forEach(selector => gsap.from(selector, { opacity: .2, y: 22, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: selector, start: 'top 94%', once: true } }));
-        }
-      });
-    }
-    $$('.motion-toggle').forEach(button => button.addEventListener('click', () => { paused = !paused; animate(); }));
-    reduced.addEventListener('change', event => { paused = event.matches; animate(); });
-    animate(true);
     function clearErrors() {
       $('#form-error').hidden = true;
       $$('[data-error]', form).forEach(e => e.textContent = '');
@@ -154,6 +80,93 @@
       form.reset(); clearErrors(); success.hidden = true; form.hidden = false;
       $('#waitlist-name').focus();
     });
+    function initExperience() {
+      const neighborhood = $('.hero-world');
+      const shops = $$('.district-shop');
+      shops.forEach(shop => {
+        function activate() {
+          const wasActive = shop.getAttribute('aria-pressed') === 'true';
+          shops.forEach(other => other.setAttribute('aria-pressed', String(other === shop && !wasActive)));
+        }
+        shop.addEventListener('click', activate);
+        shop.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); }
+        });
+      });
+      if (neighborhood && 'IntersectionObserver' in window) {
+        const sceneObserver = new IntersectionObserver(entries => neighborhood.classList.toggle('scene-offscreen', !entries[0].isIntersecting), { threshold: .1 });
+        sceneObserver.observe(neighborhood);
+      }
+      function selectAudience(role) {
+        if (!['buyer', 'seller'].includes(role)) return;
+        $('#people').dataset.active = role;
+        $$('[data-audience-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.audienceSelect === role)));
+      }
+      $$('[data-audience-select]').forEach(button => button.addEventListener('click', () => selectAudience(button.dataset.audienceSelect)));
+      $$('[data-audience]').forEach(link => link.addEventListener('click', () => selectAudience(link.dataset.audience)));
+      const chapters = {
+        people: { title: 'Familiar faces.<br>New beginnings.', description: 'The team that knows the ropes. The customers who keep coming back. The relationships that make a business, a business.', index: '01 / 03' },
+        knowledge: { title: 'Years of practice.<br>A head start.', description: 'The little details no manual can teach. How the work gets done, who to call, and what makes this business its own.', index: '02 / 03' },
+        future: { title: 'A strong foundation.<br>Room to grow.', description: 'Keep the things people love. Bring a fresh perspective to the rest. A new owner can build on a story that is already worth telling.', index: '03 / 03' }
+      };
+      const chapterButtons = $$('.chapter-step');
+      function selectChapter(key, focus = false) {
+        const chapter = chapters[key]; if (!chapter) return;
+        const paper = $('.chapter-paper');
+        $('.chapter-object').dataset.chapter = key;
+        paper.setAttribute('aria-labelledby', `chapter-tab-${key}`);
+        $('.paper-title').innerHTML = chapter.title;
+        $('.paper-description').textContent = chapter.description;
+        $('.paper-index').textContent = chapter.index;
+        chapterButtons.forEach(button => { const active = button.dataset.chapter === key; button.setAttribute('aria-selected', String(active)); button.tabIndex = active ? 0 : -1; if (active && focus) button.focus(); });
+        paper.classList.remove('is-changing');
+        if (!paused) { void paper.offsetWidth; paper.classList.add('is-changing'); }
+      }
+      chapterButtons.forEach((button, index) => {
+        button.addEventListener('click', () => selectChapter(button.dataset.chapter));
+        button.addEventListener('keydown', event => {
+          if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : (index + (event.key === 'ArrowDown' ? 1 : 2)) % 3;
+          selectChapter(chapterButtons[next].dataset.chapter, true);
+        });
+      });
+      function animate(entrance = false) {
+        if (motion) { motion.revert(); motion = null; }
+        document.documentElement.classList.toggle('motion-paused', paused);
+        $$('.motion-toggle').forEach(button => {
+          button.setAttribute('aria-pressed', String(paused)); button.disabled = reduced.matches;
+          button.setAttribute('aria-label', reduced.matches ? 'Animation off: system reduced-motion preference' : paused ? 'Enable animation' : 'Pause animation');
+          $('.motion-label', button).textContent = reduced.matches ? 'Reduced motion' : paused ? 'Play motion' : 'Pause motion';
+          const icon = $('.motion-icon', button); if (icon) icon.textContent = reduced.matches ? '−' : paused ? '▷' : 'Ⅱ';
+        });
+        if (paused || !window.gsap) return;
+        motion = gsap.context(() => {
+          if (entrance) {
+            gsap.from('.hero-copy > *', { opacity: 0, y: 20, duration: .85, stagger: .09, ease: 'power3.out', clearProps: 'opacity,transform' });
+            gsap.from('.district-reveal', { opacity: 0, y: 80, scale: .88, rotation: -3, duration: 1.15, stagger: .23, delay: .45, ease: 'back.out(1.25)', clearProps: 'opacity,transform' });
+          }
+          if (window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+            ['.belief h2', '.belief-bottom', '.people-top', '.chapter-heading', '.waitlist-copy', '.questions h2'].forEach(selector => gsap.from(selector, { opacity: .25, y: 28, duration: .9, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: selector, start: 'top 93%', once: true } }));
+            gsap.from('.audience-card', { y: 60, opacity: .4, duration: 1, stagger: .18, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: '.audience-spread', start: 'top 88%', once: true } });
+            const scroll = { trigger: '.chapter-stage', start: 'top 95%', end: 'bottom 15%', scrub: 1 };
+            gsap.fromTo('.chapter-paper', { y: 45, rotation: -8 }, { y: -12, rotation: 1.5, ease: 'none', scrollTrigger: scroll });
+            gsap.fromTo('.paper-back-one', { rotation: -7, x: 0 }, { rotation: -15, x: -12, ease: 'none', scrollTrigger: scroll });
+            gsap.fromTo('.paper-back-two', { rotation: 5, x: 0 }, { rotation: 13, x: 12, ease: 'none', scrollTrigger: scroll });
+            gsap.to('.chapter-orbit', { rotation: 25, ease: 'none', scrollTrigger: scroll });
+            gsap.fromTo('.belief-mark', { rotation: -20 }, { rotation: 35, ease: 'none', scrollTrigger: { trigger: '.belief', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+            document.fonts.ready.then(() => ScrollTrigger.refresh());
+          }
+        });
+      }
+      $$('.motion-toggle').forEach(button => button.addEventListener('click', () => { paused = !paused; animate(); }));
+      reduced.addEventListener('change', event => { paused = event.matches; animate(); });
+      animate(true);
+    }
+    // Optional motion must never prevent the waitlist from becoming usable.
+    try { initExperience(); } catch (error) { console.warn('Maychant motion unavailable.', error); }
+
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
 })();

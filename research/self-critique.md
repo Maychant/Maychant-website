@@ -1,23 +1,21 @@
-# Maychant dimensional neighborhood: self-critique
+# Maychant V5: design self-critique
 
-The previous page explained a preparation workflow through dashboard cards. The user wanted the feel of a shopkeeper's business and a buyer/seller waitlist. This revision changes the content, composition and primary action together.
+The redesign follows the user's selected direction: a centered headline above a full-width neighborhood, with a different editorial rhythm below. Generic illustrated businesses replace the category-specific storefront labels. The primary action remains joining a buyer or seller waitlist.
 
-The opening pairs a direct ownership idea with a miniature street. The latest revision restores the user’s original white/navy/cobalt/cyan palette, removes automatic dark mode, and places the café forward with the other shops receding at different angles. Roof planes, side windows and stepped pavement provide depth without turning the illustration into interface cards. Different rooflines, a record window, café seating, a repair-shop window and an owner at the door give the business a physical setting. Motion comes from these objects: the record turns, coffee steam rises, a sign swings and the owner waves. There are no charts, workflow tiles, generated images or video. A moving path and drifting sky details add motion; a slow focus sequence draws attention to each shop. Manual controls stop the automatic focus so a visitor can inspect one business illustration at their own pace.
+## What works
 
-The hero's two actions explicitly distinguish buying from selling. Both select the right form option. The rest of the page adds the people behind a handover, two audience perspectives, one durable waitlist and clear prelaunch answers. The page does not imply current listings, completed sales, verified buyers or existing customers. The storefront names are part of an illustration, not offered businesses.
+- Three complete buildings rise into place in sequence. Separate entrance, interaction and perspective wrappers keep the buildings structurally intact. Hover, keyboard activation, moving plants, the owner wave and the swinging Open sign provide object-based motion.
+- The sticky glass header remains legible over both white and navy sections. The supplied white/navy/cobalt/cyan palette is retained across system themes.
+- Large editorial type creates a pause after the hero. Buyer and seller panels introduce a different illustration language: hands, paper and an open doorway, rather than repeating storefronts or small floating vector icons.
+- The navy section adds contrast and scale. Its layered papers move with scrolling; keyboard-operated chapter controls change the message and paper artwork. Its copy describes handover principles, not nonexistent product capabilities.
+- Every buyer/seller CTA leads to the actual waitlist with the appropriate role selected. Optional motion initializes after the form, so a visual effect cannot prevent signup initialization.
 
-The dimensional scene keeps each building opaque. An independent review caught the initial inactive-shop transparency revealing a rear shop through the café wall; focus now uses only position, scale and the selected control, preserving solid walls.
+## Corrections from independent review
 
-## Corrections from actual review
+The first pass hid too much of the desktop entrance below the first screen. The headline size, top spacing, copy gaps and panorama width were reduced while retaining the broad composition. Phone artwork now fits the viewport instead of cropping the outer businesses. Two hidden line breaks now retain literal word spacing. The phone paper became content-sized with reserved footer space so all three chapter messages fit.
 
-- GSAP's origin handling initially moved SVG objects outside their intended positions. Native CSS transform-box animations now keep the record in its window and the wave attached to the person.
-- A deferred interaction script raced React hydration. A post-hydration loader now initializes the page; a fresh independent capture showed no hydration warning.
-- Hidden desktop line breaks joined words on phone. Literal whitespace now preserves their text.
-- The user rejected the automatic dark-green theme. The page now uses the supplied light palette regardless of OS appearance; this is an intentional brand choice. The native SVG hover tooltip was removed while preserving an accessible image name.
-- Form limits now match the API. Field errors are associated with inputs. The submit control enables only after its handler initializes, and the native form method is POST so contact data cannot fall into a GET URL if scripting is unavailable.
+## Remaining design tradeoffs and verification limits
 
-## Assessment
+The full desktop panorama extends beyond a 900px-high first viewport. Its entrance is visible at load, and the complete scene is revealed with scrolling. This preserves the chosen expansive layout without shrinking the artwork into a thumbnail. The fictional storefronts are illustrative, not listings or customer evidence. The handover narrative cannot replace authentic owner stories or evidence of demand.
 
-The page now has a coherent local-business subject and a working purpose. It is less corporate and more approachable than the prior dashboard-style composition. The illustration remains a stylized interpretation; it cannot substitute for real owner stories or evidence of demand. Future authentic stories should come from research and permission, not invented testimonials.
-
-Current verification covers the updated scene, desktop/phone layout, light appearance under both OS themes, automatic/manual shop focus and pause/reduced motion. The earlier complete local signup flow and dedicated server validation/persistence checks remain applicable; the API and schema are unchanged. It uses isolated Chromium because the connected browser API failed. Physical iOS Safari/Firefox compatibility and production delivery of future emails are not established. No automated email service is configured; the stored waitlist supports future follow-up.
+Independent review covers desktop, phone, narrow screens, real animation samples, keyboard interactions, pause/reduced motion, sticky navigation, anchors, role selection, and native form validation. The final targeted fixes are documented in research/v5-review.md. The API and storage schema are unchanged; their prior validation/persistence evidence remains applicable. No production signup was created during visual QA, and no email service is configured. Physical iOS Safari and Firefox were not tested. Isolated Chromium was used after the connected browser failed in the earlier workflow.

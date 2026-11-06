@@ -12,16 +12,111 @@
     let submitting = false;
     const success = $('#waitlist-success');
     const submit = $('.submit-button');
+    const waitlist = $('#waitlist-dialog');
+    const privacy = $('.privacy-dialog');
+    let waitlistOpener;
+    let privacyOpener;
+    let scrollLocked = false;
+    let previousOverflow = '';
+
+    function syncScrollLock() {
+      const anyDialogOpen = Boolean($('dialog[open]'));
+      if (anyDialogOpen && !scrollLocked) {
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        scrollLocked = true;
+      } else if (!anyDialogOpen && scrollLocked) {
+        document.body.style.overflow = previousOverflow;
+        scrollLocked = false;
+      }
+    }
+    function restoreFocus(element) {
+      if (!element?.isConnected || element.closest('dialog:not([open])') || !element.getClientRects().length) return false;
+      element.focus({ preventScroll: true });
+      return document.activeElement === element;
+    }
+    function updateWaitlistTitle() {
+      const heading = $('#waitlist-title');
+      if (!heading) return;
+      const role = $('input[name="role"]:checked', form)?.value;
+      heading.textContent = role === 'buyer' ? 'Your next chapter starts here.'
+        : role === 'seller' ? 'A good business deserves good hands.'
+        : 'Be part of what comes next.';
+    }
     function selectRole(role) {
+      if (!['buyer', 'seller', 'both'].includes(role)) return;
       const radio = $(`input[name="role"][value="${role}"]`, form);
       if (radio) radio.checked = true;
-      if (!success.hidden) { success.hidden = true; form.hidden = false; }
+      $$('input[name="role"]', form).forEach(input => input.removeAttribute('aria-invalid'));
+      const error = $('[data-error="role"]', form);
+      if (error) error.textContent = '';
     }
-    $$('[data-role]').forEach(link => link.addEventListener('click', () => selectRole(link.dataset.role)));
-    const privacy = $('.privacy-dialog');
-    $$('[data-privacy]').forEach(button => button.addEventListener('click', () => privacy.showModal()));
-    $('[data-close]', privacy).addEventListener('click', () => privacy.close());
-    privacy.addEventListener('click', event => { const r = privacy.getBoundingClientRect(); if (event.target === privacy && (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom)) privacy.close(); });
+    function focusWaitlistField(input) {
+      if (!input || !waitlist?.open || privacy?.open) return;
+      input.focus({ preventScroll: true });
+      const dialogTop = waitlist.getBoundingClientRect().top;
+      const topbarHeight = $('.dialog-topbar', waitlist)?.getBoundingClientRect().height || 0;
+      const targetTop = input.getBoundingClientRect().top - dialogTop + waitlist.scrollTop;
+      waitlist.scrollTo({ top: Math.max(0, targetTop - topbarHeight - 32), behavior: 'instant' });
+    }
+    function focusWaitlist() {
+      if (!waitlist?.open || privacy?.open) return;
+      const target = success.hidden ? $('#waitlist-title') || $('#waitlist-name') : success;
+      if (target) {
+        if (!target.hasAttribute('tabindex') && target.tagName !== 'INPUT') target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
+      waitlist.scrollTop = 0;
+    }
+    $$('[data-waitlist-open]').forEach(button => button.addEventListener('click', () => {
+      if (!waitlist) return;
+      waitlistOpener = button;
+      // Reopening a saved signup must not quietly begin another registration.
+      if (success.hidden) {
+        if (!submitting) selectRole(button.dataset.role);
+        updateWaitlistTitle();
+      }
+      if (!waitlist.open) waitlist.showModal();
+      syncScrollLock();
+      focusWaitlist();
+    }));
+    $$('input[name="role"]', form).forEach(input => input.addEventListener('change', updateWaitlistTitle));
+    if (waitlist) {
+      $$('[data-waitlist-close]', waitlist).forEach(button => button.addEventListener('click', () => waitlist.close()));
+      waitlist.addEventListener('close', () => {
+        syncScrollLock();
+        if (!$('dialog[open]')) restoreFocus(waitlistOpener);
+      });
+    }
+    $$('[data-privacy]').forEach(button => button.addEventListener('click', () => {
+      if (!privacy) return;
+      privacyOpener = button;
+      if (!privacy.open) privacy.showModal();
+      syncScrollLock();
+    }));
+    if (privacy) {
+      $('[data-close]', privacy)?.addEventListener('click', () => privacy.close());
+      privacy.addEventListener('close', () => {
+        syncScrollLock();
+        if (!restoreFocus(privacyOpener)) {
+          if (waitlist?.open) focusWaitlist();
+          else if (!$('dialog[open]')) restoreFocus(waitlistOpener);
+        }
+      });
+    }
+    [waitlist, privacy].filter(Boolean).forEach(dialog => {
+      let startedOnBackdrop = false;
+      const isBackdrop = event => {
+        const rect = dialog.getBoundingClientRect();
+        return event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right
+          || event.clientY < rect.top || event.clientY > rect.bottom);
+      };
+      dialog.addEventListener('pointerdown', event => { startedOnBackdrop = isBackdrop(event); });
+      dialog.addEventListener('click', event => {
+        if (startedOnBackdrop && isBackdrop(event)) dialog.close();
+        startedOnBackdrop = false;
+      });
+    });
     function clearErrors() {
       $('#form-error').hidden = true;
       $$('[data-error]', form).forEach(e => e.textContent = '');
@@ -60,13 +155,13 @@
         }
         form.hidden = true;
         success.hidden = false;
-        success.focus({ preventScroll: true });
-        success.scrollIntoView({ block: 'center', behavior: paused ? 'instant' : 'smooth' });
+        focusWaitlist();
       } catch (error) {
         const message = error.name === 'AbortError' ? 'That took longer than expected. Please try again; you won’t be added twice.' : error instanceof TypeError ? 'We couldn’t connect. Check your connection and try again.' : error.message;
         $('#form-error').textContent = message;
         $('#form-error').hidden = false;
-        const first = $('[aria-invalid="true"]', form); if (first) first.focus();
+        const first = $('[aria-invalid="true"]', form);
+        if (first) focusWaitlistField(first);
       } finally {
         clearTimeout(timeout);
         submitting = false;
@@ -78,7 +173,11 @@
     submit.disabled = false;
     $('#add-another').addEventListener('click', () => {
       form.reset(); clearErrors(); success.hidden = true; form.hidden = false;
-      $('#waitlist-name').focus();
+      updateWaitlistTitle();
+      if (waitlist?.open && !privacy?.open) {
+        waitlist.scrollTop = 0;
+        focusWaitlistField($('#waitlist-name'));
+      }
     });
     function initExperience() {
       const neighborhood = $('.hero-world');
@@ -100,10 +199,20 @@
       function selectAudience(role) {
         if (!['buyer', 'seller'].includes(role)) return;
         $('#people').dataset.active = role;
-        $$('[data-audience-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.audienceSelect === role)));
+        $$('[data-audience-select]').forEach(button => {
+          const active = button.dataset.audienceSelect === role;
+          button.setAttribute('aria-expanded', String(active));
+          const details = $(`#${button.getAttribute('aria-controls')}`);
+          if (details) details.inert = !active;
+        });
+        if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), paused ? 0 : 800);
       }
       $$('[data-audience-select]').forEach(button => button.addEventListener('click', () => selectAudience(button.dataset.audienceSelect)));
       $$('[data-audience]').forEach(link => link.addEventListener('click', () => selectAudience(link.dataset.audience)));
+      $$('.audience-card').forEach(card => card.addEventListener('click', event => {
+        if (event.target.closest('button,a')) return;
+        selectAudience(card.id === 'buyer-panel' ? 'buyer' : 'seller');
+      }));
       const chapters = {
         people: { title: 'Familiar faces.<br>New beginnings.', description: 'The team that knows the ropes. The customers who keep coming back. The relationships that make a business, a business.', index: '01 / 03' },
         knowledge: { title: 'Years of practice.<br>A head start.', description: 'The little details no manual can teach. How the work gets done, who to call, and what makes this business its own.', index: '02 / 03' },
@@ -118,7 +227,15 @@
         $('.paper-title').innerHTML = chapter.title;
         $('.paper-description').textContent = chapter.description;
         $('.paper-index').textContent = chapter.index;
-        chapterButtons.forEach(button => { const active = button.dataset.chapter === key; button.setAttribute('aria-selected', String(active)); button.tabIndex = active ? 0 : -1; if (active && focus) button.focus(); });
+        chapterButtons.forEach(button => {
+          const active = button.dataset.chapter === key;
+          button.setAttribute('aria-expanded', String(active));
+          button.closest('.chapter-item').dataset.expanded = String(active);
+          const detail = $(`#${button.getAttribute('aria-controls')}`);
+          if (detail) detail.inert = !active;
+          if (active && focus) button.focus();
+        });
+        if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), paused ? 0 : 650);
         paper.classList.remove('is-changing');
         if (!paused) { void paper.offsetWidth; paper.classList.add('is-changing'); }
       }
@@ -148,7 +265,7 @@
           }
           if (window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
-            ['.belief h2', '.belief-bottom', '.people-top', '.chapter-heading', '.waitlist-copy', '.questions h2'].forEach(selector => gsap.from(selector, { opacity: .25, y: 28, duration: .9, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: selector, start: 'top 93%', once: true } }));
+            ['.belief h2', '.belief-bottom', '.people-top', '.chapter-heading', '.closing-invite', '.questions h2'].forEach(selector => gsap.from(selector, { opacity: .25, y: 28, duration: .9, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: selector, start: 'top 93%', once: true } }));
             gsap.from('.audience-card', { y: 60, opacity: .4, duration: 1, stagger: .18, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: '.audience-spread', start: 'top 88%', once: true } });
             const scroll = { trigger: '.chapter-stage', start: 'top 95%', end: 'bottom 15%', scrub: 1 };
             gsap.fromTo('.chapter-paper', { y: 45, rotation: -8 }, { y: -12, rotation: 1.5, ease: 'none', scrollTrigger: scroll });

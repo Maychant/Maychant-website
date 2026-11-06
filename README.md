@@ -5,7 +5,7 @@ A buyer and seller waitlist for small-business ownership, with an authored anima
 ## Run and build
 
 ```sh
-npm run dev -- --port 5174
+npm run dev -- --port 5175
 ```
 
 The current application uses the Sites Vinext starter, React and a Cloudflare Worker with D1. The Site identity remains in `.openai/hosting.json`; the audience remains owner-private.
@@ -24,11 +24,11 @@ Use the installed Sites plugin's build and publication helpers for release. Loca
 
 ## Experience
 
-The centered hero leads into a wide authored neighborhood panorama. Three generic fictional businesses rise into place one by one. Each responds to hover, focus and keyboard activation, while an owner waves, plants move, an Open sign swings and sky details drift. No visible shop-type labels narrow the audience. Perspective, entrance and hover transforms use separate SVG groups so whole buildings move together. The supplied white, navy, cobalt and cyan palette remains fixed across OS themes.
+The centered headline leads into a full neighborhood scene sized to show complete storefront bases at the reviewed desktop viewport sizes. A pale street backdrop, distant building outlines, a paper plane, window glints, swaying awnings and moving route details add motion. The supplied white, navy, cobalt and cyan palette remains fixed across OS themes. The artwork is authored SVG, with separate entrance, interaction and perspective groups.
 
-A sticky translucent header provides persistent navigation. The lower page alternates a spacious editorial statement, two expansive buyer/seller panels with custom hand-and-paper illustrations, and a navy handover section. The navy section has keyboard-operated chapter tabs and layered papers that shift with scrolling. Pause and system reduced-motion settings provide a static, fully readable view. All artwork is authored SVG/CSS; no generated photos or videos are shipped.
+Navigation floats below the top edge in a rounded glass bar. The buyer and seller panels widen and reveal more context when selected while the other panel contracts. Their illustrations have transparent canvases to blend with the glass surfaces. The navy section uses an accordion: the selected chapter opens its explanation, compresses the other chapters and updates the animated paper illustration. Pause and system reduced-motion controls retain a fully readable static view.
 
-Buyer and seller links select the corresponding waitlist interest. The form saves name, email, interest, optional location and consent. Success appears only after a successful server response; input is preserved on failure. Form initialization precedes optional animation setup. Names and addresses are never stored in browser storage or placed in a GET URL. No email is sent automatically.
+Waitlist actions open a native modal rather than scrolling to a footer form. Explicit buyer/seller buttons preselect their role; unfinished inputs are preserved on close. Escape, backdrop and close controls restore focus to the opener. Nested privacy details preserve the outer modal's scroll lock and focus. The form saves name, email, interest, optional location and consent through the existing API. Success requires a successful server response and remains visible on reopening until the user chooses Add another. No email is sent automatically.
 
 ## Product scope
 
@@ -36,6 +36,6 @@ This is a prelaunch waitlist, not a live business marketplace. There are no list
 
 ## Verification
 
-Current redesign and motion review: `research/v5-review.md`. Earlier palette and scene review: `research/color-scene-review.md`. Full waitlist and layout review: `research/neighborhood-review.md`. Backend tests and persistence evidence: `research/waitlist-backend-report.md`. Root design judgment: `research/self-critique.md`. Earlier photographic/vector dashboard reviews describe superseded versions and remain historical evidence only.
+Current popup, expansion and responsive review: `research/v6-review.md`. Previous redesign and motion review: `research/v5-review.md`. Earlier palette and scene review: `research/color-scene-review.md`. Full waitlist and layout review: `research/neighborhood-review.md`. Backend tests and persistence evidence: `research/waitlist-backend-report.md`. Root design judgment: `research/self-critique.md`. Earlier photographic/vector dashboard reviews describe superseded versions and remain historical evidence only.
 
 Original reference research, including all eleven requested GitHub repositories, remains in `research/repository-influences.md`. Current storefronts and all other art are bespoke; no competitor assets or customer claims are used.

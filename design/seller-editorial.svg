@@ -2,7 +2,6 @@
   <title id="seller-art-title">A story ready to be carried forward</title>
   <desc id="seller-art-description">A folded blue and white document passes between two hands. Its flowing ink mark suggests the knowledge and care within a business.</desc>
   <!-- Motion hooks: .seller-story, .seller-hand-giving, .seller-hand-receiving, .seller-ink. Keep movement within 3px / 2deg. -->
-  <rect width="520" height="420" fill="#0B1B3D"/>
   <path d="M95 327C175 303 344 301 429 328C369 356 166 366 95 327Z" fill="#142C57"/>
   <path d="M353 61C373 61 384 74 384 91M359 50C386 50 399 66 399 87" stroke="#4B75B7" stroke-width="2" stroke-linecap="round"/>
   <g class="seller-hand-giving" data-motion="giving-hand">

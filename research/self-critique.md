@@ -1,21 +1,19 @@
-# Maychant V5: design self-critique
+# Maychant V6: design self-critique
 
-The redesign follows the user's selected direction: a centered headline above a full-width neighborhood, with a different editorial rhythm below. Generic illustrated businesses replace the category-specific storefront labels. The primary action remains joining a buyer or seller waitlist.
+The user asked to retain the neighborhood below the headline, show complete storefronts, add more motion and background detail, make navigation float, expand glass panels and replace the bottom form with a popup. This revision changes those behaviors while preserving the buyer/seller waitlist purpose and supplied palette.
 
-## What works
+## Design judgment
 
-- Three complete buildings rise into place in sequence. Separate entrance, interaction and perspective wrappers keep the buildings structurally intact. Hover, keyboard activation, moving plants, the owner wave and the swinging Open sign provide object-based motion.
-- The sticky glass header remains legible over both white and navy sections. The supplied white/navy/cobalt/cyan palette is retained across system themes.
-- Large editorial type creates a pause after the hero. Buyer and seller panels introduce a different illustration language: hands, paper and an open doorway, rather than repeating storefronts or small floating vector icons.
-- The navy section adds contrast and scale. Its layered papers move with scrolling; keyboard-operated chapter controls change the message and paper artwork. Its copy describes handover principles, not nonexistent product capabilities.
-- Every buyer/seller CTA leads to the actual waitlist with the appropriate role selected. Optional motion initializes after the form, so a visual effect cannot prevent signup initialization.
+The headline becomes one line on wide screens to make room for the full street. The SVG scales against viewport height, so the buildings and their bases remain visible together in reviewed desktop sizes. A pale street plane, distant linework and sun shape fill the gaps without competing with the solid storefronts. Motion comes from recognizable details: the paper plane drifts, glints shine, an owner waves, awnings respond to interaction and path markers move.
 
-## Corrections from independent review
+The paired primary actions use a single raised dock, clear buyer/seller waitlist captions and directional hover feedback. They open the same native modal with the appropriate role selected. The detached rounded navigation bar has a translucent white surface, fine border and soft shadow that remain legible when scrolling over navy.
 
-The first pass hid too much of the desktop entrance below the first screen. The headline size, top spacing, copy gaps and panorama width were reduced while retaining the broad composition. Phone artwork now fits the viewport instead of cropping the outer businesses. Two hidden line breaks now retain literal word spacing. The phone paper became content-sized with reserved footer space so all three chapter messages fit.
+The two audience panels now have a substantial width and height change. The selected panel gains a translucent finish and reveals reassuring context; the other shrinks. The navy chapter list uses a related disclosure pattern, with shorter inactive rows and an expanded glass panel tied to the changing paper artwork. This makes the interaction understandable without depending on decorative motion alone.
 
-## Remaining design tradeoffs and verification limits
+## Review corrections and scope
 
-The full desktop panorama extends beyond a 900px-high first viewport. Its entrance is visible at load, and the complete scene is revealed with scrolling. This preserves the chosen expansive layout without shrinking the artwork into a thumbnail. The fictional storefronts are illustrative, not listings or customer evidence. The handover narrative cannot replace authentic owner stories or evidence of demand.
+Root inspection caught hard rectangular backgrounds behind the hand illustrations; those canvases are now transparent so they sit naturally on glass. A hidden mobile line break in the closing invitation now preserves word spacing. Independent review caught a server-rejected name field focusing behind the sticky modal header in a short phone viewport; field errors now explicitly scroll the modal to leave header clearance. The waitlist preserves unfinished input, requires the existing successful API response before showing success, and retains the success state until Add another is chosen.
 
-Independent review covers desktop, phone, narrow screens, real animation samples, keyboard interactions, pause/reduced motion, sticky navigation, anchors, role selection, and native form validation. The final targeted fixes are documented in research/v5-review.md. The API and storage schema are unchanged; their prior validation/persistence evidence remains applicable. No production signup was created during visual QA, and no email service is configured. Physical iOS Safari and Firefox were not tested. Isolated Chromium was used after the connected browser failed in the earlier workflow.
+The first automated capture hit another project's preview at port5174. It is not evidence for this revision. All final V6 verification uses the canonical Maychant checkout at port5175; the unrelated process and checkout were left untouched. Final independent evidence and any targeted corrections are in research/v6-review.md.
+
+The storefronts remain fictional illustrations, not listings or proof of traction. Viewport fitting is responsive, not a guarantee that the entire page fits every screen or browser zoom. Very short screens can scroll naturally. API response cases are simulated locally for UI validation; the API and database schema are unchanged from their prior persistence checks. No production signups or emails are sent during this review. Physical iOS Safari and Firefox are outside this review.

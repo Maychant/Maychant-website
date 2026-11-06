@@ -33,7 +33,7 @@ The user-supplied vector masters come from `sites/maychant/brand/storefront-a-so
 - `maychant-logos.zip`: original full asset package.
 - `logo-source-notes.md`: original artwork notes and typography attribution.
 
-Do not trace an approximate logo, typeset a substitute wordmark, or invent alternate variants. Use `BrandLogo` in React or the same external SVG in static HTML. The header, footer, dialog, paper illustration, and favicon use these paths. The favicon places the exact symbol on white so it remains visible in both light and dark browser chrome.
+Do not trace an approximate logo, typeset a substitute wordmark, or invent alternate variants. Use `BrandLogo` in React or the same external SVG in static HTML. The header, footer, dialog, paper illustration, and favicon use these paths. The favicon uses only the exact symbol on a transparent background. Its lower M uses the supplied white variant in dark browser chrome. The versioned `/brand/maychant-icon-v2.svg` URL refreshes the previous cached tab icon.
 
 Preserve aspect ratio. Clear space starts at half the symbol height. Use 180px in desktop navigation and at least 132px on mobile; use the isolated mark when smaller. Use full color on white/light glass and the supplied reversed lockup on navy. Master colors are cobalt #1557FF and navy #101E42; the shared tokens and active illustrations match them.
 

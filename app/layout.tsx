@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   title: "Maychant — Next chapters for good businesses",
   description:
     "Good businesses deserve a next chapter. Join Maychant’s buyer and seller waitlist and help shape a more thoughtful business handover.",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: {
+    icon: { url: "/brand/maychant-icon-v2.svg", type: "image/svg+xml", sizes: "any" },
+    shortcut: "/brand/maychant-icon-v2.svg",
+  },
   openGraph: {
     title: "Maychant — Next chapters for good businesses",
     description:

@@ -1,14 +1,40 @@
 import { z } from "zod";
 
+export type WaitlistEntry = {
+  id: string;
+  name: string;
+  email: string;
+  role: "buyer" | "seller" | "both";
+  location: string;
+  consentVersion: string;
+  consentedAt: number;
+  createdAt: number;
+};
+
+export interface WaitlistStore {
+  /** Atomically consumes one attempt, returning the new count for this window. */
+  consumeRateLimit(input: { key: string; now: number; expiresAt: number; limit: number }): Promise<number>;
+  /** Resolves only after a successful insert or an existing unique-email conflict. */
+  save(entry: WaitlistEntry): Promise<void>;
+}
+
+export type WaitlistContext = {
+  /** Supplied by the deployment adapter, never read from arbitrary request headers. */
+  clientIdentity?: string;
+  now?: number;
+};
+
 export const WAITLIST_MAX_BYTES = 4096;
 export const WAITLIST_WINDOW_SECONDS = 600;
 export const WAITLIST_REQUEST_LIMIT = 12;
 export const WAITLIST_CONSENT_VERSION = "maychant-waitlist-v1";
 
-const cleanText = (max: number) => z.string().trim().max(max).refine(
-  value => !/[\u0000-\u001f\u007f]/u.test(value),
-  "Please use ordinary text without control characters.",
-);
+const cleanText = (max: number) => z.string().trim()
+  .transform(value => value.normalize("NFC"))
+  .pipe(z.string().max(max).refine(
+    value => !/[\u0000-\u001f\u007f]/u.test(value),
+    "Please use ordinary text without control characters.",
+  ));
 
 const signup = z.object({
   name: cleanText(100).refine(value => value.length >= 2, "Enter your name (2–100 characters)."),
@@ -59,18 +85,18 @@ async function readBody(request: Request): Promise<unknown> {
   }
 }
 
-async function rateKey(request: Request, bucket: number) {
-  // These headers are set by Cloudflare/Sites. Never trust X-Forwarded-For.
-  const identity = request.headers.get("cf-connecting-ip")
-    || request.headers.get("oai-authenticated-user-id")
-    || "unknown-client";
+async function rateKey(identity: string | undefined, bucket: number) {
   const digest = await crypto.subtle.digest(
-    "SHA-256", new TextEncoder().encode(`maychant-waitlist|${bucket}|${identity}`),
+    "SHA-256", new TextEncoder().encode(`maychant-waitlist|${bucket}|${identity || "unknown-client"}`),
   );
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
-export async function handleWaitlist(request: Request, db: D1Database | undefined, now = Date.now()) {
+export async function handleWaitlist(
+  request: Request,
+  store: WaitlistStore | undefined,
+  { clientIdentity, now = Date.now() }: WaitlistContext = {},
+) {
   const origin = request.headers.get("origin");
   if ((origin && origin !== new URL(request.url).origin)
       || request.headers.get("sec-fetch-site") === "cross-site") {
@@ -100,34 +126,28 @@ export async function handleWaitlist(request: Request, db: D1Database | undefine
   if (parsed.data.website.trim()) {
     return json({ ok: false, error: "We couldn’t accept this request. Please try again." }, 400);
   }
-  if (!db) {
+  if (!store) {
     return json({ ok: false, error: "We couldn’t save your request. Please try again shortly." }, 503);
   }
   const seconds = Math.floor(now / 1000);
   const bucket = Math.floor(seconds / WAITLIST_WINDOW_SECONDS);
   const expires = (bucket + 1) * WAITLIST_WINDOW_SECONDS;
   try {
-    const key = await rateKey(request, bucket);
-    // Bound routine cleanup work. Rate keys contain no raw IP/user ID and expire quickly.
-    await db.prepare(
-      "DELETE FROM waitlist_rate_limits WHERE key IN (SELECT key FROM waitlist_rate_limits WHERE expires_at <= ? LIMIT 50)",
-    ).bind(seconds).run();
-    const limit = await db.prepare(
-      "INSERT INTO waitlist_rate_limits (key, count, expires_at) VALUES (?, 1, ?) "
-      + "ON CONFLICT(key) DO UPDATE SET count = min(count + 1, ?) RETURNING count",
-    ).bind(key, expires, WAITLIST_REQUEST_LIMIT + 1).first<{ count: number }>();
-    if (!limit) throw new Error("rate-write-failed");
-    if (limit.count > WAITLIST_REQUEST_LIMIT) {
+    const key = await rateKey(clientIdentity, bucket);
+    const count = await store.consumeRateLimit({
+      key, now: seconds, expiresAt: expires, limit: WAITLIST_REQUEST_LIMIT,
+    });
+    if (!Number.isInteger(count) || count < 1) throw new Error("rate-write-failed");
+    if (count > WAITLIST_REQUEST_LIMIT) {
       return json({ ok: false, error: "You’ve made several requests. Please wait a little and try again." }, 429,
         { "Retry-After": String(Math.max(1, expires - seconds)) });
     }
     const { name, email, role, location } = parsed.data;
-    const stored = await db.prepare(
-      "INSERT INTO waitlist_entries (id, name, email, role, location, consent_version, consented_at, created_at) "
-      + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING",
-    ).bind(crypto.randomUUID(), name.normalize("NFC"), email, role, location.normalize("NFC"),
-      WAITLIST_CONSENT_VERSION, seconds, seconds).run();
-    if (!stored.success) throw new Error("waitlist-write-failed");
+    await store.save({
+      id: crypto.randomUUID(), name, email, role,
+      location, consentVersion: WAITLIST_CONSENT_VERSION,
+      consentedAt: seconds, createdAt: seconds,
+    });
     // A conflict confirms an existing saved email. Never reveal its details or overwrite it.
     return json({ ok: true, message: "You’re on the Maychant waitlist." }, 200);
   } catch {

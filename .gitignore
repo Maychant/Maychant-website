@@ -7,10 +7,8 @@ research/reference-captures/
 research/film-review/
 research/functional-artifacts/
 tmp/
-.openai/*.local.*
 research/qa-vector/
 
-# Vinext server build and local runtime
 # Dependencies
 /node_modules/
 /.pnp
@@ -25,7 +23,6 @@ research/qa-vector/
 # Generated builds and framework state
 /dist/
 /.next/
-/.vinext/
 /out/
 next-env.d.ts
 *.tsbuildinfo
@@ -41,12 +38,7 @@ yarn-error.log*
 
 # Local environment and keys
 .env*
-.dev.vars*
 *.pem
-
-# Checkout-local tool state
-/.wrangler/
-/.sites-runtime/
 
 # Workspace scaffolding and publication archives
 /.agents/
@@ -59,3 +51,4 @@ yarn-error.log*
 
 research/qa-neighborhood/
 research/qa-color-scene/
+.vercel

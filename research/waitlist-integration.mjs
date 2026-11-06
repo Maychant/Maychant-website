@@ -1,36 +1,58 @@
+// Explicit real-Postgres verification. Uses synthetic contacts only, then deletes
+// only this run's exact UUIDs and hashed rate keys. Never calls an email service.
 import assert from 'node:assert/strict';
-import { writeFileSync } from 'node:fs';
+import { randomUUID } from 'node:crypto';
+import { neon } from '@neondatabase/serverless';
+import { handleWaitlist, WAITLIST_REQUEST_LIMIT } from '../lib/waitlist.ts';
+import { createNeonWaitlistStore } from '../lib/waitlist-store.ts';
 
-const base = new URL(process.argv[2] || 'http://127.0.0.1:8787');
-assert.ok(['127.0.0.1','localhost','[::1]'].includes(base.hostname), 'Synthetic signup tests are local-only.');
-const prefix = `qa-${Date.now()}`;
-const responseLog=[];
-const post=async(payload,ip='192.0.2.10')=>{
-  const response=await fetch(new URL('/api/waitlist',base),{
-    method:'POST',headers:{'Content-Type':'application/json','Origin':base.origin,'CF-Connecting-IP':ip},
-    body:JSON.stringify(payload),
-  });
-  const body=await response.json();
-  responseLog.push({status:response.status,body,retryAfter:response.headers.get('Retry-After')});
-  return {response,body};
+assert.equal(process.env.WAITLIST_DB_TEST,'1','Set WAITLIST_DB_TEST=1 to permit temporary synthetic database writes.');
+assert.ok(process.env.DATABASE_URL,'DATABASE_URL is required.');
+const sql=neon(process.env.DATABASE_URL);
+const adapter=createNeonWaitlistStore(process.env.DATABASE_URL);
+const ids=new Set();
+const keys=new Set();
+const store={
+  async consumeRateLimit(input){keys.add(input.key);return adapter.consumeRateLimit(input);},
+  async save(entry){ids.add(entry.id);await adapter.save(entry);},
 };
-const entry={name:'Local QA Buyer',email:`${prefix}@example.com`,role:'buyer',location:'Test location',consent:true,website:''};
-const first=await post(entry);
-assert.equal(first.response.status,200);assert.equal(first.body.ok,true);
-const duplicate=await post({...entry,name:'Do not overwrite',email:entry.email.toUpperCase(),role:'seller'});
-assert.equal(duplicate.response.status,200);assert.deepEqual(duplicate.body,first.body);
-const seller=await post({...entry,name:'Local QA Seller',email:`${prefix}-seller@example.com`,role:'seller'},'192.0.2.11');
-assert.equal(seller.response.status,200);
-const both=await post({...entry,name:'Local QA Both',email:`${prefix}-both@example.com`,role:'both',location:undefined},'192.0.2.12');
-assert.equal(both.response.status,200);
-const concurrent=await Promise.all(Array.from({length:4},()=>post({...entry,email:`${prefix}-concurrent@example.com`},'192.0.2.13')));
-assert.ok(concurrent.every(item=>item.response.status===200&&item.body.ok));
-const invalid=await post({...entry,consent:false});assert.equal(invalid.response.status,400);
-const trapped=await post({...entry,website:'bot'});assert.equal(trapped.response.status,400);
-const listing=await fetch(new URL('/api/waitlist',base));assert.equal(listing.status,405);
-const rateStatuses=[];
-for(let i=0;i<13;i++)rateStatuses.push((await post({...entry,email:`${prefix}-rate@example.com`},'192.0.2.14')).response.status);
-assert.equal(rateStatuses[12],429);assert.ok(rateStatuses.some(status=>status===200));
-const record={prefix,firstEmail:entry.email,expectedUniqueEntries:5,responseLog,checks:{durablePost:true,duplicateSameResponse:true,threeRoles:true,concurrentRetry:true,noConsentRejected:true,honeypotRejected:true,noReadEndpoint:true,rateLimit:true}};
-writeFileSync('.sites-runtime/waitlist-test-results.json',JSON.stringify(record,null,2));
-console.log(JSON.stringify({prefix,firstEmail:entry.email,expectedUniqueEntries:5,checks:record.checks},null,2));
+const run=randomUUID();
+const now=Date.now();
+const email=`maychant-qa-${run}@example.invalid`;
+const entry={name:'Synthetic QA Buyer',email,role:'buyer',location:'Synthetic test',consent:true,website:''};
+const post=(body,identity='roles')=>handleWaitlist(new Request('https://waitlist-test.invalid/api/waitlist',{
+  method:'POST',headers:{'Content-Type':'application/json',Origin:'https://waitlist-test.invalid'},body:JSON.stringify(body),
+}),store,{clientIdentity:`test-${run}-${identity}`,now});
+
+try{
+  const first=await post(entry);
+  assert.equal(first.status,200);
+  const duplicate=await post({...entry,email:email.toUpperCase(),name:'Must not replace name',role:'seller'});
+  assert.equal(duplicate.status,200);
+  assert.deepEqual(await duplicate.json(),await first.json());
+  const saved=await sql.query('SELECT name, role, consent_version FROM waitlist_entries WHERE email = $1',[email]);
+  assert.equal(saved.length,1);
+  assert.equal(saved[0].name,entry.name);
+  assert.equal(saved[0].role,'buyer');
+  assert.equal(saved[0].consent_version,'maychant-waitlist-v1');
+  for(const role of ['seller','both']){
+    assert.equal((await post({...entry,email:`maychant-qa-${run}-${role}@example.invalid`,role})).status,200);
+  }
+  assert.equal((await post({...entry,consent:false})).status,400);
+  assert.equal((await post({...entry,website:'bot'})).status,400);
+
+  const concurrentEmail=`maychant-qa-${run}-concurrent@example.invalid`;
+  const responses=await Promise.all(Array.from({length:WAITLIST_REQUEST_LIMIT+4},()=>post({...entry,email:concurrentEmail},'concurrent')));
+  assert.equal(responses.filter(response=>response.status===200).length,WAITLIST_REQUEST_LIMIT);
+  assert.equal(responses.filter(response=>response.status===429).length,4);
+  assert.ok(responses.filter(response=>response.status===429).every(response=>Number(response.headers.get('Retry-After'))>0));
+  const counts=await sql.query('SELECT count(*)::integer AS count FROM waitlist_entries WHERE email = $1',[concurrentEmail]);
+  assert.equal(counts[0].count,1);
+  console.log('Postgres verification passed: saved roles, normalized duplicate, preserved consent, validation, atomic concurrent limit, one unique contact.');
+}finally{
+  await sql.query('DELETE FROM waitlist_entries WHERE id = ANY($1::uuid[])',[[...ids]]);
+  await sql.query('DELETE FROM waitlist_rate_limits WHERE key = ANY($1::text[])',[[...keys]]);
+  const remaining=await sql.query('SELECT count(*)::integer AS count FROM waitlist_entries WHERE id = ANY($1::uuid[])',[[...ids]]);
+  assert.equal(remaining[0].count,0);
+  console.log('Removed only this verification run’s synthetic contacts and rate keys.');
+}

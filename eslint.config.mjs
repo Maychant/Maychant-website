@@ -7,12 +7,16 @@ const eslintConfig = defineConfig([
   ...nextTs,
   globalIgnores([
     "dist/**",
-    ".vinext/**",
-    ".wrangler/**",
-    ".sites-runtime/**",
+    ".vercel/**",
     "outputs/**",
     "work/**",
+    // Published third-party animation bundles, not authored application code.
+    "public/assets/*.min.js",
   ]),
+  {
+    files: ["research/**/*.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
+  },
   {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
     rules: {

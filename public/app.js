@@ -286,14 +286,13 @@
           }
           if (window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
-            ['.belief h2', '.belief-bottom', '.people-top', '.chapter-heading', '.closing-invite', '.questions h2'].forEach(selector => gsap.from(selector, { opacity: .25, y: 28, duration: .9, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: selector, start: 'top 93%', once: true } }));
+            ['.people-top', '.chapter-heading', '.closing-invite', '.questions h2'].forEach(selector => gsap.from(selector, { opacity: .25, y: 28, duration: .9, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: selector, start: 'top 93%', once: true } }));
             gsap.from('.audience-card', { y: 60, opacity: .4, duration: 1, stagger: .18, ease: 'power3.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: '.audience-spread', start: 'top 88%', once: true } });
             const scroll = { trigger: '.chapter-stage', start: 'top 95%', end: 'bottom 15%', scrub: 1 };
             gsap.fromTo('.chapter-paper', { y: 45, rotation: -8 }, { y: -12, rotation: 1.5, ease: 'none', scrollTrigger: scroll });
             gsap.fromTo('.paper-back-one', { rotation: -7, x: 0 }, { rotation: -15, x: -12, ease: 'none', scrollTrigger: scroll });
             gsap.fromTo('.paper-back-two', { rotation: 5, x: 0 }, { rotation: 13, x: 12, ease: 'none', scrollTrigger: scroll });
             gsap.to('.chapter-orbit', { rotation: 25, ease: 'none', scrollTrigger: scroll });
-            gsap.fromTo('.belief-mark', { rotation: -20 }, { rotation: 35, ease: 'none', scrollTrigger: { trigger: '.belief', start: 'top bottom', end: 'bottom top', scrub: 1 } });
             document.fonts.ready.then(() => ScrollTrigger.refresh());
           }
         });

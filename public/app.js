@@ -276,7 +276,8 @@
           button.setAttribute('aria-pressed', String(paused)); button.disabled = reduced.matches;
           button.setAttribute('aria-label', reduced.matches ? 'Animation off: system reduced-motion preference' : paused ? 'Enable animation' : 'Pause animation');
           $('.motion-label', button).textContent = reduced.matches ? 'Reduced motion' : paused ? 'Play motion' : 'Pause motion';
-          const icon = $('.motion-icon', button); if (icon) icon.textContent = reduced.matches ? '−' : paused ? '▷' : 'Ⅱ';
+          const icon = $('.motion-icon use', button);
+          if (icon) icon.setAttribute('href', reduced.matches ? '#motion-off' : paused ? '#motion-play' : '#motion-pause');
         });
         if (paused || !window.gsap) return;
         motion = gsap.context(() => {

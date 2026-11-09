@@ -4,6 +4,9 @@
 .site-footer .brand .brand-lockup { width: 200px; height: auto; display: block; }
 .paper-brand-lockup { width: 110px; height: auto; display: block; }
 .dialog-topbar .dialog-mark { width: 32px; height: 28px; }
+/* Draw control icons as vectors so phone emoji fonts cannot substitute them. */
+.mc-icon { display: block; width: 1em; height: 1em; flex-shrink: 0; }
+.motion-icon { display: block; width: 14px; height: 14px; flex-shrink: 0; }
 .mc-button {
   --button-bg: var(--mc-action);
   --button-text: var(--mc-white);
